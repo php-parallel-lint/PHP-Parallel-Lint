@@ -31,4 +31,8 @@ script:
   - ./parallel-lint --exclude vendor --exclude tests/examples --no-colors .
   - ./parallel-lint --exclude vendor --exclude tests/examples .
   - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs;fi
-  - if [[ "$PHPSTAN" == "1" ]]; then ./vendor/bin/phpstan analyse --level 1 src/ ./parallel-lint;fi
+  - |
+    if [[ "$PHPSTAN" == "1" ]]; then
+      composer require "phpstan/phpstan:^0.12"
+      ./vendor/bin/phpstan analyse --level 4 ./parallel-lint ./src/;
+    fi
