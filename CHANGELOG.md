@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Normalized composer.json from [@OndraM](https://github.com/OndraM).
 - Updated PHPCS dependency from [@jrfnl](https://github.com/jrfnl).
 - Cleaned coding style from [@jrfnl](https://github.com/jrfnl).
+- Added checking code with [PHPStan](https://phpstan.org/), thanks to [@szepeviktor](https://github.com/szepeviktor).
 
 ## [1.2.0] - 2020-04-04
 
