@@ -6,14 +6,14 @@ use JakubOnderka\PhpParallelLint\RunTimeException;
 
 class Process
 {
-    const STDIN = 0,
-        STDOUT = 1,
-        STDERR = 2;
+    const STDIN = 0;
+    const STDOUT = 1;
+    const STDERR = 2;
 
-    const READ = 'r',
-        WRITE = 'w';
+    const READ = 'r';
+    const WRITE = 'w';
 
-    /** @var resource */
+    /** @var resource|null */
     protected $process;
 
     /** @var resource */

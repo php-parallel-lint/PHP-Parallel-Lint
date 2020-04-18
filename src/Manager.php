@@ -6,7 +6,7 @@ use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
 
 class Manager
 {
-    /** @var Output */
+    /** @var Output|null */
     protected $output;
 
     /**
@@ -141,7 +141,7 @@ class Manager
         foreach ($paths as $path) {
             if (is_file($path)) {
                 $files[] = $path;
-            } else if (is_dir($path)) {
+            } elseif (is_dir($path)) {
                 $iterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
                 if (!empty($excluded)) {
                     $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
@@ -154,7 +154,6 @@ class Manager
 
                 $iterator = new \RegexIterator($iterator, $regex);
 
-                /** @var \SplFileInfo[] $iterator */
                 foreach ($iterator as $directoryFile) {
                     $files[] = (string) $directoryFile;
                 }

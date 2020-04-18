@@ -502,7 +502,7 @@ class MultipleWriter implements IWriter
     }
 
     /**
-     * @param $string
+     * @param string $string
      */
     public function write($string)
     {

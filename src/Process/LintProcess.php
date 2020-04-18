@@ -43,17 +43,16 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws
      */
     public function containsError()
     {
-        return $this->containsParserError($this->getOutput()) ||
-            $this->containsFatalError($this->getOutput()) ||
-            $this->containsDeprecatedError($this->getOutput());
+        return $this->containsParserError($this->getOutput())
+            || $this->containsFatalError($this->getOutput())
+            || $this->containsDeprecatedError($this->getOutput());
     }
 
     /**
-     * @return string
+     * @return string|false
      * @throws RunTimeException
      */
     public function getSyntaxError()

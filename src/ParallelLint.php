@@ -7,10 +7,10 @@ use JakubOnderka\PhpParallelLint\Process\SkipLintProcess;
 
 class ParallelLint
 {
-    const STATUS_OK = 'ok',
-        STATUS_SKIP = 'skip',
-        STATUS_FAIL = 'fail',
-        STATUS_ERROR = 'error';
+    const STATUS_OK = 'ok';
+    const STATUS_SKIP = 'skip';
+    const STATUS_FAIL = 'fail';
+    const STATUS_ERROR = 'error';
 
     /** @var int */
     private $parallelJobs;
@@ -24,7 +24,7 @@ class ParallelLint
     /** @var bool */
     private $shortTagEnabled = false;
 
-    /** @var callable */
+    /** @var callable|null */
     private $processCallback;
 
     /** @var bool */
@@ -50,12 +50,14 @@ class ParallelLint
         $processCallback = is_callable($this->processCallback) ? $this->processCallback : function () {
         };
 
-        /**
-         * @var LintProcess[] $running
-         * @var LintProcess[] $waiting
-         */
-        $errors = $running = $waiting = array();
-        $skippedFiles = $checkedFiles = array();
+        $errors = array();
+        /** @var LintProcess[] $running */
+        $running = array();
+        /** @var LintProcess[] $waiting */
+        $waiting = array();
+
+        $skippedFiles = array();
+        $checkedFiles = array();
 
         while ($files || $running) {
             for ($i = count($running); $files && $i < $this->parallelJobs; $i++) {
@@ -166,7 +168,7 @@ class ParallelLint
     }
 
     /**
-     * @return string
+     * @return phpExecutable
      */
     public function getPhpExecutable()
     {
@@ -174,7 +176,7 @@ class ParallelLint
     }
 
     /**
-     * @param string $phpExecutable
+     * @param phpExecutable $phpExecutable
      * @return ParallelLint
      */
     public function setPhpExecutable($phpExecutable)
@@ -250,7 +252,7 @@ class ParallelLint
     }
 
     /**
-     * @param $showDeprecated
+     * @param bool $showDeprecated
      * @return ParallelLint
      */
     public function setShowDeprecated($showDeprecated)

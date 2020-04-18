@@ -103,7 +103,7 @@ class Blame implements \JsonSerializable
 
 class SyntaxError extends Error
 {
-    /** @var Blame */
+    /** @var Blame|null */
     private $blame;
 
     /**
