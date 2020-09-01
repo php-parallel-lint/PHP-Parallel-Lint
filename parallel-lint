@@ -35,9 +35,13 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) {
     exit(254);
 }
 
+function isPhar() {
+    return class_exists(Phar::class) && (strlen(Phar::running()) > 0 ? true : false);
+}
+
 $autoloadLocations = [
-    getcwd() . '/vendor/autoload.php',
-    getcwd() . '/../../autoload.php',
+    isPhar() ? "" : getcwd() . '/vendor/autoload.php',
+    isPhar() ? "" : getcwd() . '/../../autoload.php',
     __DIR__ . '/vendor/autoload.php',
     __DIR__ . '/../vendor/autoload.php',
     __DIR__ . '/../../../autoload.php',
