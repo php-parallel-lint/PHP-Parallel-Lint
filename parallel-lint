@@ -36,7 +36,7 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) {
 }
 
 function isPhar() {
-    return class_exists(Phar::class) && (strlen(Phar::running()) > 0 ? true : false);
+    return class_exists('Phar') && (strlen(Phar::running()) > 0 ? true : false);
 }
 
 $autoloadLocations = [
