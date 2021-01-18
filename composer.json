@@ -29,9 +29,9 @@
         "sort-packages": true
     },
     "autoload": {
-        "classmap": [
-            "./src/"
-        ]
+        "psr-4": {
+            "JakubOnderka\\PhpParallelLint\\": "src/"
+        }
     },
     "autoload-dev": {
         "classmap": [
