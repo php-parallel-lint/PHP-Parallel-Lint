@@ -236,12 +236,3 @@ class Settings
         return array_map('rtrim', $lines);
     }
 }
-
-class ArrayIterator extends \ArrayIterator
-{
-    public function getNext()
-    {
-        $this->next();
-        return $this->current();
-    }
-}
