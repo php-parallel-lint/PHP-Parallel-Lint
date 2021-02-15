@@ -128,7 +128,7 @@ class Settings
         $settings = new self;
 
         // Use the currently invoked php as the default if possible
-        if (defined('PHP_BINARY')) {
+        if (defined('PHP_BINARY') && PHP_BINARY !== '') {
             $settings->phpExecutable = PHP_BINARY;
         }
 
