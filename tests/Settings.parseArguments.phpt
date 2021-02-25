@@ -103,6 +103,14 @@ class SettingsParseArgumentsTest extends Tester\TestCase
         Assert::equal(Settings::FORMAT_JSON, $settings->format);
     }
 
+    public function testGitLabOutput()
+    {
+        $commandLine = './parallel-lint --gitlab .';
+        $argv = explode(" ", $commandLine);
+        $settings = Settings::parseArguments($argv);
+        Assert::equal(Settings::FORMAT_GITLAB, $settings->format);
+    }
+
     public function testCheckstyleOutput()
     {
         $commandLine = './parallel-lint --checkstyle .';

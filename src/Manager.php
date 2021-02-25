@@ -82,6 +82,8 @@ class Manager
         switch ($settings->format) {
             case Settings::FORMAT_JSON:
                 return new JsonOutput($writer);
+            case Settings::FORMAT_GITLAB:
+                return new GitLabOutput($writer);
             case Settings::FORMAT_CHECKSTYLE:
                 return new CheckstyleOutput($writer);
         }
