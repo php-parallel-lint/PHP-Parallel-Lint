@@ -75,6 +75,7 @@ It is strongly recommended for existing users of the (unmaintained)
 - `--no-progress`   		Disable progress in console output.
 - `--checkstyle`    		Output results as Checkstyle XML.
 - `--json`          		Output results as JSON string (requires PHP 5.4).
+- `--gitlab`          		Output results for the GitLab Code Quality widget (requires PHP 5.4), see more in [Code Quality](https://docs.gitlab.com/ee/user/project/merge_requests/code_quality.html) documentation.
 - `--blame`         		Try to show git blame for row with error.
 - `--git <git>`     		Path to Git executable to show blame message (default: 'git').
 - `--stdin`         		Load files and folder to test from standard input.

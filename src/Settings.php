@@ -13,6 +13,7 @@ class Settings
 
     const FORMAT_TEXT = 'text';
     const FORMAT_JSON = 'json';
+    const FORMAT_GITLAB = 'gitlab';
     const FORMAT_CHECKSTYLE = 'checkstyle';
 
     /**
@@ -177,6 +178,10 @@ class Settings
 
                     case '--json':
                         $settings->format = self::FORMAT_JSON;
+                        break;
+
+                    case '--gitlab':
+                        $settings->format = self::FORMAT_GITLAB;
                         break;
 
                     case '--checkstyle':

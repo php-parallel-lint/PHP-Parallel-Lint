@@ -87,6 +87,7 @@ Options:
     --no-colors             Disable colors in console output.
     --no-progress           Disable progress in console output.
     --json                  Output results as JSON string.
+    --gitlab                Output results for the GitLab Code Quality Widget.
     --checkstyle            Output results as Checkstyle XML.
     --blame                 Try to show git blame for row with error.
     --git <git>             Path to Git executable to show blame message (default: 'git').
