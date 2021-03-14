@@ -29,6 +29,7 @@
         "sort-packages": true
     },
     "autoload": {
+        "files": [ "src/polyfill.php" ],
         "classmap": [
             "./"
         ]
