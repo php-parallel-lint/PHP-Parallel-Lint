@@ -35,14 +35,14 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) {
     exit(254);
 }
 
-$autoloadLocations = [
+$autoloadLocations = array(
     getcwd() . '/vendor/autoload.php',
     getcwd() . '/../../autoload.php',
     __DIR__ . '/vendor/autoload.php',
     __DIR__ . '/../vendor/autoload.php',
     __DIR__ . '/../../../autoload.php',
     __DIR__ . '/../../autoload.php',
-];
+);
 
 $loaded = false;
 foreach ($autoloadLocations as $autoload) {
