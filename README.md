@@ -4,33 +4,36 @@
 [![Build Status](https://travis-ci.org/php-parallel-lint/PHP-Parallel-Lint.svg?branch=master)](https://travis-ci.org/php-parallel-lint/PHP-Parallel-Lint)
 [![License](https://poser.pugx.org/php-parallel-lint/php-parallel-lint/license.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
 
-This tool checks syntax of PHP files faster than serial check with a fancier output.
+This application checks syntax of PHP files in parallel.
+It can output in plain text, colored text, json and checksyntax formats.
+Additionally `blame` can be used to show commits that introduced the breakage.
+
 Running parallel jobs in PHP is inspired by Nette framework tests.
 
-This works from PHP 5.4 to 7.4
+The application is officially supported for use with PHP 5.4 to 8.0.
 
 ## Table of contents
 
 1. [Installation](#installation)
 2. [Example output](#example-output)
-3. [Fork](#fork)
-4. [Options for run](#options-for-run)
-5. [Options for Symfony](#recommended-setting-for-usage-with-symfony-framework)
+3. [History](#history)
+4. [Command line options](#command-line-options)
+5. [Recommended excludes for Symfony framework](#recommended-excludes-for-symfony-framework)
 6. [Create Phar package](#create-phar-package)
-7. [How upgrade](#how-upgrade)
+7. [How to upgrade](#how-to-upgrade)
 
 ## Installation
 
-Just run the following command to install it:
+Install with `composer` as development dependency:
 
     composer require --dev php-parallel-lint/php-parallel-lint
 
-When you cannot use tool as dependency then you can install as project. Command for it:
+Alternatively you can install as a standalone `composer` project:
 
     composer create-project php-parallel-lint/php-parallel-lint /path/to/folder/php-parallel-lint
     /path/to/folder/php-parallel-lint/parallel-lint # running tool
 
-For colored output also install the suggested package `php-parallel-lint/php-console-highlighter`:
+For colored output, install the suggested package `php-parallel-lint/php-console-highlighter`:
 
     composer require --dev php-parallel-lint/php-console-highlighter
 
@@ -39,14 +42,27 @@ For colored output also install the suggested package `php-parallel-lint/php-con
 ![Example use of tool with error](/tests/examples/example-images/use-error.png?raw=true "Example use of tool with error")
 
 
-## Fork
-This is a fork of [original project](https://github.com/JakubOnderka/PHP-Parallel-Lint). Why I forked it and why I am the right man?
+## History
 
-- Project is used in many and projects.
-- I am [second most active](https://github.com/JakubOnderka/PHP-Parallel-Lint/graphs/contributors) contributor in original project.
-- Author does [not responds to issues and PRs](https://github.com/JakubOnderka/PHP-Parallel-Lint/pulls) and my mail messages.
+This project was originally created by [@JakubOnderka] and released as
+[jakub-onderka/php-parallel-lint].
 
-## Options for run
+Since then, Jakub has moved on to other interests and as of January 2020, the
+second most active maintainer [@grogy] has taken over maintenance of the project
+and given the project - and related dependencies - a new home in the PHP
+Parallel Lint organisation.
+
+It is strongly recommended for existing users of the (unmaintained)
+[jakub-onderka/php-parallel-lint] package to switch their dependency to
+[php-parallel-lint/php-parallel-lint].
+
+[php-parallel-lint/php-parallel-lint]: https://github.com/php-parallel-lint/PHP-Parallel-Lint
+[grogy/php-parallel-lint]: https://github.com/grogy/PHP-Parallel-Lint
+[jakub-onderka/php-parallel-lint]: https://github.com/JakubOnderka/PHP-Parallel-Lint
+[@JakubOnderka]: https://github.com/JakubOnderka
+[@grogy]: https://github.com/grogy
+
+## Command line options
 
 - `-p <php>`        		Specify PHP-CGI executable to run (default: 'php').
 - `-s, --short`     		Set short_open_tag to On (default: Off).
@@ -58,7 +74,7 @@ This is a fork of [original project](https://github.com/JakubOnderka/PHP-Paralle
 - `--no-colors`     		Disable colors in console output.
 - `--no-progress`   		Disable progress in console output.
 - `--checkstyle`    		Output results as Checkstyle XML.
-- `--json`          		Output results as JSON string (require PHP 5.4).
+- `--json`          		Output results as JSON string (requires PHP 5.4).
 - `--blame`         		Try to show git blame for row with error.
 - `--git <git>`     		Path to Git executable to show blame message (default: 'git').
 - `--stdin`         		Load files and folder to test from standard input.
@@ -68,9 +84,9 @@ This is a fork of [original project](https://github.com/JakubOnderka/PHP-Paralle
 - `-V, --version`   		Display this application version.
 
 
-## Recommended setting for usage with Symfony framework
+## Recommended excludes for Symfony framework
 
-For run from command line:
+To run from the command line:
 
     vendor/bin/parallel-lint --exclude app --exclude vendor .
 
@@ -82,14 +98,14 @@ PHP Parallel Lint supports [Box app](https://box-project.github.io/box2/) for cr
     curl -LSs https://box-project.github.io/box2/installer.php | php
 
 
-and then run this command in parallel lint folder, which creates `parallel-lint.phar` file.
+then run the build command in parallel lint folder, which creates `parallel-lint.phar` file.
 
 
     box build
 
-## How upgrade
+## How to upgrade
 
-Are you using original package? You can easy use this fork. Steps for upgrade are:
+Are you using `jakub-onderka/php-parallel-lint` package? You can switch to `php-parallel-lint/php-parallel-lint` using:
 
     composer remove --dev jakub-onderka/php-parallel-lint
     composer require --dev php-parallel-lint/php-parallel-lint
