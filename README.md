@@ -54,7 +54,7 @@ Parallel Lint organisation.
 
 It is strongly recommended for existing users of the (unmaintained)
 [jakub-onderka/php-parallel-lint] package to switch their dependency to
-[php-parallel-lint/php-parallel-lint].
+[php-parallel-lint/php-parallel-lint], see [How to upgrade](#how-to-upgrade) below.
 
 [php-parallel-lint/php-parallel-lint]: https://github.com/php-parallel-lint/PHP-Parallel-Lint
 [grogy/php-parallel-lint]: https://github.com/grogy/PHP-Parallel-Lint
