@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Determine skip lint process failure by status code instead of stderr content [#48](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/48) from [@jankonas](https://github.com/jankonas).
 
+### Changed
+
+- Improve wording in the readme [#52](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/52) from [@glensc](https://github.com/glensc).
+
 ### Internal
 
 - Normalized composer.json from [@OndraM](https://github.com/OndraM).
