@@ -1,7 +1,7 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Writers;
 
-class NullWriter implements IWriter
+class NullWriter implements WriterInterface
 {
     /**
      * @param string $string

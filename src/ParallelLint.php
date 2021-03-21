@@ -1,10 +1,12 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint;
 
-use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use JakubOnderka\PhpParallelLint\Process\LintProcess;
-use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
-use JakubOnderka\PhpParallelLint\Process\SkipLintProcess;
+use PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
+use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PhpParallelLint\PhpParallelLint\Process\LintProcess;
+use PhpParallelLint\PhpParallelLint\Process\PhpExecutable;
+use PhpParallelLint\PhpParallelLint\Process\SkipLintProcess;
 
 class ParallelLint
 {
@@ -54,12 +56,13 @@ class ParallelLint
         $processCallback = is_callable($this->processCallback) ? $this->processCallback : function () {
         };
 
+        $errors = $running = $waiting = array();
+        $skippedFiles = $checkedFiles = array();
+
         /**
          * @var LintProcess[] $running
          * @var LintProcess[] $waiting
          */
-        $errors = $running = $waiting = array();
-        $skippedFiles = $checkedFiles = array();
 
         while ($files || $running) {
             for ($i = count($running); $files && $i < $this->parallelJobs; $i++) {
@@ -105,7 +108,7 @@ class ParallelLint
 
 
                     } else {
-                        $errors[] = new Error($file, $process->getOutput());
+                        $errors[] = new ParallelLintError($file, $process->getOutput());
                         $processCallback(self::STATUS_FAIL, $file);
                     }
                 }
@@ -139,7 +142,7 @@ class ParallelLint
                     $processCallback(self::STATUS_ERROR, $file);
 
                 } else {
-                    $errors[] = new Error($file, $process->getOutput());
+                    $errors[] = new ParallelLintError($file, $process->getOutput());
                     $processCallback(self::STATUS_FAIL, $file);
                 }
             }
@@ -254,7 +257,7 @@ class ParallelLint
     }
 
     /**
-     * @param $showDeprecated
+     * @param bool $showDeprecated
      * @return ParallelLint
      */
     public function setShowDeprecated($showDeprecated)

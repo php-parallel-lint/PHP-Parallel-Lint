@@ -1,11 +1,16 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Outputs;
 
-class CheckstyleOutput implements Output
+use PhpParallelLint\PhpParallelLint\ErrorFormatter;
+use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PhpParallelLint\PhpParallelLint\Result;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+
+class CheckstyleOutput implements OutputInterface
 {
     private $writer;
 
-    public function __construct(IWriter $writer)
+    public function __construct(WriterInterface $writer)
     {
         $this->writer = $writer;
     }

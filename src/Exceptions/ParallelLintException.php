@@ -1,9 +1,9 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Exceptions;
 
 use ReturnTypeWillChange;
 
-class Exception extends \Exception implements \JsonSerializable
+class ParallelLintException extends \Exception implements \JsonSerializable
 {
     #[ReturnTypeWillChange]
     public function jsonSerialize()

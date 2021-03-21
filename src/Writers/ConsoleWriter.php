@@ -1,7 +1,7 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Writers;
 
-class ConsoleWriter implements IWriter
+class ConsoleWriter implements WriterInterface
 {
     /**
      * @param string $string

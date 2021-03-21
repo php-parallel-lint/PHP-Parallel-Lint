@@ -1,6 +1,9 @@
 <?php
 
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint;
+
+use PhpParallelLint\PhpParallelLint\Exceptions\InvalidArgumentException;
+use PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException;
 
 class Application
 {
@@ -54,7 +57,7 @@ class Application
             $this->showOptions();
             return self::FAILED;
 
-        } catch (Exception $e) {
+        } catch (ParallelLintException $e) {
             if (isset($settings) && $settings->format === Settings::FORMAT_JSON) {
                 echo json_encode($e);
             } else {

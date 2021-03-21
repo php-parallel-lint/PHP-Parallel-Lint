@@ -1,7 +1,7 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Writers;
 
-class FileWriter implements IWriter
+class FileWriter implements WriterInterface
 {
     /** @var string */
     protected $logFile;

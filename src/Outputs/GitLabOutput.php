@@ -1,15 +1,21 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Outputs;
 
-class GitLabOutput implements Output
+use PhpParallelLint\PhpParallelLint\Outputs\OutputInterface;
+use PhpParallelLint\PhpParallelLint\ErrorFormatter;
+use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PhpParallelLint\PhpParallelLint\Result;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+
+class GitLabOutput implements OutputInterface
 {
-    /** @var IWriter */
+    /** @var WriterInterface */
     protected $writer;
 
     /**
-     * @param IWriter $writer
+     * @param WriterInterface $writer
      */
-    public function __construct(IWriter $writer)
+    public function __construct(WriterInterface $writer)
     {
         $this->writer = $writer;
     }

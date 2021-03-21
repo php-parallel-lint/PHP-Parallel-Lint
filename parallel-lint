@@ -70,5 +70,5 @@ if (!$loaded) {
 
 require_once __DIR__ . '/src/polyfill.php';
 
-$app = new JakubOnderka\PhpParallelLint\Application();
+$app = new PhpParallelLint\PhpParallelLint\Application();
 exit($app->run());

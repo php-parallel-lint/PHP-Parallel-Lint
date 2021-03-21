@@ -1,7 +1,7 @@
 <?php
-namespace JakubOnderka\PhpParallelLint\Process;
+namespace PhpParallelLint\PhpParallelLint\Process;
 
-use JakubOnderka\PhpParallelLint\RunTimeException;
+use PhpParallelLint\PhpParallelLint\Exceptions\RuntimeException;
 
 class GitBlameProcess extends Process
 {
@@ -9,7 +9,7 @@ class GitBlameProcess extends Process
      * @param string $gitExecutable
      * @param string $file
      * @param int $line
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function __construct($gitExecutable, $file, $line)
     {
@@ -19,7 +19,7 @@ class GitBlameProcess extends Process
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isSuccess()
     {
@@ -28,12 +28,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getAuthor()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author can only be retrieved for successful process output.");
+            throw new RuntimeException("Author can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -43,12 +43,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getAuthorEmail()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author e-mail can only be retrieved for successful process output.");
+            throw new RuntimeException("Author e-mail can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -58,12 +58,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return \DateTime
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getAuthorTime()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author time can only be retrieved for successful process output.");
+            throw new RuntimeException("Author time can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -79,12 +79,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getCommitHash()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Commit hash can only be retrieved for successful process output.");
+            throw new RuntimeException("Commit hash can only be retrieved for successful process output.");
         }
 
         return substr($this->getOutput(), 0, strpos($this->getOutput(), ' '));
@@ -92,12 +92,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getSummary()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Commit summary can only be retrieved for successful process output.");
+            throw new RuntimeException("Commit summary can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -108,7 +108,7 @@ class GitBlameProcess extends Process
     /**
      * @param string $gitExecutable
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public static function gitExists($gitExecutable)
     {

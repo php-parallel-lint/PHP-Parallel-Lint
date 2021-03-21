@@ -1,5 +1,8 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint;
+
+use PhpParallelLint\PhpParallelLint\Exceptions\InvalidArgumentException;
+use PhpParallelLint\PhpParallelLint\Iterators\ArrayIterator;
 
 class Settings
 {

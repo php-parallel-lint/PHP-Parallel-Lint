@@ -1,6 +1,6 @@
 <?php
 
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Iterators;
 
 use ReturnTypeWillChange;
 

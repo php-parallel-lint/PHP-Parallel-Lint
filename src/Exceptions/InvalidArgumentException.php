@@ -1,7 +1,7 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Exceptions;
 
-class InvalidArgumentException extends Exception
+class InvalidArgumentException extends ParallelLintException
 {
     protected $argument;
 

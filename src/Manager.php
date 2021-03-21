@@ -1,20 +1,32 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint;
 
-use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use JakubOnderka\PhpParallelLint\Process\GitBlameProcess;
-use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
+use PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PhpParallelLint\PhpParallelLint\Exceptions\NotExistsClassException;
+use PhpParallelLint\PhpParallelLint\Exceptions\NotExistsPathException;
+use PhpParallelLint\PhpParallelLint\Exceptions\NotImplementCallbackException;
+use PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException;
+use PhpParallelLint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
+use PhpParallelLint\PhpParallelLint\Outputs\CheckstyleOutput;
+use PhpParallelLint\PhpParallelLint\Outputs\GitLabOutput;
+use PhpParallelLint\PhpParallelLint\Outputs\JsonOutput;
+use PhpParallelLint\PhpParallelLint\Outputs\OutputInterface;
+use PhpParallelLint\PhpParallelLint\Outputs\TextOutput;
+use PhpParallelLint\PhpParallelLint\Outputs\TextOutputColored;
+use PhpParallelLint\PhpParallelLint\Process\GitBlameProcess;
+use PhpParallelLint\PhpParallelLint\Process\PhpExecutable;
+use PhpParallelLint\PhpParallelLint\Writers\ConsoleWriter;
 
 class Manager
 {
-    /** @var Output */
+    /** @var OutputInterface */
     protected $output;
 
     /**
      * @param null|Settings $settings
      * @return Result
-     * @throws Exception
-     * @throws \Exception
+     * @throws ParallelLintException
      */
     public function run(Settings $settings = null)
     {
@@ -30,7 +42,7 @@ class Manager
         $files = $this->getFilesFromPaths($settings->paths, $settings->extensions, $settings->excluded);
 
         if (empty($files)) {
-            throw new Exception('No file found to check.');
+            throw new ParallelLintException('No file found to check.');
         }
 
         $output->setTotalFileCount(count($files));
@@ -65,16 +77,16 @@ class Manager
     }
 
     /**
-     * @param Output $output
+     * @param OutputInterface $output
      */
-    public function setOutput(Output $output)
+    public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
     }
 
     /**
      * @param Settings $settings
-     * @return Output
+     * @return OutputInterface
      */
     protected function getDefaultOutput(Settings $settings)
     {
@@ -102,7 +114,7 @@ class Manager
     /**
      * @param Result $result
      * @param Settings $settings
-     * @throws Exception
+     * @throws ParallelLintException
      */
     protected function gitBlame(Result $result, Settings $settings)
     {

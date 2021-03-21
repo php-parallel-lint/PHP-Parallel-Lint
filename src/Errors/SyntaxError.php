@@ -1,7 +1,9 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Errors;
 
-class SyntaxError extends Error
+use PhpParallelLint\PhpParallelLint\Blame;
+
+class SyntaxError extends ParallelLintError
 {
     /** @var Blame */
     private $blame;

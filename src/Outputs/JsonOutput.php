@@ -1,9 +1,13 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Outputs;
 
-class JsonOutput implements Output
+use PhpParallelLint\PhpParallelLint\ErrorFormatter;
+use PhpParallelLint\PhpParallelLint\Result;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+
+class JsonOutput implements OutputInterface
 {
-    /** @var IWriter */
+    /** @var WriterInterface */
     protected $writer;
 
     /** @var int */
@@ -16,9 +20,9 @@ class JsonOutput implements Output
     protected $hhvmVersion;
 
     /**
-     * @param IWriter $writer
+     * @param WriterInterface $writer
      */
-    public function __construct(IWriter $writer)
+    public function __construct(WriterInterface $writer)
     {
         $this->writer = $writer;
     }
