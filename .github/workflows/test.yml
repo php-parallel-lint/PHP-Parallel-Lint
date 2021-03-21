@@ -1,0 +1,128 @@
+name: Run unit and style tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - master
+
+jobs:
+  lint:
+    name: Run style linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: json
+          coverage: none
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Run code sniffer
+        run: vendor/bin/phpcs
+
+  test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: json
+          coverage: none
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Run tests
+        run: composer test
+
+  bundle:
+    name: Bundle binary
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 5.4
+          extensions: exif, phar, openssl
+          coverage: false
+          ini-values: phar.readonly=Off
+
+      - name: Install Box from GitHub
+        run: |
+          curl -LSs https://box-project.github.io/box2/installer.php | php
+          test -f ./box.phar
+          test -d ~/bin || mkdir ~/bin
+          mv ./box.phar ~/bin/box
+          ~/bin/box -V
+          echo "$HOME/bin" >> $GITHUB_PATH
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Building binary...
+        run: box build -v
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: parallel-lint-phar
+          path: ./parallel-lint.phar
+
+  verify-bundle:
+    name: Validate binary on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental == true }}
+    needs:
+      - bundle
+
+    strategy:
+      matrix:
+        php:
+          - '5.4'
+          - '5.5'
+          - '5.6'
+          - '7.0'
+          - '7.1'
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+          - '8.1'
+
+        include:
+          - php: '8.1'
+            experimental: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: parallel-lint-phar
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: false
+
+      - name: Run linter against codebase
+        run: php ./parallel-lint.phar src/
