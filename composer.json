@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JakubOnderka\\PhpParallelLint\\": "src/"
+            "PhpParallelLint\\PhpParallelLint\\": "src/"
         }
     },
     "autoload-dev": {

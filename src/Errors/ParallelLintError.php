@@ -1,9 +1,9 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Errors;
 
 use ReturnTypeWillChange;
 
-class Error implements \JsonSerializable
+class ParallelLintError implements \JsonSerializable
 {
     /** @var string */
     protected $filePath;

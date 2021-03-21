@@ -1,13 +1,13 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Writers;
 
-class MultipleWriter implements IWriter
+class MultipleWriter implements WriterInterface
 {
-    /** @var IWriter[] */
+    /** @var WriterInterface[] */
     protected $writers;
 
     /**
-     * @param IWriter[] $writers
+     * @param WriterInterface[] $writers
      */
     public function __construct(array $writers)
     {
@@ -17,15 +17,15 @@ class MultipleWriter implements IWriter
     }
 
     /**
-     * @param IWriter $writer
+     * @param WriterInterface $writer
      */
-    public function addWriter(IWriter $writer)
+    public function addWriter(WriterInterface $writer)
     {
         $this->writers[] = $writer;
     }
 
     /**
-     * @param $string
+     * @param string $string
      */
     public function write($string)
     {

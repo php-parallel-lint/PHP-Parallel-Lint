@@ -6,12 +6,13 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use JakubOnderka\PhpParallelLint\ErrorFormatter;
-use JakubOnderka\PhpParallelLint\GitLabOutput;
-use JakubOnderka\PhpParallelLint\CheckstyleOutput;
-use JakubOnderka\PhpParallelLint\IWriter;
-use JakubOnderka\PhpParallelLint\Result;
-use JakubOnderka\PhpParallelLint\SyntaxError;
+use PhpParallelLint\PhpParallelLint\ErrorFormatter;
+use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
+use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PhpParallelLint\PhpParallelLint\Outputs\CheckstyleOutput;
+use PhpParallelLint\PhpParallelLint\Outputs\GitLabOutput;
+use PhpParallelLint\PhpParallelLint\Result;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
 use Tester\Assert;
 
 class OutputTest extends Tester\TestCase
@@ -50,7 +51,7 @@ class OutputTest extends Tester\TestCase
     public function testCheckstyleOutput()
     {
         $errors = array(
-            new JakubOnderka\PhpParallelLint\SyntaxError(
+            new SyntaxError(
                 'sample.php',
                 'Parse error: syntax error, unexpected \'"\' in ./sample.php on line 3'
             ),
@@ -82,20 +83,20 @@ class OutputTest extends Tester\TestCase
             ),
             array(
                 'errors' => array(
-                    new JakubOnderka\PhpParallelLint\Error('foo/bar.php', "PHP Parse error: syntax error, unexpected ';'")
+                    new ParallelLintError('foo/bar.php', "PHP Parse error: syntax error, unexpected ';'")
                 )
             ),
             array(
                 'errors' => array(
                     new SyntaxError('foo/bar.php', "Parse error: syntax error, unexpected in foo/bar.php on line 52"),
-                    new JakubOnderka\PhpParallelLint\Error('foo/bar.php', "PHP Parse error: syntax error, unexpected ';'")
+                    new ParallelLintError('foo/bar.php', "PHP Parse error: syntax error, unexpected ';'")
                 )
             ),
         );
     }
 }
 
-class TestWriter implements IWriter
+class TestWriter implements WriterInterface
 {
     /** @var string */
     protected $logs = "";

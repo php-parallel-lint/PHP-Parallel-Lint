@@ -1,7 +1,8 @@
 <?php
-namespace JakubOnderka\PhpParallelLint\Process;
+namespace PhpParallelLint\PhpParallelLint\Process;
 
-use JakubOnderka\PhpParallelLint\RunTimeException;
+use PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException;
+use PhpParallelLint\PhpParallelLint\Exceptions\RuntimeException;
 
 class LintProcess extends PhpProcess
 {
@@ -20,7 +21,7 @@ class LintProcess extends PhpProcess
      * @param bool $aspTags
      * @param bool $shortTag
      * @param bool $deprecated
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function __construct(PhpExecutable $phpExecutable, $fileToCheck, $aspTags = false, $shortTag = false, $deprecated = false)
     {
@@ -43,7 +44,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws
+     * @throws ParallelLintException
      */
     public function containsError()
     {
@@ -54,7 +55,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getSyntaxError()
     {
@@ -80,7 +81,7 @@ class LintProcess extends PhpProcess
                 }
             }
 
-            throw new RunTimeException("The output '{$this->getOutput()}' does not contain Parse or Syntax errors");
+            throw new RuntimeException("The output '{$this->getOutput()}' does not contain Parse or Syntax errors");
         }
 
         return false;
@@ -88,7 +89,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isFail()
     {
@@ -97,7 +98,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isSuccess()
     {

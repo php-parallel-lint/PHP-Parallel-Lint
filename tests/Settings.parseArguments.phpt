@@ -6,7 +6,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use JakubOnderka\PhpParallelLint\Settings;
+use PhpParallelLint\PhpParallelLint\Settings;
 use Tester\Assert;
 
 class SettingsParseArgumentsTest extends Tester\TestCase

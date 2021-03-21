@@ -1,12 +1,15 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Outputs;
+
+use PhpParallelLint\PhpParallelLint\Settings;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
 
 class TextOutputColored extends TextOutput
 {
     /** @var \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor|\JakubOnderka\PhpConsoleColor\ConsoleColor */
     private $colors;
 
-    public function __construct(IWriter $writer, $colors = Settings::AUTODETECT)
+    public function __construct(WriterInterface $writer, $colors = Settings::AUTODETECT)
     {
         parent::__construct($writer);
 

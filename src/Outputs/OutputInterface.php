@@ -1,9 +1,13 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+namespace PhpParallelLint\PhpParallelLint\Outputs;
 
-interface Output
+use PhpParallelLint\PhpParallelLint\ErrorFormatter;
+use PhpParallelLint\PhpParallelLint\Result;
+use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+
+interface OutputInterface
 {
-    public function __construct(IWriter $writer);
+    public function __construct(WriterInterface $writer);
 
     public function ok();
 

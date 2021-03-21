@@ -21,8 +21,8 @@ class SkipLintProcessTest extends Tester\TestCase
             $filesToCheck = array_merge($filesToCheck, $filesToCheck);
         }
 
-        $phpExecutable = \JakubOnderka\PhpParallelLint\Process\PhpExecutable::getPhpExecutable('php');
-        $process = new \JakubOnderka\PhpParallelLint\Process\SkipLintProcess($phpExecutable, $filesToCheck);
+        $phpExecutable = \PhpParallelLint\PhpParallelLint\Process\PhpExecutable::getPhpExecutable('php');
+        $process = new \PhpParallelLint\PhpParallelLint\Process\SkipLintProcess($phpExecutable, $filesToCheck);
 
         while (!$process->isFinished()) {
             usleep(100);

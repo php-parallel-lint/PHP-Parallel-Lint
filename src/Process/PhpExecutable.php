@@ -1,8 +1,8 @@
 <?php
 
-namespace JakubOnderka\PhpParallelLint\Process;
+namespace PhpParallelLint\PhpParallelLint\Process;
 
-use JakubOnderka\PhpParallelLint\RunTimeException;
+use PhpParallelLint\PhpParallelLint\Exceptions\RuntimeException;
 
 class PhpExecutable
 {
@@ -83,18 +83,18 @@ PHP;
 
         try {
             if ($process->getStatusCode() !== 0 && $process->getStatusCode() !== 255) {
-                throw new RunTimeException("Unable to execute '{$phpExecutable}'.");
+                throw new RuntimeException("Unable to execute '{$phpExecutable}'.");
             }
 
             return self::getPhpExecutableFromOutput($phpExecutable, $process->getOutput());
 
-        } catch (RunTimeException $e) {
+        } catch (RuntimeException $e) {
             // Try HHVM type
             $process = new Process($phpExecutable, array('--php', '-r', $codeToExecute));
             $process->waitForFinish();
 
             if ($process->getStatusCode() !== 0 && $process->getStatusCode() !== 255) {
-                throw new RunTimeException("Unable to execute '{$phpExecutable}'.");
+                throw new RuntimeException("Unable to execute '{$phpExecutable}'.");
             }
 
             return self::getPhpExecutableFromOutput($phpExecutable, $process->getOutput(), $isHhvmType = true);
@@ -106,14 +106,14 @@ PHP;
      * @param string $output
      * @param bool $isHhvmType
      * @return PhpExecutable
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     private static function getPhpExecutableFromOutput($phpExecutable, $output, $isHhvmType = false)
     {
         $parts = explode(';', $output);
 
         if ($parts[0] !== 'PHP' || !preg_match('~([0-9]+)~', $parts[1], $matches)) {
-            throw new RunTimeException("'{$phpExecutable}' is not valid PHP binary.");
+            throw new RuntimeException("'{$phpExecutable}' is not valid PHP binary.");
         }
 
         $hhvmVersion = isset($parts[2]) ? $parts[2] : false;
