@@ -36,9 +36,8 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
-          extensions: json
-          coverage: none
+          php-version: 5.4
+          extensions: json, tokenizer
 
       - name: Checkout code
         uses: actions/checkout@v2
