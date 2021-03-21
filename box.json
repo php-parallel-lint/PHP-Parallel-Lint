@@ -5,7 +5,7 @@
         "Herrera\\Box\\Compactor\\Php"
     ],
     "extract": false,
-    "main": "parallel-lint.php",
+    "main": "parallel-lint",
     "files": [
         "LICENSE"
     ],
