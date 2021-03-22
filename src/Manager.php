@@ -3,9 +3,9 @@ namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
-use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsClassException;
-use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsPathException;
-use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotImplementCallbackException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\CallbackNotImplementedException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
@@ -146,7 +146,7 @@ class Manager
      * @param array $extensions
      * @param array $excluded
      * @return array
-     * @throws NotExistsPathException
+     * @throws PathNotFoundException
      */
     protected function getFilesFromPaths(array $paths, array $extensions, array $excluded = array())
     {
@@ -175,7 +175,7 @@ class Manager
                     $files[] = (string) $directoryFile;
                 }
             } else {
-                throw new NotExistsPathException($path);
+                throw new PathNotFoundException($path);
             }
         }
 
@@ -192,20 +192,20 @@ class Manager
 
         $fullFilePath = realpath($settings->syntaxErrorCallbackFile);
         if ($fullFilePath === false) {
-            throw new NotExistsPathException($settings->syntaxErrorCallbackFile);
+            throw new PathNotFoundException($settings->syntaxErrorCallbackFile);
         }
 
         require_once $fullFilePath;
 
         $expectedClassName = basename($fullFilePath, '.php');
         if (!class_exists($expectedClassName)) {
-            throw new NotExistsClassException($expectedClassName, $settings->syntaxErrorCallbackFile);
+            throw new ClassNotFoundException($expectedClassName, $settings->syntaxErrorCallbackFile);
         }
 
         $callbackInstance = new $expectedClassName;
 
         if (!($callbackInstance instanceof SyntaxErrorCallback)) {
-            throw new NotImplementCallbackException($expectedClassName);
+            throw new CallbackNotImplementedException($expectedClassName);
         }
 
         return $callbackInstance;

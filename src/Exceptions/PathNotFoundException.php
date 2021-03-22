@@ -1,7 +1,7 @@
 <?php
 namespace PHP_Parallel_Lint\PhpParallelLint\Exceptions;
 
-class NotExistsPathException extends ParallelLintException
+class PathNotFoundException extends ParallelLintException
 {
     protected $path;
 

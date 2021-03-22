@@ -21,7 +21,7 @@ class ManagerRunTest extends Tester\TestCase
         $manager = $this->getManager($settings);
         Assert::exception(function () use ($manager, $settings) {
             $manager->run($settings);
-        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsPathException');
+        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException');
     }
 
     public function testFilesNotFound()
