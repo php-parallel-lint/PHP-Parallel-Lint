@@ -10,7 +10,7 @@ Additionally `blame` can be used to show commits that introduced the breakage.
 
 Running parallel jobs in PHP is inspired by Nette framework tests.
 
-The application is officially supported for use with PHP 5.4 to 8.0.
+The application is officially supported for use with PHP 5.3 to 8.0.
 
 ## Table of contents
 
