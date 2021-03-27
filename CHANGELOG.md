@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Cleaned coding style from [@jrfnl](https://github.com/jrfnl).
 - Provide one true way to run the test suite [#37](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/37) from [@mfn](https://github.com/mfn).
 - Travis: add build against PHP 8.0 and fix failing test [#41(https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/41) from [@jrfnl](https://github.com/jrfnl).
+- GitHub Actions for testing, and automatic phar creation [#46](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/46) from [@roelofr](https://github.com/roelofr).
 
 ## [1.2.0] - 2020-04-04
 
