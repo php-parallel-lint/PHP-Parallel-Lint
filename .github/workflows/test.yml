@@ -6,6 +6,8 @@ on:
     branches:
       - develop
       - master
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
 
 jobs:
   lint:
