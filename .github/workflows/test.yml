@@ -17,9 +17,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
-          extensions: json
+          php-version: '7.4'
           coverage: none
+          tools: cs2pr
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,7 +28,11 @@ jobs:
         uses: ramsey/composer-install@v1
 
       - name: Run code sniffer
-        run: vendor/bin/phpcs
+        continue-on-error: true
+        run: vendor/bin/phpcs --report-full --report-checkstyle=./phpcs-report.xml
+
+      - name: Show PHPCS results in PR
+        run: cs2pr ./phpcs-report.xml
 
   bundle:
     name: Bundle binary
