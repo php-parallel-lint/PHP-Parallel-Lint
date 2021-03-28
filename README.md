@@ -1,7 +1,7 @@
 # PHP Parallel Lint
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/php-parallel-lint/php-parallel-lint.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
-[![Build Status](https://travis-ci.org/php-parallel-lint/PHP-Parallel-Lint.svg?branch=master)](https://travis-ci.org/php-parallel-lint/PHP-Parallel-Lint)
+[![Build Status](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml)
 [![License](https://poser.pugx.org/php-parallel-lint/php-parallel-lint/license.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
 
 This application checks syntax of PHP files in parallel.
