@@ -61,6 +61,8 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
+        with:
+          composer-options: "--no-dev"
 
       - name: Building binary...
         run: box build -v
