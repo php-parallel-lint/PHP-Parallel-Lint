@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
 
 jobs:
   bundle:
