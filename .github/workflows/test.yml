@@ -61,7 +61,7 @@ jobs:
         with:
           php-version: 5.4
           extensions: exif, phar, openssl
-          coverage: false
+          coverage: none
           ini-values: phar.readonly=Off
 
       - name: Install Box from GitHub
@@ -121,7 +121,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: false
+          coverage: none
 
       - name: Run linter against codebase
         run: php ./parallel-lint.phar src/
