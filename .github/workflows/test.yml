@@ -28,26 +28,6 @@ jobs:
       - name: Run code sniffer
         run: vendor/bin/phpcs
 
-  test:
-    name: Run unit tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 5.4
-          extensions: json, tokenizer
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install Composer dependencies
-        uses: ramsey/composer-install@v1
-
-      - name: Run tests
-        run: composer test
-
   bundle:
     name: Bundle binary
     runs-on: ubuntu-latest
@@ -84,8 +64,8 @@ jobs:
           name: parallel-lint-phar
           path: ./parallel-lint.phar
 
-  verify-bundle:
-    name: Validate binary on PHP ${{ matrix.php }}
+  test:
+    name: Run tests on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental == true }}
     needs:
@@ -113,15 +93,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - uses: actions/download-artifact@v2
-        with:
-          name: parallel-lint-phar
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      - name: Run linter against codebase
-        run: php ./parallel-lint.phar src/
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Run unit tests
+        run: composer test
+
+      - name: 'Integration test 1 - linting own code, no colors'
+        run: ./parallel-lint --exclude vendor --exclude tests/examples --no-colors .
+
+      - name: 'Integration test 2 - linting own code'
+        run: ./parallel-lint --exclude vendor --exclude tests/examples .
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: parallel-lint-phar
+
+      - name: Run linter against codebase using the phar
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples .
