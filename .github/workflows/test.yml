@@ -105,6 +105,11 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
+      # Remove PHPCS as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
+      - name: 'Composer: remove PHPCS'
+        if: ${{ matrix.php < 5.4 }}
+        run: composer remove --dev squizlabs/php_codesniffer --no-update
+
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
 
