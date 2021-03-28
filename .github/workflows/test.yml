@@ -102,7 +102,12 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
 
-      - name: Run unit tests
+      - name: 'Run unit tests PHP 5.4, 5.5'
+        if: ${{ matrix.php < 5.6 }}
+        run: composer testphp5
+
+      - name: 'Run unit tests PHP >= 5.6'
+        if: ${{ matrix.php >= 5.6 }}
         run: composer test
 
       - name: 'Integration test 1 - linting own code, no colors'
