@@ -123,7 +123,7 @@ jobs:
       - name: 'Integration test 2 - linting own code'
         run: ./parallel-lint --exclude vendor --exclude tests/examples .
 
-      - name: 'Run unit tests PHP 5.4, 5.5'
+      - name: 'Run unit tests PHP <= 5.5'
         if: ${{ matrix.php < 5.6 }}
         run: composer testphp5
 
