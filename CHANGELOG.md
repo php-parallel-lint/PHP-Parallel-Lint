@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+[Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
+
+## [1.3.0] - 2021-04-07
+
 ### Added
 
 - Allow for multi-part file extensions to be passed using -e (like `-e php,php.dist`) from [@jrfnl](https://github.com/jrfnl).
@@ -36,7 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - GH Actions: run the tests against all supported PHP versions [#55](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/55) from [@jrfnl](https://github.com/jrfnl).
 - GH Actions: report CS violations in the PR [#55](https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/55) from [@jrfnl](https://github.com/jrfnl).
 
-[Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.2.0...HEAD
+[1.3.0]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.2.0...v1.3.0
 
 ## [1.2.0] - 2020-04-04
 
