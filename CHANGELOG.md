@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Internal
+
+- Reformat changelog to use reflinks in changelog entries [#58] from [@glensc].
+
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
+
+[#58]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/58
 
 ## [1.3.0] - 2021-04-07
 
