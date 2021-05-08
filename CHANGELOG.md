@@ -6,12 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Extend by the Code Climate output format [#50] from [@lukas9393]. 
+
 ### Internal
 
 - Reformat changelog to use reflinks in changelog entries [#58] from [@glensc].
 
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
 
+[#50]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/50
 [#58]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/58
 
 ## [1.3.0] - 2021-04-07
@@ -93,3 +98,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [@reedy]: https://github.com/reedy
 [@roelofr]: https://github.com/roelofr
 [@szepeviktor]: https://github.com/szepeviktor
+[@lukas9393]: https://github.com/lukas9393
+
