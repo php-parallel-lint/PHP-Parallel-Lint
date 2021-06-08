@@ -44,6 +44,13 @@ $autoloadLocations = array(
     __DIR__ . '/../../autoload.php',
 );
 
+if (class_exists('Phar') && Phar::running() !== '') {
+    // Running from a phar file. Prevent loading - potentially blocking - project autoload file.
+    $autoloadLocations = array(
+        __DIR__ . '/vendor/autoload.php',
+    );
+}
+
 $loaded = false;
 foreach ($autoloadLocations as $autoload) {
     if (is_file($autoload)) {
