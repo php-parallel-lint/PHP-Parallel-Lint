@@ -48,7 +48,7 @@ jobs:
           php-version: 5.4
           extensions: exif, phar, openssl
           coverage: none
-          ini-values: phar.readonly=Off
+          ini-values: phar.readonly=Off, error_reporting=E_ALL, display_errors=On
 
       - name: Install Box from GitHub
         run: |
@@ -106,6 +106,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          ini-values: error_reporting=E_ALL, display_errors=On
           coverage: none
 
       # Remove PHPCS as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
