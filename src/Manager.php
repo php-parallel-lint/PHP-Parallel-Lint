@@ -4,6 +4,7 @@ namespace JakubOnderka\PhpParallelLint;
 use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use JakubOnderka\PhpParallelLint\Process\GitBlameProcess;
 use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
+use ReturnTypeWillChange;
 
 class Manager
 {
@@ -226,6 +227,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
      * @link http://php.net/manual/en/filteriterator.accept.php
      * @return bool true if the current element is acceptable, otherwise false.
      */
+    #[ReturnTypeWillChange]
     public function accept()
     {
         $current = $this->current()->getPathname();
@@ -245,6 +247,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
      * @link http://php.net/manual/en/recursivefilteriterator.haschildren.php
      * @return bool true if the inner iterator has children, otherwise false
      */
+    #[ReturnTypeWillChange]
     public function hasChildren()
     {
         return $this->iterator->hasChildren();
@@ -257,6 +260,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
      * @link http://php.net/manual/en/recursivefilteriterator.getchildren.php
      * @return \RecursiveFilterIterator containing the inner iterator's children.
      */
+    #[ReturnTypeWillChange]
     public function getChildren()
     {
         return new self($this->iterator->getChildren(), $this->excluded);
