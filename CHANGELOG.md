@@ -6,18 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+[Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
+
+## [1.3.1] - 2021-08-13
+
 ### Added
 
 - Extend by the Code Climate output format [#50] from [@lukas9393]. 
+
+### Fixed
+
+- PHP 8.1: silence the deprecation notices about missing return types [#64] from [@jrfnl].
 
 ### Internal
 
 - Reformat changelog to use reflinks in changelog entries [#58] from [@glensc].
 
-[Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
+[1.3.1]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...1.3.1
 
 [#50]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/50
 [#58]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/58
+[#64]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/64
 
 ## [1.3.0] - 2021-04-07
 
