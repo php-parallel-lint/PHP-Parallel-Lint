@@ -28,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Reformat changelog to use reflinks in changelog entries [#58] from [@glensc].
 
-[1.3.1]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...1.3.1
+[1.3.1]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...v1.3.1
 
 [#50]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/50
 [#58]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/58
