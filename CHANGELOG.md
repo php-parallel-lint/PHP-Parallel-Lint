@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Internal
+
+-  GH Actions: set error reporting to E_ALL [#65] from [@glensc].
+
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
+
+[#65]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/65
 
 ## [1.3.1] - 2021-08-13
 
