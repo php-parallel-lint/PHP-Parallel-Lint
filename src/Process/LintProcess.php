@@ -15,6 +15,11 @@ class LintProcess extends PhpProcess
     private $showDeprecatedErrors;
 
     /**
+     * @var string
+     */
+    protected $severity;
+
+    /**
      * @param PhpExecutable $phpExecutable
      * @param string $fileToCheck Path to file to check
      * @param bool $aspTags
@@ -62,6 +67,7 @@ class LintProcess extends PhpProcess
             // Look for fatal errors first
             foreach (explode("\n", $this->getOutput()) as $line) {
                 if ($this->containsFatalError($line)) {
+                    $this->severity = 'error';
                     return $line;
                 }
             }
@@ -69,6 +75,7 @@ class LintProcess extends PhpProcess
             // Look for parser errors second
             foreach (explode("\n", $this->getOutput()) as $line) {
                 if ($this->containsParserError($line)) {
+                    $this->severity = 'error';
                     return $line;
                 }
             }
@@ -76,6 +83,7 @@ class LintProcess extends PhpProcess
             // Look for deprecated errors third
             foreach (explode("\n", $this->getOutput()) as $line) {
                 if ($this->containsDeprecatedError($line)) {
+                    $this->severity = 'warning';
                     return $line;
                 }
             }
@@ -84,6 +92,19 @@ class LintProcess extends PhpProcess
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeverity()
+    {
+        if (!empty($this->severity)) {
+            return $this->severity;
+        } else {
+            $error = $this->getSyntaxError();
+            return '$this->severity';
+        }
     }
 
     /**

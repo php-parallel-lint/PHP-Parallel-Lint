@@ -96,7 +96,7 @@ class ParallelLint
 
                     } else if ($process->containsError()) {
                         $checkedFiles[] = $file;
-                        $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
+                        $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError(), $process->getSeverity()));
                         $processCallback(self::STATUS_ERROR, $file);
 
                     } else if ($process->isSuccess()) {
@@ -135,7 +135,7 @@ class ParallelLint
 
                 } else if ($process->containsError()) {
                     $checkedFiles[] = $file;
-                    $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
+                    $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError(), $process->getSeverity()));
                     $processCallback(self::STATUS_ERROR, $file);
 
                 } else {

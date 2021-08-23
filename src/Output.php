@@ -422,15 +422,18 @@ class CheckstyleOutput implements Output
             if ($error instanceof SyntaxError) {
                 $line = $error->getLine();
                 $source = "Syntax Error";
+                $severity = $error->getSeverity();
             } else {
                 $line = 1;
                 $source = "Linter Error";
+                $severity = 'error';
             }
 
             $errors[$error->getShortFilePath()][] = array(
                 'message' => $message,
                 'line' => $line,
-                'source' => $source
+                'source' => $source,
+                'severity' => $severity,
             );
         }
 
@@ -439,8 +442,9 @@ class CheckstyleOutput implements Output
             foreach ($fileErrors as $fileError) {
                 $this->writer->write(
                     sprintf(
-                        '        <error line="%d" severity="ERROR" message="%s" source="%s" />',
+                        '        <error line="%d" severity="%s" message="%s" source="%s" />',
                         $fileError['line'],
+                        $fileError['severity'],
                         $fileError['message'],
                         $fileError['source']
                     ) .
