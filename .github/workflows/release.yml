@@ -9,6 +9,9 @@ on:
 
 jobs:
   bundle:
+    # Don't run on forks.
+    if: github.repository == 'php-parallel-lint/PHP-Parallel-Lint'
+
     name: Bundle binary
     runs-on: ubuntu-latest
 
