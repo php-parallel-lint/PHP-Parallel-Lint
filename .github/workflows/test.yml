@@ -48,7 +48,7 @@ jobs:
           php-version: 8.0
           extensions: exif, phar, openssl
           coverage: none
-          ini-values: phar.readonly=Off, error_reporting=E_ALL, display_errors=On
+          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
@@ -107,7 +107,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          ini-values: error_reporting=E_ALL, display_errors=On
+          ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
 
       # Remove PHPCS as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
