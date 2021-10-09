@@ -22,7 +22,7 @@ jobs:
           php-version: 8.0
           extensions: exif, phar, openssl
           coverage: none
-          ini-values: phar.readonly=Off
+          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
@@ -84,6 +84,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
 
       - name: Run linter against codebase
