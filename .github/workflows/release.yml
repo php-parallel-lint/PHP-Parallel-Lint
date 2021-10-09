@@ -49,7 +49,7 @@ jobs:
   verify:
     name: Validate binary on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental == true }}
+    continue-on-error: ${{ matrix.php == '8.2' }}
     needs:
       - bundle
 
@@ -67,10 +67,6 @@ jobs:
           - '8.0'
           - '8.1'
           - '8.2'
-
-        include:
-          - php: '8.2'
-            experimental: true
 
     steps:
       - name: Checkout code
