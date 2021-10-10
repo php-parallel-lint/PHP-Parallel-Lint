@@ -45,27 +45,27 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 5.4
+          php-version: 7.3
           extensions: exif, phar, openssl
           coverage: none
           ini-values: phar.readonly=Off, error_reporting=E_ALL, display_errors=On
-
-      - name: Install Box from GitHub
-        run: |
-          curl -LSs https://box-project.github.io/box2/installer.php | php
-          test -f ./box.phar
-          test -d ~/bin || mkdir ~/bin
-          mv ./box.phar ~/bin/box
-          ~/bin/box -V
-          echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v1
         with:
           composer-options: "--no-dev"
 
+      - name: Install Box
+        run: wget https://github.com/humbug/box/releases/latest/download/box.phar -O box.phar && chmod 0755 box.phar && pwd
+
+      - name: Validate configuration
+        run: php box.phar validate -i box.json
+
       - name: Building binary...
-        run: box build -v
+        run: php box.phar compile -v --config=box.json
+
+      - name: Show info about the build phar with humbug/box
+        run: php box.phar info -l parallel-lint.phar
 
       - uses: actions/upload-artifact@v2
         with:
