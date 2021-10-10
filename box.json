@@ -1,11 +1,15 @@
 {
+    "base-path": null,
     "output": "parallel-lint.phar",
     "chmod": "0755",
     "compactors": [
-        "Herrera\\Box\\Compactor\\Php"
+        "KevinGH\\Box\\Compactor\\Php"
     ],
-    "extract": false,
     "main": "parallel-lint",
+    "directories": [
+        "bin",
+        "src"
+    ],
     "files": [
         "LICENSE"
     ],
@@ -14,15 +18,7 @@
             "name": ["*.php"],
             "exclude": ["Tests", "tests"],
             "in": "vendor"
-        },
-        {
-            "exclude": ["Tests"],
-            "in": "src"
-        },
-        {
-            "in": "bin"
         }
     ],
-    "stub": true,
-    "web": false
+    "stub": true
 }
