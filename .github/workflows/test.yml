@@ -45,7 +45,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.3
+          php-version: 8.0
           extensions: exif, phar, openssl
           coverage: none
           ini-values: phar.readonly=Off, error_reporting=E_ALL, display_errors=On

@@ -2,6 +2,7 @@
     "base-path": null,
     "output": "parallel-lint.phar",
     "chmod": "0755",
+    "check-requirements": false,
     "compactors": [
         "KevinGH\\Box\\Compactor\\Php"
     ],
