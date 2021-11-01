@@ -103,7 +103,7 @@ class LintProcess extends PhpProcess
             return $this->severity;
         } else {
             $error = $this->getSyntaxError();
-            return '$this->severity';
+            return $this->severity;
         }
     }
 
