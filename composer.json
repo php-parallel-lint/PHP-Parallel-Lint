@@ -38,7 +38,7 @@
     ],
     "scripts": {
         "test": "@php vendor/bin/tester -C -p php tests",
-        "testphp5": "@php vendor/bin/tester -p php tests"
+        "testphp5": "@php vendor/bin/tester -c tests/php5.3-5.5.ini -p php tests"
     },
     "scripts-descriptions": {
         "test": "Run all tests!"
