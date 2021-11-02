@@ -96,15 +96,15 @@ class LintProcess extends PhpProcess
 
     /**
      * @return string
+     * @throws RunTimeException
      */
     public function getSeverity()
     {
-        if (!empty($this->severity)) {
-            return $this->severity;
-        } else {
-            $error = $this->getSyntaxError();
-            return $this->severity;
+        if (empty($this->severity)) {
+            $this->getSyntaxError();
         }
+
+        return $this->severity;
     }
 
     /**
