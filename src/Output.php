@@ -441,7 +441,7 @@ class CheckstyleOutput implements Output
                     sprintf(
                         '        <error line="%d" severity="ERROR" message="%s" source="%s" />',
                         $fileError['line'],
-                        $fileError['message'],
+                        htmlspecialchars($fileError['message'], ENT_COMPAT, 'UTF-8'),
                         $fileError['source']
                     ) .
                     PHP_EOL
