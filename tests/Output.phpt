@@ -8,6 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use JakubOnderka\PhpParallelLint\ErrorFormatter;
 use JakubOnderka\PhpParallelLint\GitLabOutput;
+use JakubOnderka\PhpParallelLint\CheckstyleOutput;
 use JakubOnderka\PhpParallelLint\IWriter;
 use JakubOnderka\PhpParallelLint\Result;
 use JakubOnderka\PhpParallelLint\SyntaxError;
@@ -44,6 +45,27 @@ class OutputTest extends Tester\TestCase
             Assert::equal($result[$i]->location->path, $filePath);
             Assert::equal($result[$i]->location->lines->begin, $line);
         }
+    }
+
+    public function testCheckstyleOutput()
+    {
+        $errors = array(
+            new JakubOnderka\PhpParallelLint\SyntaxError(
+                'sample.php',
+                'Parse error: syntax error, unexpected \'"\' in ./sample.php on line 3'
+            ),
+        );
+
+        $result = new Result($errors, array(), array(), 0);
+        $writer = new TestWriter();
+        $output = new CheckstyleOutput($writer);
+
+        $output->writeResult($result, new ErrorFormatter(), true);
+        $xml = $writer->getLogs();
+        $parsed = @simplexml_load_string($xml);
+
+        Assert::contains("unexpected '&quot;'", $xml);
+        Assert::type('SimpleXMLElement', $parsed);
     }
 
     public function getGitLabOutputData()
