@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - Bug fix: make Phar file run independently of project under scan [#63] from [@jrfnl].
+- Fix Phar building [#70] from [@jrfnl].
 
 ### Internal
 
@@ -25,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [#32]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues/32
 [#63]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/63
 [#65]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/65
+[#70]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/70
 [#71]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/71
 [#74]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/74
 
