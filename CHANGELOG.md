@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Added official support for PHP 8.1 [#74] from [@grogy]
+
 ### Fixed
 
 - Bug fix: make Phar file run independently of project under scan [#63] from [@jrfnl].
@@ -22,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [#63]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/63
 [#65]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/65
 [#71]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/71
+[#74]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/74
 
 ## [1.3.1] - 2021-08-13
 
