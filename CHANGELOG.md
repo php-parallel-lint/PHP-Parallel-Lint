@@ -75,7 +75,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Provide one true way to run the test suite [#37] from [@mfn].
 - Travis: add build against PHP 8.0 and fix failing test [#41] from [@jrfnl].
 - GitHub Actions for testing, and automatic phar creation [#46] from [@roelofr].
-- Add .github folder to .gitattributes export-ignore [#54] from [@glensc].
+- Add .github folder to .gitattributes export-ignore [#54] from [@reedy].
 - Suggest to curl composer install via HTTPS [#53] from [@reedy].
 - GH Actions: allow for manually triggering a workflow [#55] from [@jrfnl].
 - GH Actions: fix phar creation [#55] from [@jrfnl].
