@@ -6,14 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
-
-- Added official support for PHP 8.1 [#74] from [@grogy]
-
 ### Fixed
 
 - Bug fix: make Phar file run independently of project under scan [#63] from [@jrfnl].
 - Fix Phar building [#70] from [@jrfnl].
+- GH Actions: testing against PHP 8.2 [#74] from [@grogy]
 
 ### Internal
 
