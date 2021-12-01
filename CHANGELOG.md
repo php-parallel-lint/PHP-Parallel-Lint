@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Internal
 
 - Welcome [@jrfnl] as a new maintainer [#32]
-- GH Actions: set error reporting to E_ALL [#65] from [@glensc].
+- GH Actions: set error reporting to E_ALL [#65] from [@jrfnl].
 - GH Actions: fix failing tests on PHP 5.3-5.5 [#71] from [@jrfnl] and [@villfa]
 
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
