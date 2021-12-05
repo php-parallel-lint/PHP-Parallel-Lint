@@ -19,8 +19,7 @@ The application is officially supported for use with PHP 5.3 to 8.1.
 3. [History](#history)
 4. [Command line options](#command-line-options)
 5. [Recommended excludes for Symfony framework](#recommended-excludes-for-symfony-framework)
-6. [Create Phar package](#create-phar-package)
-7. [How to upgrade](#how-to-upgrade)
+6. [How to upgrade](#how-to-upgrade)
 
 ## Installation
 
@@ -36,6 +35,9 @@ Alternatively you can install as a standalone `composer` project:
 For colored output, install the suggested package `php-parallel-lint/php-console-highlighter`:
 
     composer require --dev php-parallel-lint/php-console-highlighter
+    
+Since v1.3.0, a PHAR file is also made available for each release.
+This PHAR file is published as an asset for each release and can be found on the [Releases](https://github.com/php-parallel-lint/PHP-Parallel-Lint/releases) page.
 
 ## Example output
 
@@ -91,18 +93,6 @@ To run from the command line:
 
     vendor/bin/parallel-lint --exclude app --exclude vendor .
 
-## Create Phar package
-
-PHP Parallel Lint supports [Box app](https://box-project.github.io/box2/) for creating Phar package. First, install box app:
-
-
-    curl -LSs https://box-project.github.io/box2/installer.php | php
-
-
-then run the build command in parallel lint folder, which creates `parallel-lint.phar` file.
-
-
-    box build
 
 ## How to upgrade
 
