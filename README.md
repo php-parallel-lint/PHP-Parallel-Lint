@@ -91,7 +91,7 @@ It is strongly recommended for existing users of the (unmaintained)
 
 To run from the command line:
 
-    vendor/bin/parallel-lint --exclude app --exclude vendor .
+    vendor/bin/parallel-lint --exclude .git --exclude app --exclude vendor .
 
 
 ## How to upgrade
