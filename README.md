@@ -19,7 +19,8 @@ The application is officially supported for use with PHP 5.3 to 8.1.
 3. [History](#history)
 4. [Command line options](#command-line-options)
 5. [Recommended excludes for Symfony framework](#recommended-excludes-for-symfony-framework)
-6. [How to upgrade](#how-to-upgrade)
+6. [Excluding files from a scan based on the PHP version used](#excluding-files-from-a-scan-based-on-the-PHP version-used)
+7. [How to upgrade](#how-to-upgrade)
 
 ## Installation
 
@@ -35,7 +36,7 @@ Alternatively you can install as a standalone `composer` project:
 For colored output, install the suggested package `php-parallel-lint/php-console-highlighter`:
 
     composer require --dev php-parallel-lint/php-console-highlighter
-    
+
 Since v1.3.0, a PHAR file is also made available for each release.
 This PHAR file is published as an asset for each release and can be found on the [Releases](https://github.com/php-parallel-lint/PHP-Parallel-Lint/releases) page.
 
@@ -92,6 +93,24 @@ It is strongly recommended for existing users of the (unmaintained)
 To run from the command line:
 
     vendor/bin/parallel-lint --exclude .git --exclude app --exclude vendor .
+
+
+## Excluding files from a scan based on the PHP version used
+
+Sometimes a particular file in a project may not comply with the project-wide minimum PHP version, like a file which is conditionally included in the project and contains PHP syntax which needs a higher PHP version to run.
+
+This can make it complicated to run Parallel Lint in a CI context, as the `exclude`s used in the command would have to be adjusted based on the PHP version on which the scan is being run.
+
+PHP Parallel Lint offers a straight-forward way around this, as files can define their own minimum PHP version like so:
+```php
+<?php // lint >= 7.4
+
+// Code which contains PHP 7.4 syntax.
+```
+
+With this comment in place, the file will be automatically skipped when PHP Parallel Lint is run on a PHP version lower than PHP 7.4.
+
+Note: The `// lint >= 7.4` comment has to be only the first line of the file and must directly follow the PHP open tag.
 
 
 ## How to upgrade
