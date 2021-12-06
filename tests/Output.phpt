@@ -62,6 +62,7 @@ class OutputTest extends Tester\TestCase
 
         $output->writeResult($result, new ErrorFormatter(), true);
         $xml = $writer->getLogs();
+        // phpcs:ignore Generic.PHP.NoSilencedErrors -- Test only code, this is okay.
         $parsed = @simplexml_load_string($xml);
 
         Assert::contains("unexpected '&quot;'", $xml);
