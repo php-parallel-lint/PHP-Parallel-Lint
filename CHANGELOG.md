@@ -9,14 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - Bug fix: make Phar file run independently of project under scan [#63] from [@jrfnl].
+- Bug fix: checkstyle report could contain invalid XML due to insufficient output escaping [#72] from [@gmazzap].
 - Fix Phar building [#70] from [@jrfnl].
 - GH Actions: testing against PHP 8.2 [#74] from [@grogy]
 
 ### Internal
 
 - Welcome [@jrfnl] as a new maintainer [#32]
-- GH Actions: set error reporting to E_ALL [#65] from [@jrfnl].
+- GH Actions: set error reporting to E_ALL [#65], [#76] from [@jrfnl].
 - GH Actions: fix failing tests on PHP 5.3-5.5 [#71] from [@jrfnl] and [@villfa]
+- GH Actions: auto-cancel concurrent builds [#76] from [@jrfnl].
 
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.0...HEAD
 
@@ -25,7 +27,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [#65]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/65
 [#70]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/70
 [#71]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/71
+[#72]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/72
 [#74]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/74
+[#76]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/76
 
 ## [1.3.1] - 2021-08-13
 
@@ -119,6 +123,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [@OndraM]: https://github.com/OndraM
 [@arxeiss]: https://github.com/arxeiss
 [@glensc]: https://github.com/glensc
+[@gmazzap]: https://github.com/gmazzap
 [@jankonas]: https://github.com/jankonas
 [@jrfnl]: https://github.com/jrfnl
 [@mfn]: https://github.com/mfn
