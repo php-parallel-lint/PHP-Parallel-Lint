@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - Bug fix: make Phar file run independently of project under scan [#63] from [@jrfnl].
-- Bug fix: checkstyle report could contain invalid XML due to insufficient output escaping [#72] from [@gmazzap].
+- Bug fix: checkstyle report could contain invalid XML due to insufficient output escaping [#73] from [@gmazzap].
 - Fix Phar building [#70] from [@jrfnl].
 - GH Actions: testing against PHP 8.2 [#74] from [@grogy]
 
@@ -27,7 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [#65]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/65
 [#70]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/70
 [#71]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/71
-[#72]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/72
+[#73]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/73
 [#74]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/74
 [#76]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/76
 
