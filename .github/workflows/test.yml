@@ -112,10 +112,10 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
 
-      # Remove PHPCS as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
+      # Remove the PHPCS standard as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
       - name: 'Composer: remove PHPCS'
         if: ${{ matrix.php < 5.4 }}
-        run: composer remove --dev squizlabs/php_codesniffer --no-update --no-interaction
+        run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
