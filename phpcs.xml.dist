@@ -12,7 +12,8 @@
     <!-- Scan all files. -->
     <file>.</file>
 
-    <!-- Exclude dependencies, test fixtures. -->
+    <!-- Exclude dependencies, test fixtures and auto-generated files. -->
+    <exclude-pattern>*/build/*</exclude-pattern>
     <exclude-pattern>*/tests/fixtures/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 

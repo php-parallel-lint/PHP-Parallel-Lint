@@ -118,7 +118,14 @@ jobs:
         run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies
+        if: ${{ matrix.php != '8.2' }}
         uses: ramsey/composer-install@v2
+
+      - name: "Install Composer dependencies (PHP 8.2, ignore PHP reqs)"
+        if: ${{ matrix.php == '8.2' }}
+        uses: ramsey/composer-install@v2
+        with:
+          composer-options: --ignore-platform-req=php
 
       - name: 'Integration test 1 - linting own code, no colors'
         continue-on-error: true
@@ -127,12 +134,7 @@ jobs:
       - name: 'Integration test 2 - linting own code'
         run: ./parallel-lint --exclude vendor --exclude tests/fixtures .
 
-      - name: 'Run unit tests PHP <= 5.5'
-        if: ${{ matrix.php < 5.6 }}
-        run: composer testphp5
-
-      - name: 'Run unit tests PHP >= 5.6'
-        if: ${{ matrix.php >= 5.6 }}
+      - name: 'Run unit tests'
         run: composer test
 
       - uses: actions/download-artifact@v3
