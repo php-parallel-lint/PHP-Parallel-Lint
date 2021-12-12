@@ -136,5 +136,5 @@ class ManagerRunTest extends Tester\TestCase
     }
 }
 
-$testCase = new ManagerRunTest;
+$testCase = new ManagerRunTest();
 $testCase->run();

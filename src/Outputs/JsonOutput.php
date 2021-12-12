@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
@@ -29,27 +30,22 @@ class JsonOutput implements OutputInterface
 
     public function ok()
     {
-
     }
 
     public function skip()
     {
-
     }
 
     public function error()
     {
-
     }
 
     public function fail()
     {
-
     }
 
     public function setTotalFileCount($count)
     {
-
     }
 
     public function writeHeader($phpVersion, $parallelJobs, $hhvmVersion = null)

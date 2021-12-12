@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Process;
 
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;

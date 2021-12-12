@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
@@ -159,7 +160,7 @@ class Result implements \JsonSerializable
      * which is a value of any type other than a resource.
      */
     #[ReturnTypeWillChange]
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'checkedFiles' => $this->getCheckedFiles(),
@@ -168,6 +169,4 @@ class Result implements \JsonSerializable
             'errors' => $this->getErrors(),
         );
     }
-
-
 }

@@ -145,5 +145,5 @@ class SettingsParseArgumentsTest extends Tester\TestCase
     }
 }
 
-$testCase = new SettingsParseArgumentsTest;
+$testCase = new SettingsParseArgumentsTest();
 $testCase->run();

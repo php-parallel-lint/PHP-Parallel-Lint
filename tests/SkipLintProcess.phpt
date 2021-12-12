@@ -37,5 +37,5 @@ class SkipLintProcessTest extends Tester\TestCase
     }
 }
 
-$skipLintProcessTest = new SkipLintProcessTest;
+$skipLintProcessTest = new SkipLintProcessTest();
 $skipLintProcessTest->run();

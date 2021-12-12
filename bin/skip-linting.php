@@ -1,4 +1,5 @@
 <?php
+
 $stdin = fopen('php://stdin', 'r');
 $input = stream_get_contents($stdin);
 fclose($stdin);

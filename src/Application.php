@@ -44,7 +44,7 @@ class Application
                 $this->showUsage();
                 return self::FAILED;
             }
-            $manager = new Manager;
+            $manager = new Manager();
             $result = $manager->run($settings);
             if ($settings->ignoreFails) {
                 return $result->hasSyntaxError() ? self::WITH_ERRORS : self::SUCCESS;
@@ -112,7 +112,7 @@ HELP;
      */
     private function showVersion()
     {
-        echo 'PHP Parallel Lint version ' . self::VERSION.PHP_EOL;
+        echo 'PHP Parallel Lint version ', self::VERSION, PHP_EOL;
     }
 
     /**

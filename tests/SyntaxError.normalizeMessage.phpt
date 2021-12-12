@@ -27,5 +27,5 @@ class SyntaxErrorNormalizeMessageTest extends Tester\TestCase
     }
 }
 
-$testCase = new SyntaxErrorNormalizeMessageTest;
+$testCase = new SyntaxErrorNormalizeMessageTest();
 $testCase->run();

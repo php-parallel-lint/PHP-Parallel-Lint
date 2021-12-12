@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
@@ -16,7 +17,7 @@ class TextOutputColored extends TextOutput
         if (class_exists('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor')) {
             $this->colors = new \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor();
             $this->colors->setForceStyle($colors === Settings::FORCED);
-        } else if (class_exists('\JakubOnderka\PhpConsoleColor\ConsoleColor')) {
+        } elseif (class_exists('\JakubOnderka\PhpConsoleColor\ConsoleColor')) {
             $this->colors = new \JakubOnderka\PhpConsoleColor\ConsoleColor();
             $this->colors->setForceStyle($colors === Settings::FORCED);
         }

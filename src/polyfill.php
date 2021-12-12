@@ -3,6 +3,7 @@
 /**
  * Polyfill for PHP < 5.4
  */
+
 if (!interface_exists('JsonSerializable', false)) {
     interface JsonSerializable
     {
@@ -10,6 +11,6 @@ if (!interface_exists('JsonSerializable', false)) {
          * @param void
          * @return mixed
          */
-        function jsonSerialize();
+        public function jsonSerialize();
     }
 }
