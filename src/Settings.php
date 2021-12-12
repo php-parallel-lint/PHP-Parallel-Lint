@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\InvalidArgumentException;
@@ -6,7 +7,6 @@ use PHP_Parallel_Lint\PhpParallelLint\Iterators\ArrayIterator;
 
 class Settings
 {
-
     /**
      * constants for enum settings
      */
@@ -129,10 +129,11 @@ class Settings
     public static function parseArguments(array $arguments)
     {
         $arguments = new ArrayIterator(array_slice($arguments, 1));
-        $settings = new self;
+        $settings = new self();
 
         // Use the currently invoked php as the default if possible
         if (defined('PHP_BINARY')) {
+            // phpcs:ignore PHPCompatibility.Constants.NewConstants.php_binaryFound
             $settings->phpExecutable = PHP_BINARY;
         }
 

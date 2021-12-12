@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;

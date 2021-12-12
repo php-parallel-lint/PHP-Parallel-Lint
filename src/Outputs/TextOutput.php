@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
@@ -175,13 +176,13 @@ class TextOutput implements OutputInterface
             if ($type === self::TYPE_OK) {
                 $this->writer->write('.');
 
-            } else if ($type === self::TYPE_SKIP) {
+            } elseif ($type === self::TYPE_SKIP) {
                 $this->write('S', self::TYPE_SKIP);
 
-            } else if ($type === self::TYPE_ERROR) {
+            } elseif ($type === self::TYPE_ERROR) {
                 $this->write('X', self::TYPE_ERROR);
 
-            } else if ($type === self::TYPE_FAIL) {
+            } elseif ($type === self::TYPE_FAIL) {
                 $this->writer->write('-');
             }
 

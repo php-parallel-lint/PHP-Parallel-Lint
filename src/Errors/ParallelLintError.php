@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint\Errors;
 
 use ReturnTypeWillChange;

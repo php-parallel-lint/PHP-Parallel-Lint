@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use JakubOnderka\PhpConsoleColor\ConsoleColor as OldConsoleColor;
@@ -123,7 +124,7 @@ class ErrorFormatter
             $colors = new ConsoleColor();
             $colors->setForceStyle($this->forceColors);
             $highlighter = new Highlighter($colors);
-        } else if (
+        } elseif (
             class_exists('\JakubOnderka\PhpConsoleHighlighter\Highlighter')
             && class_exists('\JakubOnderka\PhpConsoleColor\ConsoleColor')
         ) {

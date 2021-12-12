@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
@@ -30,7 +31,7 @@ class Manager
      */
     public function run(Settings $settings = null)
     {
-        $settings = $settings ?: new Settings;
+        $settings = $settings ?: new Settings();
         $output = $this->output ?: $this->getDefaultOutput($settings);
 
         $phpExecutable = PhpExecutable::getPhpExecutable($settings->phpExecutable);
@@ -56,9 +57,9 @@ class Manager
         $parallelLint->setProcessCallback(function ($status, $file) use ($output) {
             if ($status === ParallelLint::STATUS_OK) {
                 $output->ok();
-            } else if ($status === ParallelLint::STATUS_SKIP) {
+            } elseif ($status === ParallelLint::STATUS_SKIP) {
                 $output->skip();
-            } else if ($status === ParallelLint::STATUS_ERROR) {
+            } elseif ($status === ParallelLint::STATUS_ERROR) {
                 $output->error();
             } else {
                 $output->fail();
@@ -90,7 +91,7 @@ class Manager
      */
     protected function getDefaultOutput(Settings $settings)
     {
-        $writer = new ConsoleWriter;
+        $writer = new ConsoleWriter();
         switch ($settings->format) {
             case Settings::FORMAT_JSON:
                 return new JsonOutput($writer);
@@ -128,7 +129,7 @@ class Manager
                 $process->waitForFinish();
 
                 if ($process->isSuccess()) {
-                    $blame = new Blame;
+                    $blame = new Blame();
                     $blame->name = $process->getAuthor();
                     $blame->email = $process->getAuthorEmail();
                     $blame->datetime = $process->getAuthorTime();
@@ -157,7 +158,7 @@ class Manager
         foreach ($paths as $path) {
             if (is_file($path)) {
                 $files[] = $path;
-            } else if (is_dir($path)) {
+            } elseif (is_dir($path)) {
                 $iterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
                 if (!empty($excluded)) {
                     $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
@@ -202,7 +203,7 @@ class Manager
             throw new ClassNotFoundException($expectedClassName, $settings->syntaxErrorCallbackFile);
         }
 
-        $callbackInstance = new $expectedClassName;
+        $callbackInstance = new $expectedClassName();
 
         if (!($callbackInstance instanceof SyntaxErrorCallback)) {
             throw new CallbackNotImplementedException($expectedClassName);

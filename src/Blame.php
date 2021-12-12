@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use ReturnTypeWillChange;
@@ -24,7 +25,7 @@ class Blame implements \JsonSerializable
      * which is a value of any type other than a resource.
      */
     #[ReturnTypeWillChange]
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'name' => $this->name,

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
@@ -93,19 +94,18 @@ class ParallelLint
                     if ($skipStatus === null) {
                         $waiting[$file] = $process;
 
-                    } else if ($skipStatus === true) {
+                    } elseif ($skipStatus === true) {
                         $skippedFiles[] = $file;
                         $processCallback(self::STATUS_SKIP, $file);
 
-                    } else if ($process->containsError()) {
+                    } elseif ($process->containsError()) {
                         $checkedFiles[] = $file;
                         $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
                         $processCallback(self::STATUS_ERROR, $file);
 
-                    } else if ($process->isSuccess()) {
+                    } elseif ($process->isSuccess()) {
                         $checkedFiles[] = $file;
                         $processCallback(self::STATUS_OK, $file);
-
 
                     } else {
                         $errors[] = new ParallelLintError($file, $process->getOutput());
@@ -128,15 +128,15 @@ class ParallelLint
                 if ($skipStatus === null) {
                     throw new \Exception("File $file has empty skip status. Please contact the author of PHP Parallel Lint.");
 
-                } else if ($skipStatus === true) {
+                } elseif ($skipStatus === true) {
                     $skippedFiles[] = $file;
                     $processCallback(self::STATUS_SKIP, $file);
 
-                } else if ($process->isSuccess()) {
+                } elseif ($process->isSuccess()) {
                     $checkedFiles[] = $file;
                     $processCallback(self::STATUS_OK, $file);
 
-                } else if ($process->containsError()) {
+                } elseif ($process->containsError()) {
                     $checkedFiles[] = $file;
                     $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
                     $processCallback(self::STATUS_ERROR, $file);

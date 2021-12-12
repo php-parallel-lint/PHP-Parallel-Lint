@@ -116,5 +116,5 @@ class TestWriter implements WriterInterface
     }
 }
 
-$testCase = new OutputTest;
+$testCase = new OutputTest();
 $testCase->run();

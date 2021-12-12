@@ -102,7 +102,7 @@ class ParallelLintLintTest extends Tester\TestCase
         Assert::false($result->hasSyntaxError());
         Assert::equal(0, count($result->getErrors()));
 
-        if (PHP_VERSION_ID < 70000 || PHP_VERSION_ID >= 80000 ) {
+        if (PHP_VERSION_ID < 70000 || PHP_VERSION_ID >= 80000) {
             Tester\Environment::skip('test for php version 7.0-7.4');
         }
 
@@ -135,5 +135,5 @@ class ParallelLintLintTest extends Tester\TestCase
     }
 }
 
-$testCase = new ParallelLintLintTest;
+$testCase = new ParallelLintLintTest();
 $testCase->run();
