@@ -19,7 +19,7 @@ The application is officially supported for use with PHP 5.3 to 8.1.
 3. [History](#history)
 4. [Command line options](#command-line-options)
 5. [Recommended excludes for Symfony framework](#recommended-excludes-for-symfony-framework)
-6. [Excluding files from a scan based on the PHP version used](#excluding-files-from-a-scan-based-on-the-PHP version-used)
+6. [Excluding files from a scan based on the PHP version used](#excluding-files-from-a-scan-based-on-the-php-version-used)
 7. [How to upgrade](#how-to-upgrade)
 
 ## Installation
