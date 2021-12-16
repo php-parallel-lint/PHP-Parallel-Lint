@@ -111,7 +111,7 @@ PHP Parallel Lint offers a straight-forward way around this, as files can define
 
 With this comment in place, the file will be automatically skipped when PHP Parallel Lint is run on a PHP version lower than PHP 7.4.
 
-Note: The `// lint >= 7.4` comment has to be only the first line of the file and must directly follow the PHP open tag.
+Note: The `// lint >= 7.4` comment has to be on the first line of the file and must directly follow the PHP open tag.
 
 
 ## How to upgrade
