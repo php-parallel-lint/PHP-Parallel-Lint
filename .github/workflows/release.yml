@@ -34,7 +34,7 @@ jobs:
           ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v1
+        uses: ramsey/composer-install@v2
         with:
           composer-options: "--no-dev"
 
