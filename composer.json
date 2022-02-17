@@ -30,7 +30,12 @@
     },
     "autoload": {
         "classmap": [
-            "./"
+            "./src/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "./tests/"
         ]
     },
     "bin": [
