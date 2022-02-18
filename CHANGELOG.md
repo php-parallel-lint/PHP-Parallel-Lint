@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.2...HEAD
 
-## [1.3.2] - 2022-02-17
+## [1.3.2] - 2022-02-19
+
+### Added
+
+- Support for PHP Console Highlighter 1.0.0, which comes with PHP Console Color 1.0.1, [#92] from [@jrfnl].
 
 ### Fixed
 
@@ -56,6 +60,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [#84]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/84
 [#88]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/88
 [#89]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/89
+[#92]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/92
 
 
 ## [1.3.1] - 2021-08-13
