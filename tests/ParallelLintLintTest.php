@@ -69,7 +69,7 @@ class ParallelLintLintTest extends TestCase
     public function testEmptyFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-01/empty-file'));
+        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-01/empty-file'));
 
         Assert::equal(1, $result->getCheckedFilesCount());
         Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
@@ -80,7 +80,7 @@ class ParallelLintLintTest extends TestCase
     public function testValidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-02/example.php'));
+        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-02/example.php'));
 
         Assert::equal(1, $result->getCheckedFilesCount());
         Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
@@ -90,7 +90,7 @@ class ParallelLintLintTest extends TestCase
     public function testInvalidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-03/example.php'));
+        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-03/example.php'));
 
         Assert::equal(1, $result->getCheckedFilesCount());
         Assert::equal(1, $result->getFilesWithSyntaxErrorCount());
@@ -101,7 +101,7 @@ class ParallelLintLintTest extends TestCase
     public function testDeprecated()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-05/Foo.php'));
+        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
         Assert::equal(1, $result->getCheckedFilesCount());
         Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
         Assert::false($result->hasSyntaxError());
@@ -113,7 +113,7 @@ class ParallelLintLintTest extends TestCase
 
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $parallelLint->setShowDeprecated(true);
-        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-05/Foo.php'));
+        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
         Assert::equal(1, $result->getCheckedFilesCount());
         Assert::equal(1, $result->getFilesWithSyntaxErrorCount());
         Assert::true($result->hasSyntaxError());
@@ -124,8 +124,8 @@ class ParallelLintLintTest extends TestCase
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(
-            __DIR__ . '/examples/example-02/example.php',
-            __DIR__ . '/examples/example-03/example.php',
+            __DIR__ . '/fixtures/fixture-02/example.php',
+            __DIR__ . '/fixtures/fixture-03/example.php',
         ));
 
         Assert::equal(2, $result->getCheckedFilesCount());

@@ -26,5 +26,5 @@ install:
 
 test_script:
   - php composer.phar test
-  - php parallel-lint --exclude vendor --exclude tests\examples --no-colors .
-  - php parallel-lint --exclude vendor --exclude tests\examples .
+  - php parallel-lint --exclude vendor --exclude tests\fixtures --no-colors .
+  - php parallel-lint --exclude vendor --exclude tests\fixtures .

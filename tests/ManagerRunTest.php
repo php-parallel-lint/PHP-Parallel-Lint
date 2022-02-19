@@ -31,7 +31,7 @@ class ManagerRunTest extends TestCase
     public function testFilesNotFound()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('examples/example-01/');
+        $settings->paths = array('fixtures/fixture-01/');
         $manager = $this->getManager($settings);
         Assert::exception(function () use ($manager, $settings) {
             $manager->run($settings);
@@ -41,7 +41,7 @@ class ManagerRunTest extends TestCase
     public function testSuccess()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('examples/example-02/');
+        $settings->paths = array('fixtures/fixture-02/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
@@ -51,7 +51,7 @@ class ManagerRunTest extends TestCase
     public function testError()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('examples/example-03/');
+        $settings->paths = array('fixtures/fixture-03/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
@@ -61,13 +61,13 @@ class ManagerRunTest extends TestCase
     public function testExcludeRelativeSubdirectory()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('examples/example-04/');
+        $settings->paths = array('fixtures/fixture-04/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
         Assert::true($result->hasError());
 
-        $settings->excluded = array('examples/example-04/dir1/dir2');
+        $settings->excluded = array('fixtures/fixture-04/dir1/dir2');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
@@ -78,14 +78,14 @@ class ManagerRunTest extends TestCase
     {
         $settings = $this->prepareSettings();
         $cwd = getcwd();
-        $settings->paths = array($cwd . '/examples/example-04/');
+        $settings->paths = array($cwd . '/fixtures/fixture-04/');
         $settings->excluded = array();
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
         Assert::true($result->hasError());
 
-        $settings->excluded = array($cwd . '/examples/example-04/dir1/dir2');
+        $settings->excluded = array($cwd . '/fixtures/fixture-04/dir1/dir2');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
@@ -100,7 +100,7 @@ class ManagerRunTest extends TestCase
     public function testMultiPartExtensions()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('examples/example-06/');
+        $settings->paths = array('fixtures/fixture-06/');
 
         $settings->extensions = array('php', 'php.dist');
 
