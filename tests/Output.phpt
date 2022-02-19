@@ -15,8 +15,9 @@ use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Result;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 use Tester\Assert;
+use Tester\TestCase;
 
-class OutputTest extends Tester\TestCase
+class OutputTest extends TestCase
 {
     /**
      * @dataProvider getGitLabOutputData

@@ -7,9 +7,12 @@
 require_once __DIR__ . '/../src/polyfill.php';
 require __DIR__ . '/../vendor/autoload.php';
 
+use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;
 use Tester\Assert;
+use Tester\TestCase;
 
-class SkipLintProcessTest extends Tester\TestCase
+class SkipLintProcessTest extends TestCase
 {
     public function testLargeInput()
     {
@@ -22,8 +25,8 @@ class SkipLintProcessTest extends Tester\TestCase
             $filesToCheck = array_merge($filesToCheck, $filesToCheck);
         }
 
-        $phpExecutable = \PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable::getPhpExecutable('php');
-        $process = new \PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess($phpExecutable, $filesToCheck);
+        $phpExecutable = PhpExecutable::getPhpExecutable('php');
+        $process = new SkipLintProcess($phpExecutable, $filesToCheck);
 
         while (!$process->isFinished()) {
             usleep(100);

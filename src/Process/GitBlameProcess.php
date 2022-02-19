@@ -2,6 +2,9 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Process;
 
+use DateInterval;
+use DateTime;
+use DateTimeZone;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;
 
 class GitBlameProcess extends Process
@@ -58,7 +61,7 @@ class GitBlameProcess extends Process
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      * @throws RuntimeException
      */
     public function getAuthorTime()
@@ -123,19 +126,19 @@ class GitBlameProcess extends Process
      *
      * @param int $time
      * @param string $zone
-     * @return \DateTime
+     * @return DateTime
      * @throws \Exception
      */
     protected function getDateTime($time, $zone)
     {
-        $utcTimeZone = new \DateTimeZone('UTC');
-        $datetime = \DateTime::createFromFormat('U', $time, $utcTimeZone);
+        $utcTimeZone = new DateTimeZone('UTC');
+        $datetime = DateTime::createFromFormat('U', $time, $utcTimeZone);
 
         $way = substr($zone, 0, 1);
         $hours = (int) substr($zone, 1, 2);
         $minutes = (int) substr($zone, 3, 2);
 
-        $interval = new \DateInterval("PT{$hours}H{$minutes}M");
+        $interval = new DateInterval("PT{$hours}H{$minutes}M");
 
         if ($way === '+') {
             $datetime->add($interval);
@@ -143,6 +146,6 @@ class GitBlameProcess extends Process
             $datetime->sub($interval);
         }
 
-        return new \DateTime($datetime->format('Y-m-d\TH:i:s') . $zone, $utcTimeZone);
+        return new DateTime($datetime->format('Y-m-d\TH:i:s') . $zone, $utcTimeZone);
     }
 }

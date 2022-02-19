@@ -9,8 +9,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use Tester\Assert;
+use Tester\TestCase;
 
-class SettingsParseArgumentsTest extends Tester\TestCase
+class SettingsParseArgumentsTest extends TestCase
 {
     public function testNoneArguments()
     {

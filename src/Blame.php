@@ -2,9 +2,10 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
+use JsonSerializable;
 use ReturnTypeWillChange;
 
-class Blame implements \JsonSerializable
+class Blame implements JsonSerializable
 {
     public $name;
 

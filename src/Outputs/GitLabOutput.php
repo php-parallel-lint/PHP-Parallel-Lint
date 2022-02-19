@@ -2,7 +2,6 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
-use PHP_Parallel_Lint\PhpParallelLint\Outputs\OutputInterface;
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use PHP_Parallel_Lint\PhpParallelLint\Result;

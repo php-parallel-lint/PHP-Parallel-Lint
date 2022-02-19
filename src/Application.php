@@ -2,6 +2,7 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
+use Exception;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\InvalidArgumentException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 
@@ -65,7 +66,7 @@ class Application
             }
             return self::FAILED;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage(), PHP_EOL;
             return self::FAILED;
         }

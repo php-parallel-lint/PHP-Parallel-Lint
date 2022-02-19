@@ -2,12 +2,14 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
+use JakubOnderka\PhpConsoleColor\ConsoleColor as OldConsoleColor;
+use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 
 class TextOutputColored extends TextOutput
 {
-    /** @var \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor|\JakubOnderka\PhpConsoleColor\ConsoleColor */
+    /** @var ConsoleColor|OldConsoleColor */
     private $colors;
 
     public function __construct(WriterInterface $writer, $colors = Settings::AUTODETECT)
@@ -15,10 +17,10 @@ class TextOutputColored extends TextOutput
         parent::__construct($writer);
 
         if (class_exists('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor')) {
-            $this->colors = new \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor();
+            $this->colors = new ConsoleColor();
             $this->colors->setForceStyle($colors === Settings::FORCED);
         } elseif (class_exists('\JakubOnderka\PhpConsoleColor\ConsoleColor')) {
-            $this->colors = new \JakubOnderka\PhpConsoleColor\ConsoleColor();
+            $this->colors = new OldConsoleColor();
             $this->colors->setForceStyle($colors === Settings::FORCED);
         }
     }
@@ -31,8 +33,8 @@ class TextOutputColored extends TextOutput
     public function write($string, $type = self::TYPE_DEFAULT)
     {
         if (
-            !$this->colors instanceof \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor
-            && !$this->colors instanceof \JakubOnderka\PhpConsoleColor\ConsoleColor
+            !$this->colors instanceof ConsoleColor
+            && !$this->colors instanceof OldConsoleColor
         ) {
             parent::write($string, $type);
         } else {
