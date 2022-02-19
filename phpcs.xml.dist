@@ -13,7 +13,7 @@
     <file>.</file>
 
     <!-- Exclude dependencies, test fixtures. -->
-    <exclude-pattern>*/tests/examples/*</exclude-pattern>
+    <exclude-pattern>*/tests/fixtures/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
     <!-- Only check PHP files. -->
@@ -86,18 +86,6 @@
     <!-- To be addressed in test refactor. -->
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
         <exclude-pattern>/tests/*\.php$</exclude-pattern>
-    </rule>
-    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-        <exclude-pattern>/tests/skip-on-5\.3/*\.php$</exclude-pattern>
-    </rule>
-    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
-        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
-    </rule>
-    <rule ref="PSR12.Files.OpenTag.NotAlone">
-        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
-    </rule>
-    <rule ref="PHPCompatibility.Keywords.NewKeywords.t_traitFound">
-        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
     </rule>
 
 </ruleset>

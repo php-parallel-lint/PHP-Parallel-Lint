@@ -19,8 +19,8 @@ class SkipLintProcessTest extends TestCase
     public function testLargeInput()
     {
         $filesToCheck = array(
-            __DIR__ . '/skip-on-5.3/class.php',
-            __DIR__ . '/skip-on-5.3/trait.php',
+            __DIR__ . '/fixtures/skip-on-5.3/class.php',
+            __DIR__ . '/fixtures/skip-on-5.3/trait.php',
         );
 
         for ($i = 0; $i < 15; $i++) {
