@@ -42,7 +42,7 @@ This PHAR file is published as an asset for each release and can be found on the
 
 ## Example output
 
-![Example use of tool with error](/tests/examples/example-images/use-error.png?raw=true "Example use of tool with error")
+![Example use of tool with error](/doc/use-error.png?raw=true "Example use of tool with error")
 
 
 ## History
