@@ -41,6 +41,9 @@
     <rule ref="PHPParallelLint">
         <!-- For improved readability, a blank line should be allowed before the next leaf in a if/else control structure. -->
         <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
+
+        <!-- This package includes a polyfill for the JsonSerializable interface. -->
+        <exclude name="PHPCompatibility.Interfaces.NewInterfaces.jsonserializableFound"/>
     </rule>
 
     <rule ref="Generic.PHP.NoSilencedErrors">
@@ -52,6 +55,52 @@
             <property name="lineLimit" value="135"/>
             <property name="absoluteLineLimit" value="200"/>
         </properties>
+    </rule>
+
+
+    <!--
+    #############################################################################
+    SELECTIVE EXCLUSIONS
+    Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
+    #############################################################################
+    -->
+
+    <!-- Polyfill for PHP native interface, can't be in a namespace. -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>src/polyfill\.php$</exclude-pattern>
+    </rule>
+
+
+    <!--
+    #############################################################################
+    TEMPORARY EXCLUSIONS
+    These adjustments should be removed once the codebase has been fixed up.
+    #############################################################################
+    -->
+
+    <!-- To be addressed at a later point in time. -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <exclude-pattern>/src/(Application|ParallelLint|Settings|Outputs/TextOutput)\.php$</exclude-pattern>
+    </rule>
+
+    <!-- To be addressed in test refactor. -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern>/tests/Output\.phpt$</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>/tests/*\.php[t]?$</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>/tests/*\.phpt$</exclude-pattern>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
+        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
+    </rule>
+    <rule ref="PSR12.Files.OpenTag.NotAlone">
+        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
+    </rule>
+    <rule ref="PHPCompatibility.Keywords.NewKeywords.t_traitFound">
+        <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
     </rule>
 
 </ruleset>
