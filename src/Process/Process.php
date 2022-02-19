@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpParallelLint\PhpParallelLint\Process;
+namespace PHP_Parallel_Lint\PhpParallelLint\Process;
 
-use PhpParallelLint\PhpParallelLint\Exceptions\RuntimeException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;
 
 class Process
 {

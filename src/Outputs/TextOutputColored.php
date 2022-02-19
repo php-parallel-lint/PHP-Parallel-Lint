@@ -1,8 +1,8 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Outputs;
+namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
-use PhpParallelLint\PhpParallelLint\Settings;
-use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+use PHP_Parallel_Lint\PhpParallelLint\Settings;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 
 class TextOutputColored extends TextOutput
 {

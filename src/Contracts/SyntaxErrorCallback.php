@@ -1,7 +1,7 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Contracts;
+namespace PHP_Parallel_Lint\PhpParallelLint\Contracts;
 
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 
 interface SyntaxErrorCallback
 {

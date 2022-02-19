@@ -1,5 +1,5 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Writers;
+namespace PHP_Parallel_Lint\PhpParallelLint\Writers;
 
 class NullWriter implements WriterInterface
 {

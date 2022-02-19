@@ -1,5 +1,5 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Exceptions;
+namespace PHP_Parallel_Lint\PhpParallelLint\Exceptions;
 
 class RuntimeException extends ParallelLintException
 {

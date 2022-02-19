@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
-use PhpParallelLint\PhpParallelLint\Exceptions\InvalidArgumentException;
-use PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\InvalidArgumentException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 
 class Application
 {

@@ -1,12 +1,12 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use JakubOnderka\PhpConsoleColor\ConsoleColor as OldConsoleColor;
 use JakubOnderka\PhpConsoleHighlighter\Highlighter as OldHighlighter;
 use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
-use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 
 class ErrorFormatter
 {

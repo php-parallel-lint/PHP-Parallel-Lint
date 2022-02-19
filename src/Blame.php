@@ -1,5 +1,5 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use ReturnTypeWillChange;
 
