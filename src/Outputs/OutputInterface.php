@@ -1,9 +1,9 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Outputs;
+namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
-use PhpParallelLint\PhpParallelLint\ErrorFormatter;
-use PhpParallelLint\PhpParallelLint\Result;
-use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
+use PHP_Parallel_Lint\PhpParallelLint\Result;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 
 interface OutputInterface
 {

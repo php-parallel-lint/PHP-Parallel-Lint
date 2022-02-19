@@ -1,22 +1,22 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
-use PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
-use PhpParallelLint\PhpParallelLint\Exceptions\NotExistsClassException;
-use PhpParallelLint\PhpParallelLint\Exceptions\NotExistsPathException;
-use PhpParallelLint\PhpParallelLint\Exceptions\NotImplementCallbackException;
-use PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException;
-use PhpParallelLint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
-use PhpParallelLint\PhpParallelLint\Outputs\CheckstyleOutput;
-use PhpParallelLint\PhpParallelLint\Outputs\GitLabOutput;
-use PhpParallelLint\PhpParallelLint\Outputs\JsonOutput;
-use PhpParallelLint\PhpParallelLint\Outputs\OutputInterface;
-use PhpParallelLint\PhpParallelLint\Outputs\TextOutput;
-use PhpParallelLint\PhpParallelLint\Outputs\TextOutputColored;
-use PhpParallelLint\PhpParallelLint\Process\GitBlameProcess;
-use PhpParallelLint\PhpParallelLint\Process\PhpExecutable;
-use PhpParallelLint\PhpParallelLint\Writers\ConsoleWriter;
+use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsClassException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsPathException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotImplementCallbackException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
+use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\JsonOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\OutputInterface;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutputColored;
+use PHP_Parallel_Lint\PhpParallelLint\Process\GitBlameProcess;
+use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\ConsoleWriter;
 
 class Manager
 {

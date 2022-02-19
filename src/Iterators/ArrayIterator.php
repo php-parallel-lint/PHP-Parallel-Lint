@@ -1,5 +1,5 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Iterators;
+namespace PHP_Parallel_Lint\PhpParallelLint\Iterators;
 
 class ArrayIterator extends \ArrayIterator
 {

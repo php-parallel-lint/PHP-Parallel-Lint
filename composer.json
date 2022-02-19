@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpParallelLint\\PhpParallelLint\\": "src/"
+            "PHP_Parallel_Lint\\PhpParallelLint\\": "src/"
         }
     },
     "autoload-dev": {

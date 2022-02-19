@@ -6,13 +6,13 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PhpParallelLint\PhpParallelLint\ErrorFormatter;
-use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
-use PhpParallelLint\PhpParallelLint\Outputs\CheckstyleOutput;
-use PhpParallelLint\PhpParallelLint\Outputs\GitLabOutput;
-use PhpParallelLint\PhpParallelLint\Result;
-use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Result;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 use Tester\Assert;
 
 class OutputTest extends Tester\TestCase

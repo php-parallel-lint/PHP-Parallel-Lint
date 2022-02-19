@@ -6,7 +6,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PhpParallelLint\PhpParallelLint\ParallelLint;
+use PHP_Parallel_Lint\PhpParallelLint\ParallelLint;
 use Tester\Assert;
 
 class ParallelLintLintTest extends Tester\TestCase
@@ -130,7 +130,7 @@ class ParallelLintLintTest extends Tester\TestCase
 
     private function getPhpExecutable()
     {
-        return \PhpParallelLint\PhpParallelLint\Process\PhpExecutable::getPhpExecutable('php');
+        return \PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable::getPhpExecutable('php');
     }
 }
 

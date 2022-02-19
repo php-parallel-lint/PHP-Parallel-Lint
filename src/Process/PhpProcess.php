@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpParallelLint\PhpParallelLint\Process;
+namespace PHP_Parallel_Lint\PhpParallelLint\Process;
 
 class PhpProcess extends Process
 {
@@ -8,7 +8,7 @@ class PhpProcess extends Process
      * @param PhpExecutable $phpExecutable
      * @param array $parameters
      * @param string|null $stdIn
-     * @throws \PhpParallelLint\PhpParallelLint\Exceptions\RuntimeException
+     * @throws \PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException
      */
     public function __construct(PhpExecutable $phpExecutable, array $parameters = array(), $stdIn = null)
     {

@@ -6,10 +6,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PhpParallelLint\PhpParallelLint\Manager;
-use PhpParallelLint\PhpParallelLint\Outputs\TextOutput;
-use PhpParallelLint\PhpParallelLint\Settings;
-use PhpParallelLint\PhpParallelLint\Writers\NullWriter;
+use PHP_Parallel_Lint\PhpParallelLint\Manager;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Settings;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\NullWriter;
 use Tester\Assert;
 
 class ManagerRunTest extends Tester\TestCase
@@ -21,7 +21,7 @@ class ManagerRunTest extends Tester\TestCase
         $manager = $this->getManager($settings);
         Assert::exception(function () use ($manager, $settings) {
             $manager->run($settings);
-        }, '\PhpParallelLint\PhpParallelLint\Exceptions\NotExistsPathException');
+        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\NotExistsPathException');
     }
 
     public function testFilesNotFound()
@@ -31,7 +31,7 @@ class ManagerRunTest extends Tester\TestCase
         $manager = $this->getManager($settings);
         Assert::exception(function () use ($manager, $settings) {
             $manager->run($settings);
-        }, '\PhpParallelLint\PhpParallelLint\Exceptions\ParallelLintException', 'No file found to check.');
+        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException', 'No file found to check.');
     }
 
     public function testSuccess()
@@ -117,7 +117,7 @@ class ManagerRunTest extends Tester\TestCase
     }
 
     /**
-     * @return PhpParallelLint\PhpParallelLint\Settings
+     * @return PHP_Parallel_Lint\PhpParallelLint\Settings
      */
     private function prepareSettings()
     {

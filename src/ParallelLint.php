@@ -1,12 +1,12 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
-use PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
-use PhpParallelLint\PhpParallelLint\Process\LintProcess;
-use PhpParallelLint\PhpParallelLint\Process\PhpExecutable;
-use PhpParallelLint\PhpParallelLint\Process\SkipLintProcess;
+use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Process\LintProcess;
+use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;
 
 class ParallelLint
 {

@@ -1,8 +1,8 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
-use PhpParallelLint\PhpParallelLint\Errors\ParallelLintError;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use ReturnTypeWillChange;
 
 class Result implements \JsonSerializable

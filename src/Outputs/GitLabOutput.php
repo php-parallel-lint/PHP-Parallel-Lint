@@ -1,11 +1,11 @@
 <?php
-namespace PhpParallelLint\PhpParallelLint\Outputs;
+namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
-use PhpParallelLint\PhpParallelLint\Outputs\OutputInterface;
-use PhpParallelLint\PhpParallelLint\ErrorFormatter;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
-use PhpParallelLint\PhpParallelLint\Result;
-use PhpParallelLint\PhpParallelLint\Writers\WriterInterface;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\OutputInterface;
+use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Result;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
 
 class GitLabOutput implements OutputInterface
 {

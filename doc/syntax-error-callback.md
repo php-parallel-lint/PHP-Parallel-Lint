@@ -1,7 +1,7 @@
 # Syntax Error Callback
 
 1. Set a path to a file with custom error callback to `--syntax-error-callback` option.
-1. Create a class implementing `PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback` interface. File with the class must have the same name as the class inside.
+1. Create a class implementing `PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback` interface. File with the class must have the same name as the class inside.
 1. Modify error before it is printed to the output.
 
 ## Example configuration
@@ -11,8 +11,8 @@ The content should look like:
 
 ```php
 
-use PhpParallelLint\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use PhpParallelLint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 
 class MyCustomErrorHandler implements SyntaxErrorCallback {
 	/**
