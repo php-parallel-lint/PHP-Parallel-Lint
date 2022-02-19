@@ -4,6 +4,7 @@
  * @testCase
  */
 
+require_once __DIR__ . '/../src/polyfill.php';
 require __DIR__ . '/../vendor/autoload.php';
 
 use Tester\Assert;
