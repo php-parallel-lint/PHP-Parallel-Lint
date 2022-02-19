@@ -5,6 +5,9 @@ namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit\Errors;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
+/**
+ * @covers \PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError::getNormalizedMessage
+ */
 class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
 {
     const FILEPATH_MSG_TEMPLATE = "Parse error: unexpected 'Foo' (T_STRING) in %s on line 2";

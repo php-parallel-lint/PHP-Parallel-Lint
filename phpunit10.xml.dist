@@ -15,6 +15,7 @@
         failOnWarning="true"
         failOnNotice="true"
         failOnDeprecation="true"
+        requireCoverageMetadata="true"
         stopOnFailure="false"
     >
 
