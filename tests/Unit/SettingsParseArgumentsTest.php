@@ -7,135 +7,131 @@ use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class SettingsParseArgumentsTest extends UnitTestCase
 {
-    public function testNoneArguments()
+    /**
+     * Test parsing the arguments received from the command line.
+     *
+     * @dataProvider dataParseArguments
+     *
+     * @param string $command         The command as received from the command line.
+     * @param array  $expectedChanged The Settings class properties which are expected to have been
+     *                                changed (key) with their value.
+     *
+     * @return void
+     */
+    public function testParseArguments($command, array $expectedChanged)
     {
-        $commandLine = "./parallel-lint .";
-        $argv = explode(" ", $commandLine);
+        $expected = $this->getExpectedSettings($expectedChanged);
+
+        $argv     = explode(' ', $command);
         $settings = Settings::parseArguments($argv);
 
-        $expectedSettings = new Settings();
-        $expectedSettings->shortTag = false;
-        $expectedSettings->aspTags = false;
-        $expectedSettings->parallelJobs = 10;
-        $expectedSettings->extensions = array('php', 'phtml', 'php3', 'php4', 'php5', 'phpt');
-        $expectedSettings->paths = array('.');
-        $expectedSettings->excluded = array();
-        $expectedSettings->colors = Settings::AUTODETECT;
-        $expectedSettings->showProgress = true;
-        $expectedSettings->format = Settings::FORMAT_TEXT;
-        $expectedSettings->syntaxErrorCallbackFile = null;
-
-        $this->assertSame($expectedSettings->shortTag, $settings->shortTag);
-        $this->assertSame($expectedSettings->aspTags, $settings->aspTags);
-        $this->assertSame($expectedSettings->parallelJobs, $settings->parallelJobs);
-        $this->assertSame($expectedSettings->extensions, $settings->extensions);
-        $this->assertSame($expectedSettings->paths, $settings->paths);
-        $this->assertSame($expectedSettings->excluded, $settings->excluded);
-        $this->assertSame($expectedSettings->colors, $settings->colors);
-        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
-        $this->assertSame($expectedSettings->format, $settings->format);
-        $this->assertSame($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
+        $this->assertSame($expected, $this->getCurrentSettings($settings));
     }
 
-    public function testMoreArguments()
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataParseArguments()
     {
-        $commandLine = "./parallel-lint --exclude vendor --no-colors .";
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-
-        $expectedSettings = new Settings();
-        $expectedSettings->shortTag = false;
-        $expectedSettings->aspTags = false;
-        $expectedSettings->parallelJobs = 10;
-        $expectedSettings->extensions = array('php', 'phtml', 'php3', 'php4', 'php5', 'phpt');
-        $expectedSettings->paths = array('.');
-        $expectedSettings->excluded = array('vendor');
-        $expectedSettings->colors = Settings::DISABLED;
-        $expectedSettings->showProgress = true;
-        $expectedSettings->format = Settings::FORMAT_TEXT;
-        $expectedSettings->showDeprecated = false;
-
-        $this->assertSame($expectedSettings->shortTag, $settings->shortTag);
-        $this->assertSame($expectedSettings->aspTags, $settings->aspTags);
-        $this->assertSame($expectedSettings->parallelJobs, $settings->parallelJobs);
-        $this->assertSame($expectedSettings->extensions, $settings->extensions);
-        $this->assertSame($expectedSettings->paths, $settings->paths);
-        $this->assertSame($expectedSettings->excluded, $settings->excluded);
-        $this->assertSame($expectedSettings->colors, $settings->colors);
-        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
-        $this->assertSame($expectedSettings->format, $settings->format);
-        $this->assertSame($expectedSettings->showDeprecated, $settings->showDeprecated);
+        return array(
+            'No arguments other than the path' => array(
+                'command'         => './parallel-lint .',
+                'expectedChanged' => array(
+                    'paths' => array('.'),
+                ),
+            ),
+            'Multiple extensions, comma separated' => array(
+                'command'         => './parallel-lint -e php,php.dist,phpt .',
+                'expectedChanged' => array(
+                    'extensions' => array('php', 'php.dist', 'phpt'),
+                    'paths'      => array('.'),
+                ),
+            ),
+            'Multiple arguments' => array(
+                'command'         => './parallel-lint --exclude vendor --no-colors .',
+                'expectedChanged' => array(
+                    'excluded' => array('vendor'),
+                    'colors'   => Settings::DISABLED,
+                    'paths'    => array('.'),
+                ),
+            ),
+            'Force enable colors' => array(
+                'command'         => './parallel-lint --exclude vendor --colors .',
+                'expectedChanged' => array(
+                    'excluded' => array('vendor'),
+                    'colors'   => Settings::FORCED,
+                    'paths'    => array('.'),
+                ),
+            ),
+            'No progress' => array(
+                'command'         => './parallel-lint --exclude vendor --no-progress .',
+                'expectedChanged' => array(
+                    'excluded'     => array('vendor'),
+                    'showProgress' => false,
+                    'paths'        => array('.'),
+                ),
+            ),
+            'Output Checkstyle' => array(
+                'command'         => './parallel-lint --checkstyle .',
+                'expectedChanged' => array(
+                    'format' => Settings::FORMAT_CHECKSTYLE,
+                    'paths'  => array('.'),
+                ),
+            ),
+            'Output Json' => array(
+                'command'         => './parallel-lint --json .',
+                'expectedChanged' => array(
+                    'format' => Settings::FORMAT_JSON,
+                    'paths'  => array('.'),
+                ),
+            ),
+            'Output GitLab' => array(
+                'command'         => './parallel-lint --gitlab .',
+                'expectedChanged' => array(
+                    'format' => Settings::FORMAT_GITLAB,
+                    'paths'  => array('.'),
+                ),
+            ),
+            'Callback file' => array(
+                'command'         => './parallel-lint --syntax-error-callback ./path/to/my_custom_callback_file.php .',
+                'expectedChanged' => array(
+                    'syntaxErrorCallbackFile' => './path/to/my_custom_callback_file.php',
+                    'paths'                   => array('.'),
+                ),
+            ),
+        );
     }
 
-    public function testColorsForced()
+    /**
+     * Helper method: retrieve the default values of the properties in the Settings class and
+     * use these to create the expected values of the properties.
+     *
+     * @param array $changed Changes to the settings compared to the default values.
+     *
+     * @return array
+     */
+    private function getExpectedSettings(array $changed)
     {
-        $commandLine = "./parallel-lint --exclude vendor --colors .";
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
+        $defaults = get_class_vars('\PHP_Parallel_Lint\PhpParallelLint\Settings');
+        if (PHP_VERSION_ID >= 50400) {
+            // phpcs:ignore PHPCompatibility.Constants.NewConstants.php_binaryFound
+            $defaults['phpExecutable'] = PHP_BINARY;
+        }
 
-        $expectedSettings = new Settings();
-        $expectedSettings->colors = Settings::FORCED;
-
-        $this->assertSame($expectedSettings->colors, $settings->colors);
+        return array_merge($defaults, $changed);
     }
 
-    public function testNoProgress()
+    /**
+     * Helper method: retrieve the current values of the properties in a Settings object.
+     *
+     * @param Settings $settings
+     *
+     * @return array
+     */
+    private function getCurrentSettings(Settings $settings)
     {
-        $commandLine = "./parallel-lint --exclude vendor --no-progress .";
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-
-        $expectedSettings = new Settings();
-        $expectedSettings->showProgress = false;
-
-        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
-    }
-
-    public function testJsonOutput()
-    {
-        $commandLine = './parallel-lint --json .';
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-        $this->assertSame(Settings::FORMAT_JSON, $settings->format);
-    }
-
-    public function testGitLabOutput()
-    {
-        $commandLine = './parallel-lint --gitlab .';
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-        $this->assertSame(Settings::FORMAT_GITLAB, $settings->format);
-    }
-
-    public function testCheckstyleOutput()
-    {
-        $commandLine = './parallel-lint --checkstyle .';
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-        $this->assertSame(Settings::FORMAT_CHECKSTYLE, $settings->format);
-    }
-
-    public function testExtensions()
-    {
-        $commandLine = './parallel-lint -e php,php.dist,phpt .';
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-
-        $expectedSettings = new Settings();
-        $expectedSettings->extensions    = array('php', 'php.dist', 'phpt');
-
-        $this->assertSame($expectedSettings->extensions, $settings->extensions);
-    }
-
-    public function testFailCallaback()
-    {
-        $commandLine = "./parallel-lint --syntax-error-callback ./path/to/my_custom_callback_file.php .";
-        $argv = explode(" ", $commandLine);
-        $settings = Settings::parseArguments($argv);
-
-        $expectedSettings = new Settings();
-        $expectedSettings->syntaxErrorCallbackFile = "./path/to/my_custom_callback_file.php";
-
-        $this->assertSame($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
+        return get_object_vars($settings);
     }
 }
