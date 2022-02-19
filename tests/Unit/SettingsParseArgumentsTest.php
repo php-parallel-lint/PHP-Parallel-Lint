@@ -36,10 +36,41 @@ class SettingsParseArgumentsTest extends UnitTestCase
     public function dataParseArguments()
     {
         return array(
+            'No arguments at all' => array(
+                'command'         => './parallel-lint',
+                'expectedChanged' => array(),
+            ),
             'No arguments other than the path' => array(
                 'command'         => './parallel-lint .',
                 'expectedChanged' => array(
                     'paths' => array('.'),
+                ),
+            ),
+            'No arguments other than multiple paths in varying formats' => array(
+                'command'         => './parallel-lint ./src /tests bin ' . __DIR__ . '/../absolute/',
+                'expectedChanged' => array(
+                    'paths' => array(
+                        './src',
+                        '/tests',
+                        'bin',
+                        __DIR__ . '/../absolute/',
+                    ),
+                ),
+            ),
+            'Custom path to PHP' => array(
+                'command'         => 'parallel-lint -p path/to/php.exe .',
+                'expectedChanged' => array(
+                    'phpExecutable' => 'path/to/php.exe',
+                    'paths'         => array('.'),
+                ),
+            ),
+            'Multiple short arguments: -s -a -j 20' => array(
+                'command'         => 'parallel-lint -s -a -j 20 .',
+                'expectedChanged' => array(
+                    'shortTag'     => true,
+                    'aspTags'      => true,
+                    'parallelJobs' => 20,
+                    'paths'        => array('.'),
                 ),
             ),
             'Multiple extensions, comma separated' => array(
@@ -49,12 +80,24 @@ class SettingsParseArgumentsTest extends UnitTestCase
                     'paths'      => array('.'),
                 ),
             ),
-            'Multiple arguments' => array(
-                'command'         => './parallel-lint --exclude vendor --no-colors .',
+            'Multiple long arguments' => array(
+                'command'         => './parallel-lint --exclude vendor --short --asp .',
                 'expectedChanged' => array(
                     'excluded' => array('vendor'),
-                    'colors'   => Settings::DISABLED,
+                    'shortTag' => true,
+                    'aspTags'  => true,
                     'paths'    => array('.'),
+                ),
+            ),
+            'Multiple excludes, including subdir' => array(
+                'command'         => './parallel-lint . --exclude .git --exclude node_modules --exclude tests/fixtures',
+                'expectedChanged' => array(
+                    'paths'    => array('.'),
+                    'excluded' => array(
+                        '.git',
+                        'node_modules',
+                        'tests/fixtures',
+                    ),
                 ),
             ),
             'Force enable colors' => array(
@@ -62,6 +105,13 @@ class SettingsParseArgumentsTest extends UnitTestCase
                 'expectedChanged' => array(
                     'excluded' => array('vendor'),
                     'colors'   => Settings::FORCED,
+                    'paths'    => array('.'),
+                ),
+            ),
+            'Force disable colors' => array(
+                'command'         => './parallel-lint --no-colors .',
+                'expectedChanged' => array(
+                    'colors'   => Settings::DISABLED,
                     'paths'    => array('.'),
                 ),
             ),
@@ -92,6 +142,40 @@ class SettingsParseArgumentsTest extends UnitTestCase
                 'expectedChanged' => array(
                     'format' => Settings::FORMAT_GITLAB,
                     'paths'  => array('.'),
+                ),
+            ),
+            'Custom path to git' => array(
+                'command'         => 'parallel-lint --git path/to/git.exe .',
+                'expectedChanged' => array(
+                    'gitExecutable' => 'path/to/git.exe',
+                    'paths'         => array('.'),
+                ),
+            ),
+            'Enable stdin' => array(
+                'command'         => 'parallel-lint --stdin',
+                'expectedChanged' => array(
+                    'stdin' => true,
+                ),
+            ),
+            'Enable blame' => array(
+                'command'         => 'parallel-lint --blame .',
+                'expectedChanged' => array(
+                    'blame' => true,
+                    'paths' => array('.'),
+                ),
+            ),
+            'Ignore failures' => array(
+                'command'         => 'parallel-lint --ignore-fails .',
+                'expectedChanged' => array(
+                    'ignoreFails' => true,
+                    'paths'       => array('.'),
+                ),
+            ),
+            'Show deprecations' => array(
+                'command'         => 'parallel-lint --show-deprecated .',
+                'expectedChanged' => array(
+                    'showDeprecated' => true,
+                    'paths'          => array('.'),
                 ),
             ),
             'Callback file' => array(
