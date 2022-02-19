@@ -8,6 +8,48 @@ use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 class SettingsParseArgumentsTest extends UnitTestCase
 {
     /**
+     * Test that an exception is thrown when an unsupported argument is passed.
+     *
+     * @dataProvider dataParseArgumentsInvalidArgument
+     *
+     * @param string $command     The command as received from the command line.
+     * @param string $unsupported The unsupported argument which should trigger the exception.
+     *
+     * @return void
+     */
+    public function testParseArgumentsInvalidArgument($command, $unsupported)
+    {
+        $this->expectExceptionPolyfill('PHP_Parallel_Lint\PhpParallelLint\Exceptions\InvalidArgumentException');
+        $this->expectExceptionMessagePolyfill('Invalid argument ' . $unsupported);
+
+        $argv = explode(' ', $command);
+        Settings::parseArguments($argv);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataParseArgumentsInvalidArgument()
+    {
+        return array(
+            'Unsupported short argument' => array(
+                'command'     => './parallel-lint --colors -u . --exclude vendor',
+                'unsupported' => '-u',
+            ),
+            'Unsupported long argument' => array(
+                'command'     => './parallel-lint . --no-progress --unsupported-arg',
+                'unsupported' => '--unsupported-arg',
+            ),
+            'Unsupported argument split by = sign' => array(
+                'command'     => './parallel-lint --exclude=vendor',
+                'unsupported' => '--exclude=vendor',
+            ),
+        );
+    }
+
+    /**
      * Test parsing the arguments received from the command line.
      *
      * @dataProvider dataParseArguments
