@@ -15,7 +15,7 @@ use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Result;
-use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\Helpers\TestWriter;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -97,25 +97,6 @@ class OutputTest extends TestCase
                 )
             ),
         );
-    }
-}
-
-class TestWriter implements WriterInterface
-{
-    /** @var string */
-    protected $logs = "";
-
-    /**
-     * @param string $string
-     */
-    public function write($string)
-    {
-        $this->logs .= $string;
-    }
-
-    public function getLogs()
-    {
-        return $this->logs;
     }
 }
 
