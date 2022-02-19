@@ -231,6 +231,44 @@ class SettingsParseArgumentsTest extends UnitTestCase
                     'paths'                   => array('.'),
                 ),
             ),
+
+// TODO: decide on desired behaviour, update tests and fix code.
+            // Incorrectly passed arguments.
+            'Custom path to PHP missing the path' => array(
+                'command'         => 'parallel-lint -p .',
+                'expectedChanged' => array(
+                    'phpExecutable' => '.',
+                ),
+            ),
+            'Extensions arguments, missing extensions' => array(
+                'command'         => 'parallel-lint -e',
+                'expectedChanged' => array(
+                    'extensions' => array(''),
+                ),
+            ),
+            'Jobs argument, missing number of jobs' => array(
+                'command'         => 'parallel-lint -j --no-progress .',
+                'expectedChanged' => array(
+                    'parallelJobs' => 1,
+                    'paths'        => array('.'),
+                ),
+            ),
+            'Exclude argument, missing paths' => array(
+                'command'         => 'parallel-lint --exclude',
+                'expectedChanged' => array(
+                    'excluded'     => array(null),
+                ),
+            ),
+            'Custom path to git missing the path' => array(
+                'command'         => 'parallel-lint --git .',
+                'expectedChanged' => array(
+                    'gitExecutable' => '.',
+                ),
+            ),
+            'Callback file, missing path' => array(
+                'command'         => 'parallel-lint --syntax-error-callback',
+                'expectedChanged' => array(),
+            ),
         );
     }
 
