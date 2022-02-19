@@ -139,10 +139,20 @@ class Settings
 
         foreach ($arguments as $argument) {
             if ($argument[0] !== '-') {
+                // TODO: verify handling of paths in quotes.
+                // I.e. Windows 'D:/User/User name/AppData/'
+                // Needs integration test as we need to see how PHP $argv handles this.
                 $settings->paths[] = $argument;
             } else {
                 switch ($argument) {
                     case '-p':
+                        // MAYBE: check if getNext() is not empty
+                        // Validate with a simple exec(php -v) ? and throw exception if doesn't return expected output ?
+                        /*
+                        PHP 7.4.25 (cli) (built: Oct 20 2021 09:30:08) ( ZTS Visual C++ 2017 x64 )
+                        Copyright (c) The PHP Group
+                        Zend Engine v3.4.0, Copyright (c) Zend Technologies
+                         */
                         $settings->phpExecutable = $arguments->getNext();
                         break;
 
@@ -157,14 +167,20 @@ class Settings
                         break;
 
                     case '-e':
+                        // MAYBE: check if getNext() is not empty
+                        // Validate with a regex ? Also: trim is not needed (spaces won't work as would be parsed as next arg)
                         $settings->extensions = array_map('trim', explode(',', $arguments->getNext()));
                         break;
 
                     case '-j':
+                        // MAYBE: check if getNext() is not empty & is_numeric ?
+                        // Invalid value would now always result in 1
                         $settings->parallelJobs = max((int) $arguments->getNext(), 1);
                         break;
 
                     case '--exclude':
+                        // MAYBE: check if getNext() is not empty
+                        // Where are paths cleaned/normalized ?
                         $settings->excluded[] = $arguments->getNext();
                         break;
 
@@ -193,6 +209,9 @@ class Settings
                         break;
 
                     case '--git':
+                        // MAYBE: check if getNext() is not empty
+                        // Validate with a simple exec(git --version) ? and throw exception if doesn't return expected output ?
+                        // git version 2.35.1.windows.2
                         $settings->gitExecutable = $arguments->getNext();
                         break;
 
@@ -213,6 +232,8 @@ class Settings
                         break;
 
                     case '--syntax-error-callback':
+                        // MAYBE: check if getNext() is not empty
+                        // And validate that callback path exists ?
                         $settings->syntaxErrorCallbackFile = $arguments->getNext();
                         break;
 
