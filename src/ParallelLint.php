@@ -2,6 +2,7 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
+use Exception;
 use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
@@ -46,7 +47,7 @@ class ParallelLint
     /**
      * @param array $files
      * @return Result
-     * @throws \Exception
+     * @throws Exception
      */
     public function lint(array $files)
     {
@@ -120,13 +121,13 @@ class ParallelLint
 
             if ($skipLintProcess->isFail()) {
                 $message = "Error in skip-linting.php process\nError output: {$skipLintProcess->getErrorOutput()}";
-                throw new \Exception($message);
+                throw new Exception($message);
             }
 
             foreach ($waiting as $file => $process) {
                 $skipStatus = $skipLintProcess->isSkipped($file);
                 if ($skipStatus === null) {
-                    throw new \Exception("File $file has empty skip status. Please contact the author of PHP Parallel Lint.");
+                    throw new Exception("File $file has empty skip status. Please contact the author of PHP Parallel Lint.");
 
                 } elseif ($skipStatus === true) {
                     $skippedFiles[] = $file;

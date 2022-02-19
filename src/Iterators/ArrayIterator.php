@@ -2,7 +2,9 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Iterators;
 
-class ArrayIterator extends \ArrayIterator
+use ArrayIterator as PHPArrayIterator;
+
+class ArrayIterator extends PHPArrayIterator
 {
     public function getNext()
     {

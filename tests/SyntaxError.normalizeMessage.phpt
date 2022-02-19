@@ -9,8 +9,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use Tester\Assert;
+use Tester\TestCase;
 
-class SyntaxErrorNormalizeMessageTest extends Tester\TestCase
+class SyntaxErrorNormalizeMessageTest extends TestCase
 {
     public function testInWordInErrorMessage()
     {

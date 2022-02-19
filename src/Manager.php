@@ -2,12 +2,13 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
+use FilesystemIterator;
 use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
-use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
-use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\CallbackNotImplementedException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
@@ -18,6 +19,9 @@ use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutputColored;
 use PHP_Parallel_Lint\PhpParallelLint\Process\GitBlameProcess;
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\ConsoleWriter;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
 
 class Manager
 {
@@ -159,17 +163,17 @@ class Manager
             if (is_file($path)) {
                 $files[] = $path;
             } elseif (is_dir($path)) {
-                $iterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
+                $iterator = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
                 if (!empty($excluded)) {
                     $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
                 }
-                $iterator = new \RecursiveIteratorIterator(
+                $iterator = new RecursiveIteratorIterator(
                     $iterator,
-                    \RecursiveIteratorIterator::LEAVES_ONLY,
-                    \RecursiveIteratorIterator::CATCH_GET_CHILD
+                    RecursiveIteratorIterator::LEAVES_ONLY,
+                    RecursiveIteratorIterator::CATCH_GET_CHILD
                 );
 
-                $iterator = new \RegexIterator($iterator, $regex);
+                $iterator = new RegexIterator($iterator, $regex);
 
                 /** @var \SplFileInfo[] $iterator */
                 foreach ($iterator as $directoryFile) {

@@ -2,11 +2,12 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint;
 
+use JsonSerializable;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use ReturnTypeWillChange;
 
-class Result implements \JsonSerializable
+class Result implements JsonSerializable
 {
     /** @var ParallelLintError[] */
     private $errors;

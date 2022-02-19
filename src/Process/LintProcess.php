@@ -2,6 +2,7 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Process;
 
+use InvalidArgumentException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;
 
@@ -27,7 +28,7 @@ class LintProcess extends PhpProcess
     public function __construct(PhpExecutable $phpExecutable, $fileToCheck, $aspTags = false, $shortTag = false, $deprecated = false)
     {
         if (empty($fileToCheck)) {
-            throw new \InvalidArgumentException("File to check must be set.");
+            throw new InvalidArgumentException("File to check must be set.");
         }
 
         $parameters = array(

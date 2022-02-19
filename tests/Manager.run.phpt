@@ -12,8 +12,9 @@ use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\NullWriter;
 use Tester\Assert;
+use Tester\TestCase;
 
-class ManagerRunTest extends Tester\TestCase
+class ManagerRunTest extends TestCase
 {
     public function testBadPath()
     {
@@ -118,7 +119,7 @@ class ManagerRunTest extends Tester\TestCase
     }
 
     /**
-     * @return PHP_Parallel_Lint\PhpParallelLint\Settings
+     * @return Settings
      */
     private function prepareSettings()
     {

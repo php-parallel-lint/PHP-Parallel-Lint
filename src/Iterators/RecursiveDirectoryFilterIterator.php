@@ -2,21 +2,24 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Iterators;
 
+use RecursiveDirectoryIterator;
+use RecursiveFilterIterator;
 use ReturnTypeWillChange;
+use SplFileInfo;
 
-class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
+class RecursiveDirectoryFilterIterator extends RecursiveFilterIterator
 {
-    /** @var \RecursiveDirectoryIterator */
+    /** @var RecursiveDirectoryIterator */
     private $iterator;
 
     /** @var array */
     private $excluded = array();
 
     /**
-     * @param \RecursiveDirectoryIterator $iterator
+     * @param RecursiveDirectoryIterator $iterator
      * @param array $excluded
      */
-    public function __construct(\RecursiveDirectoryIterator $iterator, array $excluded)
+    public function __construct(RecursiveDirectoryIterator $iterator, array $excluded)
     {
         parent::__construct($iterator);
         $this->iterator = $iterator;
@@ -61,7 +64,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
      * Return the inner iterator's children contained in a RecursiveFilterIterator
      *
      * @link http://php.net/manual/en/recursivefilteriterator.getchildren.php
-     * @return \RecursiveFilterIterator containing the inner iterator's children.
+     * @return RecursiveFilterIterator containing the inner iterator's children.
      */
     #[ReturnTypeWillChange]
     public function getChildren()
@@ -81,7 +84,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
             $file = '.' . DIRECTORY_SEPARATOR . $file;
         }
 
-        $directoryFile = new \SplFileInfo($file);
+        $directoryFile = new SplFileInfo($file);
         return $directoryFile->getPathname();
     }
 
