@@ -132,7 +132,7 @@ class SyntaxError extends Error
     public function getNormalizedMessage($translateTokens = false)
     {
         $message = preg_replace('~^(Parse|Fatal) error: (syntax error, )?~', '', $this->message);
-        $message = preg_replace('~ in ' . preg_quote(basename($this->filePath)) . ' on line [0-9]+$~', '', $message);
+        $message = preg_replace('~ in ' . preg_quote(basename($this->filePath), '~') . ' on line [0-9]+$~', '', $message);
         $message = ucfirst($message);
 
         if ($translateTokens) {
