@@ -31,7 +31,7 @@ class SyntaxError extends ParallelLintError
      */
     public function getNormalizedMessage($translateTokens = false)
     {
-        $message  = preg_replace('~^(Parse|Fatal) error: (syntax error, )?~', '', $this->message);
+        $message  = preg_replace('~^(?:Parse|Fatal) error: (?:syntax error, )?~', '', $this->message);
         $baseName = basename($this->filePath);
         $regex    = sprintf(self::IN_ON_REGEX, preg_quote($baseName, '~'));
         $message  = preg_replace($regex, '', $message, -1, $count);
