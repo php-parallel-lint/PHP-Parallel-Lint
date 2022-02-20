@@ -78,6 +78,26 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
                 'filePath' => 'test~file.php',
                 'fileName' => 'test~file.php',
             ),
+            'Full file path, linux slashes' => array(
+                'filePath' => 'path/to/subdir/file.php',
+                'fileName' => 'file.php',
+            ),
+            'File path, windows slashes' => array(
+                'filePath' => 'path\to\subdir\file.php',
+                'fileName' => 'file.php',
+            ),
+            'Absolute file path, windows slashes' => array(
+                'filePath' => 'C:\path\to\subdir\file.php',
+                'fileName' => 'C:\path\to\subdir\file.php',
+            ),
+            'Relative file path, windows slashes' => array(
+                'filePath' => '.\subdir\file.php',
+                'fileName' => '.\subdir\file.php',
+            ),
+            'Phar file name' => array(
+                'filePath' => 'phar://031.phar.php/a.php',
+                'fileName' => 'phar://031.phar.php/a.php',
+            ),
         );
     }
 }
