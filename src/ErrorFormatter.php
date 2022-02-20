@@ -60,6 +60,7 @@ class ErrorFormatter
                 } else {
                     $string .= $this->getCodeSnippet($error->getFilePath(), $onLine);
                 }
+                $string = rtrim($string) . PHP_EOL;
             }
         }
 
