@@ -70,5 +70,7 @@ if (!$loaded) {
 
 require_once __DIR__ . '/src/polyfill.php';
 
-$app = new PHP_Parallel_Lint\PhpParallelLint\Application();
+// Prevent parse error on PHP < 5.3 so the version check above can work.
+$className = 'PHP_Parallel_Lint\PhpParallelLint\Application';
+$app = new $className();
 exit($app->run());
