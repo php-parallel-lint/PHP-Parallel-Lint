@@ -2,6 +2,7 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Outputs;
 
+use PHP_Parallel_Lint\PhpParallelLint\Application;
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
 use PHP_Parallel_Lint\PhpParallelLint\Result;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\WriterInterface;
@@ -99,7 +100,7 @@ class TextOutput implements OutputInterface
      */
     public function writeHeader($phpVersion, $parallelJobs, $hhvmVersion = null)
     {
-        $this->write("PHP {$this->phpVersionIdToString($phpVersion)} | ");
+        $this->write('PHP-Parallel-Lint ' . Application::VERSION . " | PHP {$this->phpVersionIdToString($phpVersion)} | ");
 
         if ($hhvmVersion) {
             $this->write("HHVM $hhvmVersion | ");
