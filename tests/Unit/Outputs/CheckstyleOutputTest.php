@@ -33,3 +33,26 @@ class CheckstyleOutputTest extends UnitTestCase
         $this->assertInstanceOf('SimpleXMLElement', $parsed);
     }
 }
+
+/*
+ * NOTES FOR TESTS
+ *
+ * - Test that the result is valid XML
+ * - Test against schema ?
+ * - Test that expected nr of files are present
+ * - Test that expected nr of errors per file are present
+ * - Test that the message is encoded correctly
+ * -
+ *
+ * Test pattern idea:
+ * - Have separate test functions which just contain $input and $expected definitions.
+ * - Then have a helper method which is called from each test to do the actual testing (and not have huge amounts of duplicate code)
+ *
+ *
+ * Note: as these tests use simpleXML, that should be marked as a required dev extension in composer.json
+ *
+ * Use Assert::assertXmlStringEqualsXmlString()
+ *
+ * Some examples which could be used:
+ * https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/tests/Console/Report/FixReport/CheckstyleReporterTest.php
+ */
