@@ -60,6 +60,18 @@ class SyntaxErrorTranslateTokensTest extends UnitTestCase
                 'message'  => 'Unexpected T_INC, T_IS_IDENTICAL, T_OBJECT_OPERATOR, T_START_HEREDOC',
                 'expected' => 'Unexpected ++ (T_INC), === (T_IS_IDENTICAL), -> (T_OBJECT_OPERATOR), <<< (T_START_HEREDOC)',
             ),
+            'PHP 5.4-style message with token name with PHP native translation [1] - prevent double translation' => array(
+                'message'  => 'Unexpected \'__FILE__\' (T_FILE), expecting T_STRING',
+                'expected' => 'Unexpected \'__FILE__\' (T_FILE), expecting T_STRING',
+            ),
+            'PHP 5.4-style message with token name with PHP native translation [2] - prevent double translation' => array(
+                'message'  => 'Unexpected \'++\' (T_INC) in',
+                'expected' => 'Unexpected \'++\' (T_INC) in',
+            ),
+            'Message with multiple tokens with PHP native translation' => array(
+                'message'  => 'Unexpected ++ (T_INC), === (T_IS_IDENTICAL), -> (T_OBJECT_OPERATOR), <<< (T_START_HEREDOC)',
+                'expected' => 'Unexpected ++ (T_INC), === (T_IS_IDENTICAL), -> (T_OBJECT_OPERATOR), <<< (T_START_HEREDOC)',
+            ),
         );
     }
 }
