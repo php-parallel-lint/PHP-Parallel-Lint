@@ -20,7 +20,7 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
      *
      * @return void
      */
-    public function testMessageNormalization($message, $expected)
+    public function testMessageNormalizationWithoutTokenTranslation($message, $expected)
     {
         $error = new SyntaxError('test.php', $message);
         $this->assertSame($expected, $error->getNormalizedMessage());
@@ -34,11 +34,33 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
     public function dataMessageNormalization()
     {
         return array(
-            'Strip leading and trailing information' => array(
+            'Strip leading and trailing information - fatal error' => array(
                 'message'  => "Fatal error: 'break' not in the 'loop' or 'switch' context in test.php on line 2",
                 'expected' => "'break' not in the 'loop' or 'switch' context",
             ),
+            'Strip leading and trailing information - parse error' => array(
+                'message'  => "Parse error: unexpected 'Foo' (T_STRING) in test.php on line 2",
+                'expected' => "Unexpected 'Foo' (T_STRING)", // Also verifies ucfirst() call is being made.
+            ),
+            'Strip trailing information, not leading - deprecation' => array(
+                'message'  => "Deprecated: The (real) cast is deprecated, use (float) instead in test.php on line 2",
+                'expected' => "Deprecated: The (real) cast is deprecated, use (float) instead",
+            ),
         );
+    }
+
+    /**
+     * Test retrieving a normalized error message with token translation.
+     *
+     * @return void
+     */
+    public function testMessageNormalizationWithTokenTranslation()
+    {
+        $message  = 'Parse error: unexpected T_FILE, expecting T_STRING in test.php on line 2';
+        $expected = 'Unexpected __FILE__ (T_FILE), expecting T_STRING';
+
+        $error = new SyntaxError('test.php', $message);
+        $this->assertSame($expected, $error->getNormalizedMessage(true));
     }
 
     /**
