@@ -7,17 +7,73 @@ use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
 {
-    public function testInWordInErrorMessage()
+    const FILEPATH_MSG_TEMPLATE = "Parse error: unexpected 'Foo' (T_STRING) in %s on line 2";
+    const FILEPATH_MSG_EXPECTED = "Unexpected 'Foo' (T_STRING)";
+
+    /**
+     * Test retrieving a normalized error message.
+     *
+     * @dataProvider dataMessageNormalization
+     *
+     * @param string $message  The message input to run the test with.
+     * @param string $expected The expected method return value.
+     *
+     * @return void
+     */
+    public function testMessageNormalization($message, $expected)
     {
-        $message = 'Fatal error: \'break\' not in the \'loop\' or \'switch\' context in test.php on line 2';
         $error = new SyntaxError('test.php', $message);
-        $this->assertSame('\'break\' not in the \'loop\' or \'switch\' context', $error->getNormalizedMessage());
+        $this->assertSame($expected, $error->getNormalizedMessage());
     }
 
-    public function testInWordInErrorMessageAndInFileName()
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataMessageNormalization()
     {
-        $message = 'Fatal error: \'break\' not in the \'loop\' or \'switch\' context in test in file.php on line 2';
-        $error = new SyntaxError('test in file.php', $message);
-        $this->assertSame('\'break\' not in the \'loop\' or \'switch\' context', $error->getNormalizedMessage());
+        return array(
+            'Strip leading and trailing information' => array(
+                'message'  => "Fatal error: 'break' not in the 'loop' or 'switch' context in test.php on line 2",
+                'expected' => "'break' not in the 'loop' or 'switch' context",
+            ),
+        );
+    }
+
+    /**
+     * Test retrieving a normalized error message with variations for the file path.
+     *
+     * @dataProvider dataFilePathHandling
+     *
+     * @param string $filePath The file path input to run the test with.
+     * @param string $fileName The file name which is expected to be in the error message.
+     *
+     * @return void
+     */
+    public function testFilePathHandling($filePath, $fileName)
+    {
+        $message = sprintf(self::FILEPATH_MSG_TEMPLATE, $fileName);
+        $error   = new SyntaxError($filePath, $message);
+        $this->assertSame(self::FILEPATH_MSG_EXPECTED, $error->getNormalizedMessage());
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataFilePathHandling()
+    {
+        return array(
+            'Plain file name' => array(
+                'filePath' => 'test.php',
+                'fileName' => 'test.php',
+            ),
+            'File name containing spaces' => array(
+                'filePath' => 'test in file.php',
+                'fileName' => 'test in file.php',
+            ),
+        );
     }
 }
