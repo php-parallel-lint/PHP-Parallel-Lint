@@ -74,6 +74,10 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
                 'filePath' => 'test in file.php',
                 'fileName' => 'test in file.php',
             ),
+            'File name containing regex delimiter' => array(
+                'filePath' => 'test~file.php',
+                'fileName' => 'test~file.php',
+            ),
         );
     }
 }
