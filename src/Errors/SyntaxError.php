@@ -16,7 +16,7 @@ class SyntaxError extends ParallelLintError
     {
         preg_match('~on line ([0-9]+)$~', $this->message, $matches);
 
-        if ($matches && isset($matches[1])) {
+        if (isset($matches[1])) {
             return (int) $matches[1];
         }
 
