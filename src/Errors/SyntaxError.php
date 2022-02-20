@@ -92,7 +92,7 @@ class SyntaxError extends ParallelLintError
             'T_ECHO' => 'echo'
         );
 
-        return preg_replace_callback('~T_([A-Z_]*)~', function ($matches) use ($translateTokens) {
+        return preg_replace_callback('~(?<!\()T_([A-Z_]*)(?!\))~', function ($matches) use ($translateTokens) {
             list($tokenName) = $matches;
             if (isset($translateTokens[$tokenName])) {
                 $operator = $translateTokens[$tokenName];
