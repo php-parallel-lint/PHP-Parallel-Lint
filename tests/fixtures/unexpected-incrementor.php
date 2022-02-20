@@ -1,0 +1,6 @@
+<?php
+
+// Pre PHP 8.0: Unexpected '++' (T_INC) in ...
+// PHP 8.0+:    Unexpected token "++" in ...
+
+MY_CONSTANT++;

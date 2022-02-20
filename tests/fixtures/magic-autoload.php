@@ -1,0 +1,6 @@
+<?php
+
+// PHP 7.2 - 7.4: Deprecated: __autoload() is deprecated, use spl_autoload_register() instead in ...
+// PHP 8.0+:      __autoload() is no longer supported, use spl_autoload_register() instead in ...
+
+function __autoload($class) {}

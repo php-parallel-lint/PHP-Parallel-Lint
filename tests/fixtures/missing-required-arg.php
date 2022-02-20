@@ -1,0 +1,6 @@
+<?php
+
+// Pre PHP 8.0: __autoload() must take exactly 1 argument in ...
+// PHP 8.0+:    __autoload() is no longer supported, use spl_autoload_register() instead in ...
+
+function __autoload() {}
