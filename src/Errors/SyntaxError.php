@@ -6,6 +6,8 @@ use PHP_Parallel_Lint\PhpParallelLint\Blame;
 
 class SyntaxError extends ParallelLintError
 {
+    const IN_ON_REGEX = '~ in %s on line [0-9]+$~';
+
     /** @var Blame */
     private $blame;
 
@@ -29,8 +31,22 @@ class SyntaxError extends ParallelLintError
      */
     public function getNormalizedMessage($translateTokens = false)
     {
-        $message = preg_replace('~^(Parse|Fatal) error: (syntax error, )?~', '', $this->message);
-        $message = preg_replace('~ in ' . preg_quote(basename($this->filePath), '~') . ' on line [0-9]+$~', '', $message);
+        $message  = preg_replace('~^(Parse|Fatal) error: (syntax error, )?~', '', $this->message);
+        $baseName = basename($this->filePath);
+        $regex    = sprintf(self::IN_ON_REGEX, preg_quote($baseName, '~'));
+        $message  = preg_replace($regex, '', $message, -1, $count);
+
+        if ($count === 0 && strpos($baseName, '\\') !== false) {
+            $baseName = ltrim(strrchr($this->filePath, '\\'), '\\');
+            $regex    = sprintf(self::IN_ON_REGEX, preg_quote($baseName, '~'));
+            $message  = preg_replace($regex, '', $message, -1, $count);
+        }
+
+        if ($count === 0) {
+            $regex   = sprintf(self::IN_ON_REGEX, preg_quote($this->filePath, '~'));
+            $message = preg_replace($regex, '', $message);
+        }
+
         $message = ucfirst($message);
 
         if ($translateTokens) {
