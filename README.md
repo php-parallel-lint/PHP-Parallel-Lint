@@ -30,7 +30,7 @@ Install with `composer` as development dependency:
 
 Alternatively you can install as a standalone `composer` project:
 
-    composer create-project php-parallel-lint/php-parallel-lint /path/to/folder/php-parallel-lint
+    composer create-project php-parallel-lint/php-parallel-lint /path/to/folder/php-parallel-lint --no-dev
     /path/to/folder/php-parallel-lint/parallel-lint # running tool
 
 For colored output, install the suggested package `php-parallel-lint/php-console-highlighter`:
