@@ -1,21 +1,14 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
-
-require_once __DIR__ . '/../src/polyfill.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\ParallelLint;
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
 use Tester\Assert;
 use Tester\Environment;
-use Tester\TestCase;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
-class ParallelLintLintTest extends TestCase
+class ParallelLintLintTest extends UnitTestCase
 {
     public function testSettersAndGetters()
     {
@@ -139,6 +132,3 @@ class ParallelLintLintTest extends TestCase
         return PhpExecutable::getPhpExecutable('php');
     }
 }
-
-$testCase = new ParallelLintLintTest();
-$testCase->run();

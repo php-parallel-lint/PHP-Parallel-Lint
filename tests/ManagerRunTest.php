@@ -1,22 +1,15 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
-
-require_once __DIR__ . '/../src/polyfill.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Manager;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\NullWriter;
 use Tester\Assert;
-use Tester\TestCase;
 
-class ManagerRunTest extends TestCase
+class ManagerRunTest extends UnitTestCase
 {
     public function testBadPath()
     {
@@ -138,6 +131,3 @@ class ManagerRunTest extends TestCase
         return $settings;
     }
 }
-
-$testCase = new ManagerRunTest();
-$testCase->run();
