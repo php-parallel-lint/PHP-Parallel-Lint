@@ -3,9 +3,9 @@ name: Run unit and style tests
 on:
   pull_request:
   push:
-    branches:
-      - develop
-      - master
+#    branches:
+#      - develop
+#      - master
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
@@ -98,6 +98,7 @@ jobs:
       - bundle
 
     strategy:
+      fail-fast: false
       matrix:
         php:
           - '5.3'
