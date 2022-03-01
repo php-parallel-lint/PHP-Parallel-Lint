@@ -4,6 +4,8 @@
  * @testCase
  */
 
+namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
+
 require_once __DIR__ . '/../src/polyfill.php';
 require __DIR__ . '/../vendor/autoload.php';
 

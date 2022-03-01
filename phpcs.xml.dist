@@ -85,13 +85,13 @@
 
     <!-- To be addressed in test refactor. -->
     <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
-        <exclude-pattern>/tests/Output\.phpt$</exclude-pattern>
-    </rule>
-    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-        <exclude-pattern>/tests/*\.php[t]?$</exclude-pattern>
+        <exclude-pattern>/tests/OutputTest\.php$</exclude-pattern>
     </rule>
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>/tests/*\.phpt$</exclude-pattern>
+        <exclude-pattern>/tests/*\.php$</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>/tests/skip-on-5\.3/*\.php$</exclude-pattern>
     </rule>
     <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
         <exclude-pattern>/tests/skip-on-5.3/trait\.php$</exclude-pattern>
