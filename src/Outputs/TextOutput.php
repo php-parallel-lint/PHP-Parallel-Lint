@@ -131,7 +131,7 @@ class TextOutput implements OutputInterface
 
         $testTime = round($result->getTestTime(), 1);
         $message = "Checked {$result->getCheckedFilesCount()} files in $testTime ";
-        $message .= $testTime == 1 ? 'second' : 'seconds';
+        $message .= $testTime === 1 ? 'second' : 'seconds';
 
         if ($result->getSkippedFilesCount() > 0) {
             $message .= ", skipped {$result->getSkippedFilesCount()} ";
