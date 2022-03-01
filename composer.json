@@ -37,9 +37,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "./tests/"
-        ]
+        "psr-4": {
+            "PHP_Parallel_Lint\\PhpParallelLint\\Tests\\": "tests/"
+        }
     },
     "bin": [
         "parallel-lint"
