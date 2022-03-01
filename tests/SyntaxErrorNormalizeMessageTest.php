@@ -1,19 +1,12 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
-
-require_once __DIR__ . '/../src/polyfill.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use Tester\Assert;
-use Tester\TestCase;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
-class SyntaxErrorNormalizeMessageTest extends TestCase
+class SyntaxErrorNormalizeMessageTest extends UnitTestCase
 {
     public function testInWordInErrorMessage()
     {
@@ -29,6 +22,3 @@ class SyntaxErrorNormalizeMessageTest extends TestCase
         Assert::equal('\'break\' not in the \'loop\' or \'switch\' context', $error->getNormalizedMessage());
     }
 }
-
-$testCase = new SyntaxErrorNormalizeMessageTest();
-$testCase->run();

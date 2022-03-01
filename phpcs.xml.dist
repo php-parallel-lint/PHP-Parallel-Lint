@@ -84,9 +84,4 @@
         <exclude-pattern>/src/(Application|ParallelLint|Settings|Outputs/TextOutput)\.php$</exclude-pattern>
     </rule>
 
-    <!-- To be addressed in test refactor. -->
-    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>/tests/*\.php$</exclude-pattern>
-    </rule>
-
 </ruleset>

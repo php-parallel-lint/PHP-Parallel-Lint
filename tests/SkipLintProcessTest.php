@@ -1,20 +1,13 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
-
-require_once __DIR__ . '/../src/polyfill.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
 use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;
 use Tester\Assert;
-use Tester\TestCase;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
-class SkipLintProcessTest extends TestCase
+class SkipLintProcessTest extends UnitTestCase
 {
     public function testLargeInput()
     {
@@ -41,6 +34,3 @@ class SkipLintProcessTest extends TestCase
         }
     }
 }
-
-$skipLintProcessTest = new SkipLintProcessTest();
-$skipLintProcessTest->run();

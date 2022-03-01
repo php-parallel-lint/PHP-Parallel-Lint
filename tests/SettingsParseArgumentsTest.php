@@ -1,19 +1,12 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
-
-require_once __DIR__ . '/../src/polyfill.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use Tester\Assert;
-use Tester\TestCase;
+use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
-class SettingsParseArgumentsTest extends TestCase
+class SettingsParseArgumentsTest extends UnitTestCase
 {
     public function testNoneArguments()
     {
@@ -147,6 +140,3 @@ class SettingsParseArgumentsTest extends TestCase
         Assert::equal($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
     }
 }
-
-$testCase = new SettingsParseArgumentsTest();
-$testCase->run();
