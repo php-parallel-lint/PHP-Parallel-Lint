@@ -7,82 +7,82 @@ use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 use PHP_Parallel_Lint\PhpParallelLint\Writers\NullWriter;
-use Tester\Assert;
 
 class ManagerRunTest extends UnitTestCase
 {
     public function testBadPath()
     {
+        $this->expectExceptionPolyfill('\PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException');
+
         $settings = $this->prepareSettings();
         $settings->paths = array('path/for-not-found/');
         $manager = $this->getManager($settings);
-        Assert::exception(function () use ($manager, $settings) {
-            $manager->run($settings);
-        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException');
+        $manager->run($settings);
     }
 
     public function testFilesNotFound()
     {
+        $this->expectExceptionPolyfill('\PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException');
+        $this->expectExceptionMessagePolyfill('No file found to check.');
+
         $settings = $this->prepareSettings();
-        $settings->paths = array('fixtures/fixture-01/');
+        $settings->paths = array('tests/fixtures/fixture-01/');
         $manager = $this->getManager($settings);
-        Assert::exception(function () use ($manager, $settings) {
-            $manager->run($settings);
-        }, '\PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException', 'No file found to check.');
+        $manager->run($settings);
     }
 
     public function testSuccess()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('fixtures/fixture-02/');
+        $settings->paths = array('tests/fixtures/fixture-02/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::false($result->hasError());
+        $this->assertFalse($result->hasError());
     }
 
     public function testError()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('fixtures/fixture-03/');
+        $settings->paths = array('tests/fixtures/fixture-03/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::true($result->hasError());
+        $this->assertTrue($result->hasError());
     }
 
     public function testExcludeRelativeSubdirectory()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('fixtures/fixture-04/');
+        $settings->paths = array('tests/fixtures/fixture-04/');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::true($result->hasError());
+        $this->assertTrue($result->hasError());
 
-        $settings->excluded = array('fixtures/fixture-04/dir1/dir2');
+        $settings->excluded = array('tests/fixtures/fixture-04/dir1/dir2');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::false($result->hasError());
+        $this->assertFalse($result->hasError());
     }
 
     public function testExcludeAbsoluteSubdirectory()
     {
         $settings = $this->prepareSettings();
         $cwd = getcwd();
-        $settings->paths = array($cwd . '/fixtures/fixture-04/');
+        $settings->paths = array($cwd . '/tests/fixtures/fixture-04/');
         $settings->excluded = array();
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::true($result->hasError());
+        $this->assertTrue($result->hasError());
 
-        $settings->excluded = array($cwd . '/fixtures/fixture-04/dir1/dir2');
+        $settings->excluded = array($cwd . '/tests/fixtures/fixture-04/dir1/dir2');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::false($result->hasError());
+        $this->assertFalse($result->hasError());
     }
 
     /**
@@ -93,13 +93,13 @@ class ManagerRunTest extends UnitTestCase
     public function testMultiPartExtensions()
     {
         $settings = $this->prepareSettings();
-        $settings->paths = array('fixtures/fixture-06/');
+        $settings->paths = array('tests/fixtures/fixture-06/');
 
         $settings->extensions = array('php', 'php.dist');
 
         $manager = $this->getManager($settings);
         $result = $manager->run($settings);
-        Assert::false($result->hasError());
+        $this->assertFalse($result->hasError());
     }
 
     /**

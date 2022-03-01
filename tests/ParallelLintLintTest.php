@@ -4,8 +4,6 @@ namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
 
 use PHP_Parallel_Lint\PhpParallelLint\ParallelLint;
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
-use Tester\Assert;
-use Tester\Environment;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class ParallelLintLintTest extends UnitTestCase
@@ -14,27 +12,27 @@ class ParallelLintLintTest extends UnitTestCase
     {
         $phpExecutable = $this->getPhpExecutable();
         $parallelLint = new ParallelLint($phpExecutable, 10);
-        Assert::equal($phpExecutable, $parallelLint->getPhpExecutable());
-        Assert::equal(10, $parallelLint->getParallelJobs());
+        $this->assertSame($phpExecutable, $parallelLint->getPhpExecutable());
+        $this->assertSame(10, $parallelLint->getParallelJobs());
 
         $phpExecutable2 = $this->getPhpExecutable();
         $parallelLint->setPhpExecutable($phpExecutable2);
-        Assert::equal($phpExecutable2, $parallelLint->getPhpExecutable());
+        $this->assertSame($phpExecutable2, $parallelLint->getPhpExecutable());
 
         $parallelLint->setParallelJobs(33);
-        Assert::equal(33, $parallelLint->getParallelJobs());
+        $this->assertSame(33, $parallelLint->getParallelJobs());
 
         $parallelLint->setShortTagEnabled(true);
-        Assert::true($parallelLint->isShortTagEnabled());
+        $this->assertTrue($parallelLint->isShortTagEnabled());
 
         $parallelLint->setAspTagsEnabled(true);
-        Assert::true($parallelLint->isAspTagsEnabled());
+        $this->assertTrue($parallelLint->isAspTagsEnabled());
 
         $parallelLint->setShortTagEnabled(false);
-        Assert::false($parallelLint->isShortTagEnabled());
+        $this->assertFalse($parallelLint->isShortTagEnabled());
 
         $parallelLint->setAspTagsEnabled(false);
-        Assert::false($parallelLint->isAspTagsEnabled());
+        $this->assertFalse($parallelLint->isAspTagsEnabled());
     }
 
     public function testEmptyArray()
@@ -42,10 +40,10 @@ class ParallelLintLintTest extends UnitTestCase
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array());
 
-        Assert::equal(0, $result->getCheckedFilesCount());
-        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
-        Assert::false($result->hasSyntaxError());
-        Assert::equal(0, count($result->getErrors()));
+        $this->assertSame(0, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertFalse($result->hasSyntaxError());
+        $this->assertSame(0, count($result->getErrors()));
     }
 
     public function testNotExistsFile()
@@ -53,10 +51,10 @@ class ParallelLintLintTest extends UnitTestCase
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array('path/for-not-found/'));
 
-        Assert::equal(0, $result->getCheckedFilesCount());
-        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
-        Assert::false($result->hasSyntaxError());
-        Assert::equal(1, count($result->getErrors()));
+        $this->assertSame(0, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertFalse($result->hasSyntaxError());
+        $this->assertSame(1, count($result->getErrors()));
     }
 
     public function testEmptyFile()
@@ -64,10 +62,10 @@ class ParallelLintLintTest extends UnitTestCase
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-01/empty-file'));
 
-        Assert::equal(1, $result->getCheckedFilesCount());
-        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
-        Assert::false($result->hasSyntaxError());
-        Assert::equal(0, count($result->getErrors()));
+        $this->assertSame(1, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertFalse($result->hasSyntaxError());
+        $this->assertSame(0, count($result->getErrors()));
     }
 
     public function testValidFile()
@@ -75,9 +73,9 @@ class ParallelLintLintTest extends UnitTestCase
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-02/example.php'));
 
-        Assert::equal(1, $result->getCheckedFilesCount());
-        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
-        Assert::equal(0, count($result->getErrors()));
+        $this->assertSame(1, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertSame(0, count($result->getErrors()));
     }
 
     public function testInvalidFile()
@@ -85,32 +83,32 @@ class ParallelLintLintTest extends UnitTestCase
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-03/example.php'));
 
-        Assert::equal(1, $result->getCheckedFilesCount());
-        Assert::equal(1, $result->getFilesWithSyntaxErrorCount());
-        Assert::true($result->hasSyntaxError());
-        Assert::equal(1, count($result->getErrors()));
+        $this->assertSame(1, $result->getCheckedFilesCount());
+        $this->assertSame(1, $result->getFilesWithSyntaxErrorCount());
+        $this->assertTrue($result->hasSyntaxError());
+        $this->assertSame(1, count($result->getErrors()));
     }
 
     public function testDeprecated()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
-        Assert::equal(1, $result->getCheckedFilesCount());
-        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
-        Assert::false($result->hasSyntaxError());
-        Assert::equal(0, count($result->getErrors()));
+        $this->assertSame(1, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertFalse($result->hasSyntaxError());
+        $this->assertSame(0, count($result->getErrors()));
 
         if (PHP_VERSION_ID < 70000 || PHP_VERSION_ID >= 80000) {
-            Environment::skip('test for php version 7.0-7.4');
+            $this->markTestSkipped('Test for php version 7.0-7.4');
         }
 
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $parallelLint->setShowDeprecated(true);
         $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
-        Assert::equal(1, $result->getCheckedFilesCount());
-        Assert::equal(1, $result->getFilesWithSyntaxErrorCount());
-        Assert::true($result->hasSyntaxError());
-        Assert::equal(1, count($result->getErrors()));
+        $this->assertSame(1, $result->getCheckedFilesCount());
+        $this->assertSame(1, $result->getFilesWithSyntaxErrorCount());
+        $this->assertTrue($result->hasSyntaxError());
+        $this->assertSame(1, count($result->getErrors()));
     }
 
     public function testValidAndInvalidFiles()
@@ -121,10 +119,10 @@ class ParallelLintLintTest extends UnitTestCase
             __DIR__ . '/fixtures/fixture-03/example.php',
         ));
 
-        Assert::equal(2, $result->getCheckedFilesCount());
-        Assert::equal(1, $result->getFilesWithSyntaxErrorCount());
-        Assert::true($result->hasSyntaxError());
-        Assert::equal(1, count($result->getErrors()));
+        $this->assertSame(2, $result->getCheckedFilesCount());
+        $this->assertSame(1, $result->getFilesWithSyntaxErrorCount());
+        $this->assertTrue($result->hasSyntaxError());
+        $this->assertSame(1, count($result->getErrors()));
     }
 
     private function getPhpExecutable()

@@ -4,7 +4,6 @@ namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
 
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
 use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;
-use Tester\Assert;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class SkipLintProcessTest extends UnitTestCase
@@ -30,7 +29,7 @@ class SkipLintProcessTest extends UnitTestCase
 
         foreach ($filesToCheck as $fileToCheck) {
             $status = $process->isSkipped($fileToCheck);
-            Assert::notEqual(null, $status);
+            $this->assertNotNull($status);
         }
     }
 }

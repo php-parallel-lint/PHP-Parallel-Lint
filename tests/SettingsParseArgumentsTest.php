@@ -3,7 +3,6 @@
 namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
 
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
-use Tester\Assert;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class SettingsParseArgumentsTest extends UnitTestCase
@@ -26,16 +25,16 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings->format = Settings::FORMAT_TEXT;
         $expectedSettings->syntaxErrorCallbackFile = null;
 
-        Assert::equal($expectedSettings->shortTag, $settings->shortTag);
-        Assert::equal($expectedSettings->aspTags, $settings->aspTags);
-        Assert::equal($expectedSettings->parallelJobs, $settings->parallelJobs);
-        Assert::equal($expectedSettings->extensions, $settings->extensions);
-        Assert::equal($expectedSettings->paths, $settings->paths);
-        Assert::equal($expectedSettings->excluded, $settings->excluded);
-        Assert::equal($expectedSettings->colors, $settings->colors);
-        Assert::equal($expectedSettings->showProgress, $settings->showProgress);
-        Assert::equal($expectedSettings->format, $settings->format);
-        Assert::equal($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
+        $this->assertSame($expectedSettings->shortTag, $settings->shortTag);
+        $this->assertSame($expectedSettings->aspTags, $settings->aspTags);
+        $this->assertSame($expectedSettings->parallelJobs, $settings->parallelJobs);
+        $this->assertSame($expectedSettings->extensions, $settings->extensions);
+        $this->assertSame($expectedSettings->paths, $settings->paths);
+        $this->assertSame($expectedSettings->excluded, $settings->excluded);
+        $this->assertSame($expectedSettings->colors, $settings->colors);
+        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
+        $this->assertSame($expectedSettings->format, $settings->format);
+        $this->assertSame($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
     }
 
     public function testMoreArguments()
@@ -56,16 +55,16 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings->format = Settings::FORMAT_TEXT;
         $expectedSettings->showDeprecated = false;
 
-        Assert::equal($expectedSettings->shortTag, $settings->shortTag);
-        Assert::equal($expectedSettings->aspTags, $settings->aspTags);
-        Assert::equal($expectedSettings->parallelJobs, $settings->parallelJobs);
-        Assert::equal($expectedSettings->extensions, $settings->extensions);
-        Assert::equal($expectedSettings->paths, $settings->paths);
-        Assert::equal($expectedSettings->excluded, $settings->excluded);
-        Assert::equal($expectedSettings->colors, $settings->colors);
-        Assert::equal($expectedSettings->showProgress, $settings->showProgress);
-        Assert::equal($expectedSettings->format, $settings->format);
-        Assert::equal($expectedSettings->showDeprecated, $settings->showDeprecated);
+        $this->assertSame($expectedSettings->shortTag, $settings->shortTag);
+        $this->assertSame($expectedSettings->aspTags, $settings->aspTags);
+        $this->assertSame($expectedSettings->parallelJobs, $settings->parallelJobs);
+        $this->assertSame($expectedSettings->extensions, $settings->extensions);
+        $this->assertSame($expectedSettings->paths, $settings->paths);
+        $this->assertSame($expectedSettings->excluded, $settings->excluded);
+        $this->assertSame($expectedSettings->colors, $settings->colors);
+        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
+        $this->assertSame($expectedSettings->format, $settings->format);
+        $this->assertSame($expectedSettings->showDeprecated, $settings->showDeprecated);
     }
 
     public function testColorsForced()
@@ -77,7 +76,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings = new Settings();
         $expectedSettings->colors = Settings::FORCED;
 
-        Assert::equal($expectedSettings->colors, $settings->colors);
+        $this->assertSame($expectedSettings->colors, $settings->colors);
     }
 
     public function testNoProgress()
@@ -89,7 +88,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings = new Settings();
         $expectedSettings->showProgress = false;
 
-        Assert::equal($expectedSettings->showProgress, $settings->showProgress);
+        $this->assertSame($expectedSettings->showProgress, $settings->showProgress);
     }
 
     public function testJsonOutput()
@@ -97,7 +96,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $commandLine = './parallel-lint --json .';
         $argv = explode(" ", $commandLine);
         $settings = Settings::parseArguments($argv);
-        Assert::equal(Settings::FORMAT_JSON, $settings->format);
+        $this->assertSame(Settings::FORMAT_JSON, $settings->format);
     }
 
     public function testGitLabOutput()
@@ -105,7 +104,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $commandLine = './parallel-lint --gitlab .';
         $argv = explode(" ", $commandLine);
         $settings = Settings::parseArguments($argv);
-        Assert::equal(Settings::FORMAT_GITLAB, $settings->format);
+        $this->assertSame(Settings::FORMAT_GITLAB, $settings->format);
     }
 
     public function testCheckstyleOutput()
@@ -113,7 +112,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $commandLine = './parallel-lint --checkstyle .';
         $argv = explode(" ", $commandLine);
         $settings = Settings::parseArguments($argv);
-        Assert::equal(Settings::FORMAT_CHECKSTYLE, $settings->format);
+        $this->assertSame(Settings::FORMAT_CHECKSTYLE, $settings->format);
     }
 
     public function testExtensions()
@@ -125,7 +124,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings = new Settings();
         $expectedSettings->extensions    = array('php', 'php.dist', 'phpt');
 
-        Assert::equal($expectedSettings->extensions, $settings->extensions);
+        $this->assertSame($expectedSettings->extensions, $settings->extensions);
     }
 
     public function testFailCallaback()
@@ -137,6 +136,6 @@ class SettingsParseArgumentsTest extends UnitTestCase
         $expectedSettings = new Settings();
         $expectedSettings->syntaxErrorCallbackFile = "./path/to/my_custom_callback_file.php";
 
-        Assert::equal($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
+        $this->assertSame($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
     }
 }
