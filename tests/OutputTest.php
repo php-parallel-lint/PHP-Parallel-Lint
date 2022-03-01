@@ -9,7 +9,6 @@ use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Result;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\Helpers\TestWriter;
-use Tester\Assert;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
 class OutputTest extends UnitTestCase
@@ -34,14 +33,14 @@ class OutputTest extends UnitTestCase
             if ($errors[$i] instanceof SyntaxError) {
                 $line = $errors[$i]->getLine();
             }
-            Assert::equal($result[$i]->type, 'issue');
-            Assert::equal($result[$i]->check_name, 'Parse error');
-            Assert::equal($result[$i]->categories, 'Style');
-            Assert::equal($result[$i]->severity, 'minor');
-            Assert::equal($result[$i]->description, $message);
-            Assert::equal($result[$i]->fingerprint, md5($filePath . $message . $line));
-            Assert::equal($result[$i]->location->path, $filePath);
-            Assert::equal($result[$i]->location->lines->begin, $line);
+            $this->assertSame($result[$i]->type, 'issue');
+            $this->assertSame($result[$i]->check_name, 'Parse error');
+            $this->assertSame($result[$i]->categories, 'Style');
+            $this->assertSame($result[$i]->severity, 'minor');
+            $this->assertSame($result[$i]->description, $message);
+            $this->assertSame($result[$i]->fingerprint, md5($filePath . $message . $line));
+            $this->assertSame($result[$i]->location->path, $filePath);
+            $this->assertSame($result[$i]->location->lines->begin, $line);
         }
     }
 
@@ -63,8 +62,8 @@ class OutputTest extends UnitTestCase
         // phpcs:ignore Generic.PHP.NoSilencedErrors -- Test only code, this is okay.
         $parsed = @simplexml_load_string($xml);
 
-        Assert::contains("unexpected '&quot;'", $xml);
-        Assert::type('SimpleXMLElement', $parsed);
+        $this->assertStringContainsStringPolyfill("unexpected '&quot;'", $xml);
+        $this->assertInstanceOf('SimpleXMLElement', $parsed);
     }
 
     public function getGitLabOutputData()
