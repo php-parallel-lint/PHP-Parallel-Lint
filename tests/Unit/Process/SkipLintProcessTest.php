@@ -1,6 +1,6 @@
 <?php
 
-namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
+namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit\Process;
 
 use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
 use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;

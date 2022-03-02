@@ -16,7 +16,7 @@
 
     <testsuites>
         <testsuite name="Unittests">
-            <directory suffix="Test.php">tests</directory>
+            <directory suffix="Test.php">tests/Unit</directory>
         </testsuite>
     </testsuites>
 

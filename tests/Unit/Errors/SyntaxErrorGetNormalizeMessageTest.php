@@ -1,11 +1,11 @@
 <?php
 
-namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
+namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit\Errors;
 
 use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
-class SyntaxErrorNormalizeMessageTest extends UnitTestCase
+class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
 {
     public function testInWordInErrorMessage()
     {

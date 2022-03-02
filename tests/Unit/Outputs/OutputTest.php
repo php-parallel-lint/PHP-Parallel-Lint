@@ -1,6 +1,6 @@
 <?php
 
-namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
+namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit\Outputs;
 
 use PHP_Parallel_Lint\PhpParallelLint\ErrorFormatter;
 use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
