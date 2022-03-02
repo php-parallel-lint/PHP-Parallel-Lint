@@ -58,7 +58,7 @@ class SettingsParseArgumentsTest extends Tester\TestCase
         $expectedSettings->colors = Settings::DISABLED;
         $expectedSettings->showProgress = true;
         $expectedSettings->format = Settings::FORMAT_TEXT;
-        $expectedSettings->deprecated = false;
+        $expectedSettings->showDeprecated = false;
 
         Assert::equal($expectedSettings->shortTag, $settings->shortTag);
         Assert::equal($expectedSettings->aspTags, $settings->aspTags);
