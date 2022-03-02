@@ -60,7 +60,7 @@ class ParallelLintLintTest extends UnitTestCase
     public function testEmptyFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-01/empty-file'));
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-01/empty-file'));
 
         $this->assertSame(1, $result->getCheckedFilesCount());
         $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
@@ -71,7 +71,7 @@ class ParallelLintLintTest extends UnitTestCase
     public function testValidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-02/example.php'));
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-02/example.php'));
 
         $this->assertSame(1, $result->getCheckedFilesCount());
         $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
@@ -81,7 +81,7 @@ class ParallelLintLintTest extends UnitTestCase
     public function testInvalidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-03/example.php'));
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-03/example.php'));
 
         $this->assertSame(1, $result->getCheckedFilesCount());
         $this->assertSame(1, $result->getFilesWithSyntaxErrorCount());
@@ -92,7 +92,7 @@ class ParallelLintLintTest extends UnitTestCase
     public function testDeprecated()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
-        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-05/Foo.php'));
         $this->assertSame(1, $result->getCheckedFilesCount());
         $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
         $this->assertFalse($result->hasSyntaxError());
@@ -104,7 +104,7 @@ class ParallelLintLintTest extends UnitTestCase
 
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $parallelLint->setShowDeprecated(true);
-        $result = $parallelLint->lint(array(__DIR__ . '/fixtures/fixture-05/Foo.php'));
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-05/Foo.php'));
         $this->assertSame(1, $result->getCheckedFilesCount());
         $this->assertSame(1, $result->getFilesWithSyntaxErrorCount());
         $this->assertTrue($result->hasSyntaxError());
@@ -115,8 +115,8 @@ class ParallelLintLintTest extends UnitTestCase
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
         $result = $parallelLint->lint(array(
-            __DIR__ . '/fixtures/fixture-02/example.php',
-            __DIR__ . '/fixtures/fixture-03/example.php',
+            PL_TESTROOT . '/fixtures/fixture-02/example.php',
+            PL_TESTROOT . '/fixtures/fixture-03/example.php',
         ));
 
         $this->assertSame(2, $result->getCheckedFilesCount());
