@@ -1,6 +1,6 @@
 <?php
 
-namespace PHP_Parallel_Lint\PhpParallelLint\Tests;
+namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit;
 
 use PHP_Parallel_Lint\PhpParallelLint\Manager;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
