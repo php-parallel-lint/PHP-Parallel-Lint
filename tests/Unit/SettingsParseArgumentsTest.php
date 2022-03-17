@@ -5,6 +5,10 @@ namespace PHP_Parallel_Lint\PhpParallelLint\Tests\Unit;
 use PHP_Parallel_Lint\PhpParallelLint\Settings;
 use PHP_Parallel_Lint\PhpParallelLint\Tests\UnitTestCase;
 
+/**
+ * @covers \PHP_Parallel_Lint\PhpParallelLint\Settings::parseArguments
+ * @covers \PHP_Parallel_Lint\PhpParallelLint\Iterators\ArrayIterator
+ */
 class SettingsParseArgumentsTest extends UnitTestCase
 {
     /**
