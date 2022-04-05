@@ -43,7 +43,7 @@ jobs:
       # Note: do NOT turn on the requirement checker in the box config as it is no longer
       # compatible with PHP < 7.2.
       - name: Install Box
-        run: wget https://github.com/humbug/box/releases/latest/download/box.phar -O box.phar && chmod 0755 box.phar && pwd
+        run: wget https://github.com/box-project/box/releases/latest/download/box.phar -O box.phar && chmod 0755 box.phar && pwd
 
       - name: Validate configuration
         run: php box.phar validate -i box.json
@@ -51,7 +51,7 @@ jobs:
       - name: Building binary...
         run: php box.phar compile -v --config=box.json
 
-      - name: Show info about the build phar with humbug/box
+      - name: Show info about the build phar with box-project/box
         run: php box.phar info -l parallel-lint.phar
 
       - uses: actions/upload-artifact@v3
