@@ -55,6 +55,8 @@ jobs:
           extensions: exif, phar, openssl
           coverage: none
           ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
+          # Autoload files generated with Composer 2.3 are not compatible with PHP < 7.0.
+          tools: composer:2.2
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
