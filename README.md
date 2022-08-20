@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml)
 [![License](https://poser.pugx.org/php-parallel-lint/php-parallel-lint/license.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
 
-This application checks syntax of PHP files in parallel.
+This application checks the syntax of PHP files in parallel.
 It can output in plain text, colored text, json and checksyntax formats.
 Additionally `blame` can be used to show commits that introduced the breakage.
 
@@ -72,7 +72,7 @@ It is strongly recommended for existing users of the (unmaintained)
 - `-a`, `--asp`             Set asp_tags to On (default: Off).
 - `-e <ext>`                Check only files with selected extensions separated by comma. (default: php,php3,php4,php5,phtml,phpt)
 - `-j <num>`                Run <num> jobs in parallel (default: 10).
-- `--exclude`               Exclude a file or directory. If you want exclude multiple items, use multiple exclude parameters.
+- `--exclude`               Exclude a file or directory. If you want to exclude multiple items, use multiple exclude parameters.
 - `--colors`                Enable colors in console output. (disables auto detection of color support)
 - `--no-colors`             Disable colors in console output.
 - `--no-progress`           Disable progress in console output.
@@ -116,7 +116,7 @@ Note: The `// lint >= 7.4` comment has to be only the first line of the file and
 
 ## How to upgrade
 
-Are you using `jakub-onderka/php-parallel-lint` package? You can switch to `php-parallel-lint/php-parallel-lint` using:
+Are you using the `jakub-onderka/php-parallel-lint` package? You can switch to `php-parallel-lint/php-parallel-lint` using:
 
     composer remove --dev jakub-onderka/php-parallel-lint
     composer require --dev php-parallel-lint/php-parallel-lint
