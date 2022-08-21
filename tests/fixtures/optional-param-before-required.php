@@ -1,0 +1,6 @@
+<?php
+
+// PHP 8.0:  E_DEPRECATED | Required parameter $required follows optional parameter $optional in ...
+// PHP 8.1+: E_DEPRECATED | Optional parameter $optional declared before required parameter $required is implicitly treated as a required parameter in ...
+
+function intentionallyWrong($optional = true, $required) {}

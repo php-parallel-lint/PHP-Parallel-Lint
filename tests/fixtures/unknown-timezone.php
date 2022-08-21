@@ -1,0 +1,6 @@
+<?php
+
+// PHP 5.x  | E_ERROR | Uncaught exception 'Exception' with message 'DateTimeZone::__construct(): Unknown or bad timezone (doesnotexist)' in ...
+// PHP 7.0+ | E_ERROR | Uncaught Exception: DateTimeZone::__construct(): Unknown or bad timezone (doesnotexist) in ...
+
+$obj = new DateTimeZone('doesnotexist');

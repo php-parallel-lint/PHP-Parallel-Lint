@@ -1,0 +1,6 @@
+<?php
+
+// PHP < 7.0: E_PARSE         | Unexpected ':', expecting '{' in ...
+// PHP 7.0+:  E_COMPILE_ERROR | Cannot use "self" when no class scope is active in ...
+
+function foo(): self {}

@@ -1,0 +1,6 @@
+<?php
+
+// PHP < 7.4: E_RECOVERABLE_ERROR | Object of class stdClass could not be converted to string in ...
+// PHP 7.4+:  E_ERROR             | Object of class stdClass could not be converted to string in ...
+
+implode([new stdClass]);
