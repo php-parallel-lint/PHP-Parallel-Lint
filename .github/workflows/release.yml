@@ -7,8 +7,17 @@ on:
   # Allow manually triggering the workflow.
   workflow_dispatch:
 
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bundle:
+    # Don't run on forks.
+    if: github.repository == 'php-parallel-lint/PHP-Parallel-Lint'
+
     name: Bundle binary
     runs-on: ubuntu-latest
 
@@ -19,27 +28,31 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 5.4
-          extensions: exif, phar, openssl
+          php-version: 8.1
+          extensions: exif, phar, openssl, sodium
           coverage: none
-          ini-values: phar.readonly=Off
-
-      - name: Install Box from GitHub
-        run: |
-          curl -LSs https://box-project.github.io/box2/installer.php | php
-          test -f ./box.phar
-          test -d ~/bin || mkdir ~/bin
-          mv ./box.phar ~/bin/box
-          ~/bin/box -V
-          echo "$HOME/bin" >> $GITHUB_PATH
+          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
+          # Autoload files generated with Composer 2.3 are not compatible with PHP < 7.0.
+          tools: composer:2.2
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v1
+        uses: ramsey/composer-install@v2
         with:
           composer-options: "--no-dev"
 
+      # Note: do NOT turn on the requirement checker in the box config as it is no longer
+      # compatible with PHP < 7.2.
+      - name: Install Box
+        run: wget https://github.com/humbug/box/releases/latest/download/box.phar -O box.phar && chmod 0755 box.phar && pwd
+
+      - name: Validate configuration
+        run: php box.phar validate -i box.json
+
       - name: Building binary...
-        run: box build -v
+        run: php box.phar compile -v --config=box.json
+
+      - name: Show info about the build phar with humbug/box
+        run: php box.phar info -l parallel-lint.phar
 
       - uses: actions/upload-artifact@v2
         with:
@@ -49,13 +62,14 @@ jobs:
   verify:
     name: Validate binary on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental == true }}
+    continue-on-error: ${{ matrix.php == '8.2' }}
     needs:
       - bundle
 
     strategy:
       matrix:
         php:
+          - '5.3'
           - '5.4'
           - '5.5'
           - '5.6'
@@ -66,10 +80,7 @@ jobs:
           - '7.4'
           - '8.0'
           - '8.1'
-
-        include:
-          - php: '8.1'
-            experimental: true
+          - '8.2'
 
     steps:
       - name: Checkout code
@@ -83,6 +94,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
 
       - name: Run linter against codebase
