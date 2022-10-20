@@ -8,7 +8,6 @@
 .gitattributes   export-ignore
 .gitignore       export-ignore
 appveyor.yml     export-ignore
-box.json         export-ignore
 phpcs.xml.dist   export-ignore
 phpunit.xml.dist export-ignore
 /.github/        export-ignore
