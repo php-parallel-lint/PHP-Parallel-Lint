@@ -32,6 +32,9 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: Run code sniffer
         id: phpcs
@@ -63,6 +66,8 @@ jobs:
         uses: ramsey/composer-install@v2
         with:
           composer-options: "--no-dev"
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: do NOT turn on the requirement checker in the box config as it is no longer
       # compatible with PHP < 7.2.
@@ -126,12 +131,16 @@ jobs:
       - name: Install Composer dependencies
         if: ${{ matrix.php != '8.3' }}
         uses: ramsey/composer-install@v2
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: "Install Composer dependencies (PHP 8.3, ignore PHP reqs)"
         if: ${{ matrix.php == '8.3' }}
         uses: ramsey/composer-install@v2
         with:
           composer-options: --ignore-platform-req=php
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: 'Integration test 1 - linting own code, no colors'
         continue-on-error: true
