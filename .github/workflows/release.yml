@@ -39,6 +39,8 @@ jobs:
         uses: ramsey/composer-install@v2
         with:
           composer-options: "--no-dev"
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
 
       # Note: do NOT turn on the requirement checker in the box config as it is no longer
       # compatible with PHP < 7.2.
