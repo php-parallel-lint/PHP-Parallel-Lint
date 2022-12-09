@@ -23,7 +23,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: 'latest'
           coverage: none
           tools: cs2pr
 
@@ -86,7 +86,7 @@ jobs:
   test:
     name: Run tests on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.php == '8.2' }}
+    continue-on-error: ${{ matrix.php == '8.3' }}
     needs:
       - bundle
 
@@ -105,6 +105,7 @@ jobs:
           - '8.0'
           - '8.1'
           - '8.2'
+          - '8.3'
 
     steps:
       - name: Checkout code
@@ -123,11 +124,11 @@ jobs:
         run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies
-        if: ${{ matrix.php != '8.2' }}
+        if: ${{ matrix.php != '8.3' }}
         uses: ramsey/composer-install@v2
 
-      - name: "Install Composer dependencies (PHP 8.2, ignore PHP reqs)"
-        if: ${{ matrix.php == '8.2' }}
+      - name: "Install Composer dependencies (PHP 8.3, ignore PHP reqs)"
+        if: ${{ matrix.php == '8.3' }}
         uses: ramsey/composer-install@v2
         with:
           composer-options: --ignore-platform-req=php
