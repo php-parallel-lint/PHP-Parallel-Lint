@@ -23,7 +23,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: 'latest'
           coverage: none
           tools: cs2pr
 
@@ -125,7 +125,14 @@ jobs:
         run: composer remove --dev squizlabs/php_codesniffer --no-update --no-interaction
 
       - name: Install Composer dependencies
+        if: ${{ matrix.php != '8.3' }}
         uses: ramsey/composer-install@v2
+
+      - name: "Install Composer dependencies (PHP 8.3, ignore PHP reqs)"
+        if: ${{ matrix.php == '8.3' }}
+        uses: ramsey/composer-install@v2
+        with:
+          composer-options: --ignore-platform-req=php
 
       - name: 'Integration test 1 - linting own code, no colors'
         continue-on-error: true
