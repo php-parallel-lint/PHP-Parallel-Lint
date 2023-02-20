@@ -3,6 +3,10 @@
     "description": "This tool check syntax of PHP files about 20x faster than serial check.",
     "homepage": "https://github.com/php-parallel-lint/PHP-Parallel-Lint",
     "license": "BSD-2-Clause",
+    "keywords": [
+        "lint",
+        "static analysis"
+    ],
     "authors": [
         {
             "name": "Jakub Onderka",
