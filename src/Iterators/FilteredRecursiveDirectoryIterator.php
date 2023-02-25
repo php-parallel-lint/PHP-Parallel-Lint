@@ -2,14 +2,16 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Iterators;
 
-class FilteredRecursiveDirectoryIterator extends \RecursiveDirectoryIterator {
+class FilteredRecursiveDirectoryIterator extends \RecursiveDirectoryIterator
+{
     private $excluded = array();
 
-    public function __construct($path, $flags = null, array $excluded = array()) {
+    public function __construct($path, $flags = null, array $excluded = array())
+    {
         $this->excluded = $excluded;
 
         if ($flags === null) {
-            $flags = \FilesystemIterator::KEY_AS_PATHNAME|\FilesystemIterator::CURRENT_AS_FILEINFO;
+            $flags = \FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_FILEINFO;
         }
 
         parent::__construct($path, $flags);
