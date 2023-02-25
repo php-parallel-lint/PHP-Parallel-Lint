@@ -9,6 +9,7 @@ use PHP_Parallel_Lint\PhpParallelLint\Exceptions\CallbackNotImplementedException
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
+use PHP_Parallel_Lint\PhpParallelLint\Iterators\FilteredRecursiveDirectoryIterator;
 use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
@@ -163,7 +164,7 @@ class Manager
             if (is_file($path)) {
                 $files[] = $path;
             } elseif (is_dir($path)) {
-                $iterator = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
+                $iterator = new FilteredRecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS, $excluded);
                 if (!empty($excluded)) {
                     $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
                 }
