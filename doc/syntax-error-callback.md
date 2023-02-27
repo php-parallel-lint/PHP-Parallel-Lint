@@ -15,17 +15,17 @@ use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use JakubOnderka\PhpParallelLint\SyntaxError;
 
 class MyCustomErrorHandler implements SyntaxErrorCallback {
-	/**
+    /**
      * @param SyntaxError $error
      * @return SyntaxError
      */
     public function errorFound(SyntaxError $error){
-    	// Return new SyntaxError with custom modification to FilePath or Message
-    	// Or return custom implementation of SyntaxError extending the original one...
-    	return new SyntaxError(
-    		$error->getFilePath(),
-    		$error->getMessage()
-    	);
+        // Return new SyntaxError with custom modification to FilePath or Message
+        // Or return custom implementation of SyntaxError extending the original one...
+        return new SyntaxError(
+            $error->getFilePath(),
+            $error->getMessage()
+        );
     }
 }
 ```
