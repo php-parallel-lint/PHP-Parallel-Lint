@@ -2,6 +2,8 @@
 
 namespace PHP_Parallel_Lint\PhpParallelLint\Iterators;
 
+use ReturnTypeWillChange;
+
 class FilteredRecursiveDirectoryIterator extends \RecursiveDirectoryIterator
 {
     private $excluded = array();
@@ -17,8 +19,10 @@ class FilteredRecursiveDirectoryIterator extends \RecursiveDirectoryIterator
         parent::__construct($path, $flags);
     }
 
+    #[ReturnTypeWillChange]
     public function hasChildren($allowLinks = false)
     {
+        var_dump($this->getRealPath());
         if (in_array($this->getBasename(), $this->excluded)) {
             return false;
         }
