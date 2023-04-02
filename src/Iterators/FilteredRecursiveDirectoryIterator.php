@@ -22,8 +22,7 @@ class FilteredRecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     #[ReturnTypeWillChange]
     public function hasChildren($allowLinks = false)
     {
-        var_dump($this->getRealPath());
-        if (in_array($this->getBasename(), $this->excluded)) {
+        if (in_array($this->getBasename(), $this->excluded)) {h
             return false;
         }
 
