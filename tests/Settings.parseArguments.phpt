@@ -6,6 +6,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+Tester\Environment::setup();
+
 use JakubOnderka\PhpParallelLint\Settings;
 use Tester\Assert;
 
