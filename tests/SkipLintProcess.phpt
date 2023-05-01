@@ -6,6 +6,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+Tester\Environment::setup();
+
 use Tester\Assert;
 
 class SkipLintProcessTest extends Tester\TestCase
