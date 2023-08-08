@@ -9,6 +9,12 @@ foreach (explode(PHP_EOL, $input) as $file) {
     $f = @fopen($file, 'r');
     if ($f) {
         $firstLine = fgets($f);
+
+        // ignore shebang line
+        if (strpos($firstLine, '#!') === 0) {
+            $firstLine = fgets($f);
+        }
+
         @fclose($f);
 
         if (preg_match('~<?php\\s*\\/\\/\s*lint\s*([^\d\s]+)\s*([^\s]+)\s*~i', $firstLine, $m)) {
