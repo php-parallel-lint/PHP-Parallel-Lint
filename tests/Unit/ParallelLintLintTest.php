@@ -78,6 +78,16 @@ class ParallelLintLintTest extends UnitTestCase
         $this->assertSame(0, count($result->getErrors()));
     }
 
+    public function testSkipShebang()
+    {
+        $parallelLint = new ParallelLint($this->getPhpExecutable());
+        $result = $parallelLint->lint(array(PL_TESTROOT . '/fixtures/fixture-07/example.php'));
+
+        $this->assertSame(0, $result->getCheckedFilesCount());
+        $this->assertSame(0, $result->getFilesWithSyntaxErrorCount());
+        $this->assertSame(1, $result->getSkippedFilesCount());
+    }
+
     public function testInvalidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
