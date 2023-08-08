@@ -83,6 +83,16 @@ class ParallelLintLintTest extends Tester\TestCase
         Assert::equal(0, count($result->getErrors()));
     }
 
+    public function testSkipShebang()
+    {
+        $parallelLint = new ParallelLint($this->getPhpExecutable());
+        $result = $parallelLint->lint(array(__DIR__ . '/examples/example-07/example.php'));
+
+        Assert::equal(0, $result->getCheckedFilesCount());
+        Assert::equal(0, $result->getFilesWithSyntaxErrorCount());
+        Assert::equal(1, $result->getSkippedFilesCount());
+    }
+
     public function testInvalidFile()
     {
         $parallelLint = new ParallelLint($this->getPhpExecutable());
