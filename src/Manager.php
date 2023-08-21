@@ -38,12 +38,7 @@ class Manager
         $settings = $settings ?: new Settings();
         $output = $this->output ?: $this->getDefaultOutput($settings);
 
-        $settingsPhpExecutable = escapeshellarg($settings->phpExecutable);
-        if (stripos(PHP_OS, 'WIN') === 0) {
-            $settingsPhpExecutable = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($settings->phpExecutable));
-        }
-
-        $phpExecutable = PhpExecutable::getPhpExecutable($settingsPhpExecutable);
+        $phpExecutable = PhpExecutable::getPhpExecutable(escapeshellarg($settings->phpExecutable));
         $olderThanPhp54 = $phpExecutable->getVersionId() < 50400; // From PHP version 5.4 are tokens translated by default
         $translateTokens = $phpExecutable->isIsHhvmType() || $olderThanPhp54;
 
