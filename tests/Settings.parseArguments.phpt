@@ -144,6 +144,22 @@ class SettingsParseArgumentsTest extends Tester\TestCase
 
         Assert::equal($expectedSettings->syntaxErrorCallbackFile, $settings->syntaxErrorCallbackFile);
     }
+
+    public function testEscapingPathForUnixSystems()
+    {
+        Settings::escapeString('path with spaces');
+
+        $php_path = "path with/spaces between/php.exe";
+        Assert::equal(Settings::escapeString($php_path, 'Darwin'), "path\\ with/spaces\\ between/php.exe");
+    }
+
+    public function testEscapingPathForWindows()
+    {
+        Settings::escapeString('path with spaces');
+
+        $php_path = "path with\spaces between\php.exe";
+        Assert::equal(Settings::escapeString($php_path, 'Windows'), 'path^ with\\\spaces^ between\\\php.exe');
+    }
 }
 
 $testCase = new SettingsParseArgumentsTest;
