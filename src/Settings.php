@@ -130,7 +130,7 @@ class Settings
 
         // Use the currently invoked php as the default if possible
         if (defined('PHP_BINARY')) {
-            $settings->phpExecutable = PHP_BINARY;
+            $settings->phpExecutable = str_replace(' ', '\ ', PHP_BINARY);
         }
 
         foreach ($arguments as $argument) {
