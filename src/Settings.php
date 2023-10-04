@@ -130,7 +130,7 @@ class Settings
 
         // Use the currently invoked php as the default if possible
         if (defined('PHP_BINARY')) {
-            $settings->phpExecutable = str_replace(' ', '\ ', PHP_BINARY);
+            $settings->phpExecutable = self::escapeString(PHP_BINARY);
         }
 
         foreach ($arguments as $argument) {
@@ -234,6 +234,22 @@ class Settings
 
         $lines = explode("\n", rtrim($content));
         return array_map('rtrim', $lines);
+    }
+
+    /**
+     * @param string $path
+     * @param string $os
+     * @return string
+     */
+    public static function escapeString(string $path, string $os = PHP_OS)
+    {
+        if (stripos(strtoupper($os), 'WIN') === 0) {
+            $path = str_replace('^\\', '\\',  preg_replace('`(?<!^) `', '^ ', escapeshellcmd($path)));
+        } else {
+            $path = preg_replace('`(?<!\\\) `', '\ ', escapeshellcmd($path));
+        }
+
+        return $path;
     }
 }
 
