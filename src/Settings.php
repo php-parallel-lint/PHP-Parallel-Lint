@@ -243,6 +243,8 @@ class Settings
      */
     public static function escapeString(string $path, string $os = PHP_OS)
     {
+        $path = trim($path);
+
         if (stripos(strtoupper($os), 'WIN') === 0) {
             $path = str_replace('^\\', '\\',  preg_replace('`(?<!^) `', '^ ', escapeshellcmd($path)));
         } else {
