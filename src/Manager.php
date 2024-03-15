@@ -33,7 +33,7 @@ class Manager
      * @return Result
      * @throws ParallelLintException
      */
-    public function run(Settings $settings = null)
+    public function run(?Settings $settings = null)
     {
         $settings = $settings ?: new Settings();
         $output = $this->output ?: $this->getDefaultOutput($settings);
