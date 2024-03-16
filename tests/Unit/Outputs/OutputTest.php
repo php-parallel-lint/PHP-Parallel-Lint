@@ -26,6 +26,8 @@ class OutputTest extends UnitTestCase
 
         $result = (array) json_decode($writer->getLogs());
 
+        $this->assertSame(count($errors), count($result));
+
         for ($i = 0; $i < count($result) && $i < count($errors); $i++) {
             $message = $errors[$i]->getMessage();
             $filePath = $errors[$i]->getFilePath();
