@@ -5,3 +5,4 @@ composer.lock
 phpcs.xml
 .phpunit.result.cache
 phpunit.xml
+phpunit10.xml
