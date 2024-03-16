@@ -31,7 +31,7 @@ class SyntaxErrorGetLineTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataGetLine()
+    public static function dataGetLine()
     {
         return array(
             'Message: empty string' => array(

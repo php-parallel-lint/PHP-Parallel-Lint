@@ -31,7 +31,7 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataMessageNormalization()
+    public static function dataMessageNormalization()
     {
         return array(
             'Strip leading and trailing information - fatal error' => array(
@@ -85,7 +85,7 @@ class SyntaxErrorGetNormalizeMessageTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataFilePathHandling()
+    public static function dataFilePathHandling()
     {
         return array(
             'Plain file name' => array(

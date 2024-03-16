@@ -31,7 +31,7 @@ class SyntaxErrorTranslateTokensTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataTranslateTokens()
+    public static function dataTranslateTokens()
     {
         return array(
             'No token name in message' => array(

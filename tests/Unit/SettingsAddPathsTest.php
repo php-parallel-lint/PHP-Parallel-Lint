@@ -36,7 +36,7 @@ class SettingsAddPathsTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataAddPaths()
+    public static function dataAddPaths()
     {
         return array(
             'No paths passed on CLI, no extra paths' => array(

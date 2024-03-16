@@ -68,7 +68,7 @@ class OutputTest extends UnitTestCase
         $this->assertInstanceOf('SimpleXMLElement', $parsed);
     }
 
-    public function getGitLabOutputData()
+    public static function getGitLabOutputData()
     {
         return array(
             array(
