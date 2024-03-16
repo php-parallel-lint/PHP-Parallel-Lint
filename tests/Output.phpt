@@ -31,6 +31,8 @@ class OutputTest extends Tester\TestCase
 
         $result = (array) json_decode($writer->getLogs());
 
+        Assert::equal(count($errors), count($result));
+
         for ($i = 0; $i < count($result) && $i < count($errors); $i++) {
             $message = $errors[$i]->getMessage();
             $filePath = $errors[$i]->getFilePath();
