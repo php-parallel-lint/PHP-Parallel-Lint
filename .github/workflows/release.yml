@@ -118,19 +118,12 @@ jobs:
           name: parallel-lint-phar
 
       - name: Draft Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-
-      - name: Upload Phar as Release Asset
-        id: upload-release-asset
-        uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
+          make_latest: true
           files: parallel-lint.phar
+          fail_on_unmatched_files: true
