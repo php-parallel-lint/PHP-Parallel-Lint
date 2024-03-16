@@ -35,7 +35,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataParseArgumentsInvalidArgument()
+    public static function dataParseArgumentsInvalidArgument()
     {
         return array(
             'Unsupported short argument' => array(
@@ -79,7 +79,7 @@ class SettingsParseArgumentsTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataParseArguments()
+    public static function dataParseArguments()
     {
         return array(
             'No arguments at all' => array(

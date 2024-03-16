@@ -31,7 +31,7 @@ class ParallelLintErrorTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataGetMessage()
+    public static function dataGetMessage()
     {
         return array(
             'Message: empty string' => array(
@@ -88,7 +88,7 @@ class ParallelLintErrorTest extends UnitTestCase
      *
      * @return array
      */
-    public function dataGetFilePath()
+    public static function dataGetFilePath()
     {
         $cwd = getcwd();
 
