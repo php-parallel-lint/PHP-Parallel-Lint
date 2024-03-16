@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+        backupGlobals="true"
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        bootstrap="./tests/bootstrap.php"
+        colors="true"
+        displayDetailsOnTestsThatTriggerErrors="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnIncompleteTests="true"
+        displayDetailsOnSkippedTests="true"
+        failOnWarning="true"
+        failOnNotice="true"
+        failOnDeprecation="true"
+        stopOnFailure="false"
+    >
+
+    <testsuites>
+        <testsuite name="Unittests">
+            <directory suffix="Test.php">tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">./src/</directory>
+        </include>
+    </source>
+
+    <coverage includeUncoveredFiles="true" ignoreDeprecatedCodeUnits="true">
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+        </report>
+    </coverage>
+
+</phpunit>
