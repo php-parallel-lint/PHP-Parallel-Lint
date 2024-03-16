@@ -33,9 +33,9 @@ class Manager
      * @return Result
      * @throws ParallelLintException
      */
-    public function run(?Settings $settings = null)
+    public function run($settings = null)
     {
-        $settings = $settings ?: new Settings();
+        $settings = ($settings instanceof Settings) ? $settings : new Settings();
         $output = $this->output ?: $this->getDefaultOutput($settings);
 
         $phpExecutable = PhpExecutable::getPhpExecutable($settings->phpExecutable);
