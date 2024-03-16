@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,7 +38,7 @@ jobs:
           fail-fast: true
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
         with:
           composer-options: "--no-dev"
           # Bust the cache at least once a month - output format: YYYY-MM.
@@ -58,7 +58,7 @@ jobs:
       - name: Show info about the build phar with box-project/box
         run: php box.phar info -l parallel-lint.phar
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: parallel-lint-phar
           path: ./parallel-lint.phar
@@ -89,9 +89,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: parallel-lint-phar
 
@@ -113,7 +113,7 @@ jobs:
       - verify
 
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: parallel-lint-phar
 
@@ -129,7 +129,7 @@ jobs:
 
       - name: Upload Phar as Release Asset
         id: upload-release-asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
