@@ -151,19 +151,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 [1.2.0]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.1.0...v1.2.0
 
-[@Erkens]: https://github.com/Erkens
-[@OndraM]: https://github.com/OndraM
-[@arxeiss]: https://github.com/arxeiss
-[@glensc]: https://github.com/glensc
-[@gmazzap]: https://github.com/gmazzap
-[@jankonas]: https://github.com/jankonas
-[@jrfnl]: https://github.com/jrfnl
-[@mfn]: https://github.com/mfn
+[@arxeiss]:      https://github.com/arxeiss
+[@Erkens]:       https://github.com/Erkens
+[@glensc]:       https://github.com/glensc
+[@gmazzap]:      https://github.com/gmazzap
+[@grogy]:        https://github.com/grogy
+[@jankonas]:     https://github.com/jankonas
+[@jrfnl]:        https://github.com/jrfnl
+[@lukas9393]:    https://github.com/lukas9393
+[@mfn]:          https://github.com/mfn
+[@OndraM]:       https://github.com/OndraM
 [@ondrejmirtes]: https://github.com/ondrejmirtes
-[@reedy]: https://github.com/reedy
-[@roelofr]: https://github.com/roelofr
-[@stronk7]: https://github.com/stronk7
-[@szepeviktor]: https://github.com/szepeviktor
-[@lukas9393]: https://github.com/lukas9393
-[@villfa]: https://github.com/villfa
-[@grogy]: https://github.com/grogy
+[@reedy]:        https://github.com/reedy
+[@roelofr]:      https://github.com/roelofr
+[@stronk7]:      https://github.com/stronk7
+[@szepeviktor]:  https://github.com/szepeviktor
+[@villfa]:       https://github.com/villfa
