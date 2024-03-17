@@ -8,6 +8,85 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 [Unreleased]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.2...HEAD
 
+
+## [1.4.0] - 2024-03-27
+
+### Added
+- The "skip linting" feature can now be used in PHP files starting with a shebang, [#146] from [@xaben].
+
+### Fixed
+- PHP 8.4 deprecation notice, [#154] from [@Ayesh] and [@jrfnl].
+- Bug fix: the PHP version check in the application bootstrap did not work on PHP < 5.3, [#100] from [@jrfnl], fixes [#62].
+- Bug fix: files containing the `~` character in their name can now be processed correctly, [#118] from [@jrfnl].
+- Bug fix: error message sometimes displayed on last line of code snippet, [#98] from [@jrfnl], fixes [#93].
+- Bug fix: error message would sometimes contain duplicate information, [#117] from [@jrfnl].
+- Bug fix: the "in file .. on line part" text did not always get cleaned correctly from the error message, [#118] from [@jrfnl].
+
+### Changed
+- The percentage output in the progress report is now aligned, [#140] from [@robertology].
+- The error message displayed when the PHP version is too low for the application to run is now more informative, [#100] from [@jrfnl].
+- Composer: The package will now identify itself as a static analysis/linting tool, [#134] from [@staabm].
+- Composer: fix grammar error, [#139] from [@TravisCarden].
+- README: improvement to the install instructions, [#99] from [@samsonasik], fixes [#96].
+- README: move screenshot, [#97] from [@jrfnl].
+- README: fix typos, [#124] from [@krsriq].
+- Docs: code style consistency, [#137] from [@lens0021].
+
+### Internal
+- Prevent PHAR not being compatible with PHP < 7.0, [#116] from [@jrfnl].
+- GH Actions: update used actions, [#109], [#158] from [@jrfnl].
+- GH Actions: updates for box 4.x, [#121] from [@jrfnl].
+- GH Actions: fix download URL for box, [#125] from [@jrfnl].
+- GH Actions: use fail-fast with setup-php when creating the binaries, [#131], [#132] from [@jrfnl].
+- GH Actions: update PHP version for PHAR boxing, [#152] from [@jrfnl].
+- GH Actions: harden the workflow against PHPCS ruleset errors, [#128] from [@jrfnl].
+- GH Actions: bust the cache semi-regularly, [#129] from [@jrfnl].
+- GH Actions: update PHP versions in workflows, [#130] from [@jrfnl].
+- GH Actions: update for the release of PHP 8.3, [#150], [#151] from [@jrfnl].
+- GH Actions: fix duplicate release, [#159] from [@jrfnl].
+- SettingsParseArgumentsTest: fix bug in test, [#102] from [@jrfnl].
+- OutputTest: fix risky test, [#156] from [@jrfnl].
+- Tests: fix issue with Nette Tester 1.x, [#141] from [@grogy].
+- Add dependabot configuration file, [#148] from [@jrfnl].
+
+[1.4.0]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.3.2...v1.4.0
+
+[#62]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues/62
+[#93]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues/93
+[#96]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues/96
+[#97]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/97
+[#98]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/98
+[#99]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/99
+[#100]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/100
+[#102]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/102
+[#109]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/109
+[#116]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/116
+[#117]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/117
+[#118]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/118
+[#121]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/121
+[#124]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/124
+[#125]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/125
+[#128]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/128
+[#129]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/129
+[#130]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/130
+[#131]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/131
+[#132]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/132
+[#134]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/134
+[#137]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/137
+[#139]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/139
+[#140]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/140
+[#141]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/141
+[#146]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/146
+[#148]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/148
+[#150]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/150
+[#151]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/151
+[#152]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/152
+[#154]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/154
+[#156]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/156
+[#158]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/158
+[#159]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/pull/159
+
+
 ## [1.3.2] - 2022-02-19
 
 ### Added
@@ -152,18 +231,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [1.2.0]: https://github.com/php-parallel-lint/PHP-Parallel-Lint/compare/v1.1.0...v1.2.0
 
 [@arxeiss]:      https://github.com/arxeiss
+[@Ayesh]:        https://github.com/Ayesh
 [@Erkens]:       https://github.com/Erkens
 [@glensc]:       https://github.com/glensc
 [@gmazzap]:      https://github.com/gmazzap
 [@grogy]:        https://github.com/grogy
 [@jankonas]:     https://github.com/jankonas
 [@jrfnl]:        https://github.com/jrfnl
+[@krsriq]:       https://github.com/krsriq
+[@lens0021]:     https://github.com/lens0021
 [@lukas9393]:    https://github.com/lukas9393
 [@mfn]:          https://github.com/mfn
 [@OndraM]:       https://github.com/OndraM
 [@ondrejmirtes]: https://github.com/ondrejmirtes
 [@reedy]:        https://github.com/reedy
+[@robertology]:  https://github.com/robertology
 [@roelofr]:      https://github.com/roelofr
+[@samsonasik]:   https://github.com/samsonasik
+[@staabm]:       https://github.com/staabm
 [@stronk7]:      https://github.com/stronk7
 [@szepeviktor]:  https://github.com/szepeviktor
+[@TravisCarden]: https://github.com/TravisCarden
 [@villfa]:       https://github.com/villfa
+[@xaben]:        https://github.com/xaben
