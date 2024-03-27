@@ -91,8 +91,8 @@ jobs:
           path: ./parallel-lint.phar
 
   test:
-    name: Run tests on PHP ${{ matrix.php }}
-    runs-on: ubuntu-latest
+    name: Run tests on PHP ${{ matrix.php }} (${{ matrix.os }})
+    runs-on: "${{ matrix.os }}"
     continue-on-error: ${{ matrix.php == '8.4' }}
     needs:
       - bundle
@@ -114,6 +114,19 @@ jobs:
           - '8.2'
           - '8.3'
           - '8.4'
+        os:
+          - 'ubuntu-latest'
+
+        include:
+          # Also run the tests against Windows on a few PHP versions.
+          - php: '5.5'
+            os: 'windows-latest'
+          - php: '7.0'
+            os: 'windows-latest'
+          - php: '8.0'
+            os: 'windows-latest'
+          - php: '8.3'
+            os: 'windows-latest'
 
     steps:
       - name: Checkout code
