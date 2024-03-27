@@ -11,6 +11,10 @@
         {
             "name": "Jakub Onderka",
             "email": "ahoj@jakubonderka.cz"
+        },
+        {
+            "name" : "Contributors",
+            "homepage" : "https://github.com/php-parallel-lint/PHP-Parallel-Lint/graphs/contributors"
         }
     ],
     "require": {
