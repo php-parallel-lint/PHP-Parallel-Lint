@@ -11,14 +11,18 @@ class Error implements \JsonSerializable
     /** @var string */
     protected $message;
 
+    /** @var string */
+    protected $severity;
+
     /**
      * @param string $filePath
      * @param string $message
      */
-    public function __construct($filePath, $message)
+    public function __construct($filePath, $message, $severity = 'error')
     {
         $this->filePath = $filePath;
         $this->message = rtrim($message);
+        $this->severity = $severity;
     }
 
     /**
@@ -27,6 +31,14 @@ class Error implements \JsonSerializable
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeverity()
+    {
+        return $this->severity;
     }
 
     /**
@@ -63,7 +75,7 @@ class Error implements \JsonSerializable
     public function jsonSerialize()
     {
         return array(
-            'type' => 'error',
+            'type' => $this->getSeverity(),
             'file' => $this->getFilePath(),
             'message' => $this->getMessage(),
         );
@@ -237,6 +249,7 @@ class SyntaxError extends Error
             'message' => $this->getMessage(),
             'normalizeMessage' => $this->getNormalizedMessage(),
             'blame' => $this->blame,
+            'severity' => $this->getSeverity(),
         );
     }
 }
