@@ -45,7 +45,7 @@ class Process
             self::STDERR => array('pipe', self::WRITE),
         );
 
-        $cmdLine = $executable . ' ' . implode(' ', array_map('escapeshellarg', $arguments));
+        $cmdLine = '"' . $executable . '" ' . implode(' ', array_map('escapeshellarg', $arguments));
         $this->process = proc_open($cmdLine, $descriptors, $pipes, null, null, array('bypass_shell' => true));
 
         if ($this->process === false || $this->process === null) {
