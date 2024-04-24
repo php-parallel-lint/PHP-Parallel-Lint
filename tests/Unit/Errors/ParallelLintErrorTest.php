@@ -68,9 +68,24 @@ class ParallelLintErrorTest extends UnitTestCase
     }
 
     /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public static function dataGetFilePath()
+    {
+        $data = self::dataGetShortFilePath();
+        foreach ($data as $name => $params) {
+            unset($data[$name]['expectedShort']);
+        }
+
+        return $data;
+    }
+
+    /**
      * Test retrieving the short file path.
      *
-     * @dataProvider dataGetFilePath
+     * @dataProvider dataGetShortFilePath
      *
      * @param string $filePath      The file path input to run the test with.
      * @param string $expectedShort The expected method return value.
@@ -88,7 +103,7 @@ class ParallelLintErrorTest extends UnitTestCase
      *
      * @return array
      */
-    public static function dataGetFilePath()
+    public static function dataGetShortFilePath()
     {
         $cwd = getcwd();
 
