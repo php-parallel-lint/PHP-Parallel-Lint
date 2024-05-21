@@ -59,6 +59,25 @@ class SettingsAddPathsTest extends UnitTestCase
                 'extra'    => array('path/1', 'path/subdir/3'),
                 'expected' => array('path/1', 'path/subdir/2', 'path/1', 'path/subdir/3'),
             ),
+            'Paths passed on CLI, paths with spaces' => array(
+                'original' => array('path with/spaces between/1', 'path with/spaces between/subdir/2'),
+                'extra'    => array(
+                    'path/1',
+                    'path/subdir/3',
+                    'path/with spaces',
+                    'windows-path\with spaces\and\backslashes',
+                    'windows path\with spaces\and\backslashes'
+                ),
+                'expected' => array(
+                    'path with/spaces between/1',
+                    'path with/spaces between/subdir/2',
+                    'path/1',
+                    'path/subdir/3',
+                    'path/with spaces',
+                    'windows-path\with spaces\and\backslashes',
+                    'windows path\with spaces\and\backslashes',
+                ),
+            )
         );
     }
 }
