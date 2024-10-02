@@ -22,16 +22,10 @@ class SkipLintProcess extends PhpProcess
      */
     public function __construct(PhpExecutable $phpExecutable, array $filesToCheck)
     {
-        $scriptPath = __DIR__ . '/../../bin/skip-linting.php';
-        $script = file_get_contents($scriptPath);
+        $scriptPath = dirname(dirname(__DIR__)) . '/bin/skip-linting.php';
+        $code = sprintf("include('%s');", $scriptPath);
 
-        if (!$script) {
-            throw new RuntimeException("skip-linting.php script not found in '$scriptPath'.");
-        }
-
-        $script = str_replace('<?php', '', $script);
-
-        $parameters = array('-d', 'display_errors=stderr', '-r', $script);
+        $parameters = array('-d', 'display_errors=stderr', '-r', $code);
         parent::__construct($phpExecutable, $parameters, implode(PHP_EOL, $filesToCheck));
     }
 
