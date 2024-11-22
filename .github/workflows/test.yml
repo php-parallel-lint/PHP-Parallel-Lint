@@ -93,7 +93,7 @@ jobs:
   test:
     name: Run tests on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.php == '8.4' }}
+    continue-on-error: ${{ matrix.php == '8.5' }}
     needs:
       - bundle
 
@@ -114,6 +114,7 @@ jobs:
           - '8.2'
           - '8.3'
           - '8.4'
+          - '8.5'
 
     steps:
       - name: Checkout code
@@ -132,14 +133,14 @@ jobs:
         run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies
-        if: ${{ matrix.php != '8.4' }}
+        if: ${{ matrix.php != '8.5' }}
         uses: ramsey/composer-install@v3
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
 
-      - name: "Install Composer dependencies (PHP 8.4, ignore PHP reqs)"
-        if: ${{ matrix.php == '8.4' }}
+      - name: "Install Composer dependencies (PHP nightly, ignore PHP reqs)"
+        if: ${{ matrix.php == '8.5' }}
         uses: ramsey/composer-install@v3
         with:
           composer-options: --ignore-platform-req=php
