@@ -161,13 +161,14 @@ jobs:
 
       - name: 'Integration test 1 - linting own code, no colors'
         continue-on-error: true
-        run: ./parallel-lint --exclude vendor --exclude tests/fixtures --no-colors .
+        run: php "parallel-lint" --exclude vendor --exclude tests/fixtures --no-colors .
 
       - name: 'Integration test 2 - linting own code'
-        run: ./parallel-lint --exclude vendor --exclude tests/fixtures .
+        run: php "parallel-lint" --exclude vendor --exclude tests/fixtures .
 
       - name: Grab PHPUnit version
         id: phpunit_version
+        shell: bash
         run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> $GITHUB_OUTPUT
 
       - name: "Run unit tests (PHPUnit < 10)"
