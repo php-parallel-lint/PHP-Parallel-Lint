@@ -58,7 +58,7 @@ jobs:
           php-version: 8.2
           extensions: exif, phar, openssl, sodium
           coverage: none
-          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, zend.assertions=1
+          ini-values: phar.readonly=Off, error_reporting=-1, display_errors=On, display_startup_errors=On, zend.assertions=1
           # Autoload files generated with Composer 2.3 are not compatible with PHP < 7.0.
           tools: composer:2.2
         env:
@@ -124,7 +124,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
+          ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On, zend.assertions=1
           coverage: none
 
       # Remove the PHPCS standard as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
