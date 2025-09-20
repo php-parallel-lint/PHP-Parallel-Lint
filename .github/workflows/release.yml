@@ -93,7 +93,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - uses: actions/download-artifact@v7
+      - name: Download PHAR file
+        uses: actions/download-artifact@v7
         with:
           name: parallel-lint-phar
 
@@ -115,7 +116,8 @@ jobs:
       - verify
 
     steps:
-      - uses: actions/download-artifact@v7
+      - name: Download PHAR file
+        uses: actions/download-artifact@v7
         with:
           name: parallel-lint-phar
 

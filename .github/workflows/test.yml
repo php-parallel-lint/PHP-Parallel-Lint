@@ -165,7 +165,8 @@ jobs:
         if: ${{ startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}
         run: composer test10
 
-      - uses: actions/download-artifact@v7
+      - name: Download PHAR file
+        uses: actions/download-artifact@v7
         with:
           name: parallel-lint-phar
 
