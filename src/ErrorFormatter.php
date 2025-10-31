@@ -20,10 +20,10 @@ class ErrorFormatter
     /** @var bool */
     private $translateTokens;
 
-    public function __construct($useColors = Settings::AUTODETECT, $translateTokens = false, $forceColors = false)
+    public function __construct($useColors = Settings::AUTODETECT, $translateTokens = false)
     {
         $this->useColors = $useColors;
-        $this->forceColors = $forceColors;
+        $this->forceColors = $useColors === Settings::FORCED;
         $this->translateTokens = $translateTokens;
     }
 
