@@ -2,7 +2,7 @@
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/php-parallel-lint/php-parallel-lint.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
 [![Build Status](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Parallel-Lint/actions/workflows/test.yml)
-[![License](https://poser.pugx.org/php-parallel-lint/php-parallel-lint/license.svg)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
+[![License](https://img.shields.io/github/license/php-parallel-lint/PHP-Parallel-Lint)](https://packagist.org/packages/php-parallel-lint/php-parallel-lint)
 
 This application checks the syntax of PHP files in parallel.
 It can output in plain text, colored text, json and checksyntax formats.
