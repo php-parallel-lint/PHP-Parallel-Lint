@@ -91,8 +91,8 @@ jobs:
           path: ./parallel-lint.phar
 
   test:
-    name: Run tests on PHP ${{ matrix.php }}
-    runs-on: ubuntu-latest
+    name: Run tests on PHP ${{ matrix.php }} (${{ matrix.os }})
+    runs-on: "${{ matrix.os }}"
     continue-on-error: ${{ matrix.php == '8.5' }}
     needs:
       - bundle
@@ -115,6 +115,19 @@ jobs:
           - '8.3'
           - '8.4'
           - '8.5'
+        os:
+          - 'ubuntu-latest'
+
+        include:
+          # Also run the tests against Windows on a few PHP versions.
+          - php: '5.5'
+            os: 'windows-latest'
+          - php: '7.0'
+            os: 'windows-latest'
+          - php: '8.0'
+            os: 'windows-latest'
+          - php: '8.3'
+            os: 'windows-latest'
 
     steps:
       - name: Checkout code
@@ -148,14 +161,15 @@ jobs:
 
       - name: 'Integration test 1 - linting own code, no colors'
         continue-on-error: true
-        run: ./parallel-lint --exclude vendor --exclude tests/fixtures --no-colors .
+        run: php "parallel-lint" --exclude vendor --exclude tests/fixtures --no-colors .
 
       - name: 'Integration test 2 - linting own code'
-        run: ./parallel-lint --exclude vendor --exclude tests/fixtures .
+        run: php "parallel-lint" --exclude vendor --exclude tests/fixtures .
 
       - name: Grab PHPUnit version
         id: phpunit_version
-        run: echo "VERSION=$(vendor/bin/phpunit --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> $GITHUB_OUTPUT
+        shell: bash
+        run: echo "VERSION=$(php "vendor/bin/phpunit" --version | grep --only-matching --max-count=1 --extended-regexp '\b[0-9]+\.[0-9]+')" >> $GITHUB_OUTPUT
 
       - name: "Run unit tests (PHPUnit < 10)"
         if: ${{ ! startsWith( steps.phpunit_version.outputs.VERSION, '10.' ) }}
@@ -170,4 +184,4 @@ jobs:
           name: parallel-lint-phar
 
       - name: Run linter against codebase using the phar
-        run: php ./parallel-lint.phar --exclude vendor --exclude tests/fixtures .
+        run: php "parallel-lint.phar" --exclude vendor --exclude tests/fixtures .
