@@ -46,7 +46,7 @@ jobs:
         run: php box.phar info -l parallel-lint.phar
 
       - name: Upload PHAR to workflow summary
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: parallel-lint-phar
           path: ./parallel-lint.phar
