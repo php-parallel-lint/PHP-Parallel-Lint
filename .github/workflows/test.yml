@@ -125,7 +125,7 @@ jobs:
         run: composer test10
 
       - name: Download PHAR file
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: parallel-lint-phar
 
