@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -93,14 +93,14 @@ jobs:
 
       - name: Install Composer dependencies
         if: ${{ matrix.php != '8.6' }}
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: "Install Composer dependencies (PHP nightly, ignore PHP reqs)"
         if: ${{ matrix.php == '8.6' }}
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           composer-options: --ignore-platform-req=php
           custom-cache-suffix: $(date -u "+%Y-%m")
