@@ -1,6 +1,9 @@
 /build
 /vendor
 composer.lock
+.parallel-lint-cache.json
+.parallel-lint-cache.json.*.tmp
+.parallel-lint-cache.json.lock
 .phpcs.xml
 phpcs.xml
 .phpunit.result.cache

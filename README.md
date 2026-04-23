@@ -85,6 +85,8 @@ It is strongly recommended for existing users of the (unmaintained)
 - `--ignore-fails`          Ignore failed tests.
 - `--show-deprecated`       Show deprecations (default: Off).
 - `--syntax-error-callback` File with syntax error callback for ability to modify error, see more in [example](doc/syntax-error-callback.md).
+- `--cache`                 Enable file content caching. Unchanged files skip linting on subsequent runs.
+- `--cache-file <file>`     Specify cache file location (implies `--cache`). (default: .parallel-lint-cache.json)
 - `-h`, `--help`            Print this help.
 - `-V`, `--version`         Display the application version
 
