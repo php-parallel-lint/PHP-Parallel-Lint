@@ -114,6 +114,18 @@ class Settings
     public $syntaxErrorCallbackFile = null;
 
     /**
+     * Enable checksum-based caching to skip unchanged files
+     * @var bool
+     */
+    public $cache = false;
+
+    /**
+     * Path to the cache file
+     * @var string|null
+     */
+    public $cacheFile = null;
+
+    /**
      * @param array $paths
      */
     public function addPaths(array $paths)
@@ -214,6 +226,15 @@ class Settings
 
                     case '--syntax-error-callback':
                         $settings->syntaxErrorCallbackFile = $arguments->getNext();
+                        break;
+
+                    case '--cache':
+                        $settings->cache = true;
+                        break;
+
+                    case '--cache-file':
+                        $settings->cache = true;
+                        $settings->cacheFile = $arguments->getNext();
                         break;
 
                     default:

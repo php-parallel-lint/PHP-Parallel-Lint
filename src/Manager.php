@@ -10,6 +10,7 @@ use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
 use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
+use PHP_Parallel_Lint\PhpParallelLint\Cache\LintCache;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
 use PHP_Parallel_Lint\PhpParallelLint\Outputs\JsonOutput;
@@ -50,7 +51,20 @@ class Manager
             throw new ParallelLintException('No file found to check.');
         }
 
-        $output->setTotalFileCount(count($files));
+        $cachedFiles = array();
+        $lintCache = null;
+
+        if ($settings->cache) {
+            $lintCache = $this->createLintCache($settings, $phpExecutable);
+
+            $filterResult = $lintCache->filterFiles($files);
+            $cachedFiles = $filterResult['cached'];
+            $files = $filterResult['uncached'];
+        }
+
+        array_map(array($output, 'ok'), $cachedFiles);
+
+        $output->setTotalFileCount(count($files) + count($cachedFiles));
 
         $parallelLint = new ParallelLint($phpExecutable, $settings->parallelJobs);
         $parallelLint->setAspTagsEnabled($settings->aspTags);
@@ -71,6 +85,17 @@ class Manager
         });
 
         $result = $parallelLint->lint($files);
+
+        $this->updateLintCache($lintCache, $result);
+
+        if (!empty($cachedFiles)) {
+            $result = new Result(
+                $result->getErrors(),
+                $result->getCheckedFiles(),
+                array_merge($cachedFiles, $result->getSkippedFiles()),
+                $result->getTestTime()
+            );
+        }
 
         if ($settings->blame) {
             $this->gitBlame($result, $settings);
@@ -114,6 +139,52 @@ class Manager
         $output->showProgress = $settings->showProgress;
 
         return $output;
+    }
+
+    /**
+     * @param Settings $settings
+     * @param PhpExecutable $phpExecutable
+     * @return LintCache
+     */
+    protected function createLintCache(Settings $settings, PhpExecutable $phpExecutable)
+    {
+        $cacheFilePath = LintCache::getCacheFilePath($settings->cacheFile);
+        $cacheKey = LintCache::buildCacheKey(
+            $phpExecutable->getVersionId(),
+            $settings->aspTags,
+            $settings->shortTag,
+            $settings->showDeprecated
+        );
+
+        $lintCache = new LintCache($cacheFilePath);
+        $lintCache->load($cacheKey);
+
+        return $lintCache;
+    }
+
+    /**
+     * @param LintCache|null $lintCache
+     * @param Result $result
+     */
+    protected function updateLintCache($lintCache, Result $result)
+    {
+        if (!$lintCache instanceof LintCache) {
+            return;
+        }
+
+        $erroredPaths = array();
+        foreach ($result->getErrors() as $error) {
+            $erroredPaths[$error->getFilePath()] = true;
+            $lintCache->recordFailure($error->getFilePath());
+        }
+
+        foreach ($result->getCheckedFiles() as $file) {
+            if (!isset($erroredPaths[$file])) {
+                $lintCache->recordSuccess($file);
+            }
+        }
+
+        $lintCache->save();
     }
 
     /**

@@ -102,6 +102,10 @@ Options:
     --ignore-fails          Ignore failed tests.
     --show-deprecated       Show deprecations (default: Off).
     --syntax-error-callback File with syntax error callback for ability to modify error
+    --cache                 Enable file content caching. Unchanged files skip linting
+                            on subsequent runs.
+    --cache-file <file>     Specify cache file location (implies --cache).
+                            (default: .parallel-lint-cache.json)
     -h, --help              Print this help.
     -V, --version           Display the application version
 
@@ -125,7 +129,7 @@ HELP;
         echo <<<USAGE
 -------------------------------
 Usage:
-parallel-lint [sa] [-p php] [-e ext] [-j num] [--exclude dir] [files or directories]
+parallel-lint [sa] [-p php] [-e ext] [-j num] [--cache] [--cache-file <file>] [--exclude dir] [files or directories]
 
 USAGE;
         $this->showOptions();
