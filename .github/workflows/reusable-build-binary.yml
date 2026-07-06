@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           php-version: 8.2
           extensions: exif, phar, openssl, sodium
@@ -25,7 +25,7 @@ jobs:
           fail-fast: true
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v4
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
         with:
           composer-options: "--no-dev"
           # Bust the cache at least once a month - output format: YYYY-MM.
@@ -46,7 +46,7 @@ jobs:
         run: php box.phar info -l parallel-lint.phar
 
       - name: Upload PHAR to workflow summary
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: parallel-lint-phar
           path: ./parallel-lint.phar
