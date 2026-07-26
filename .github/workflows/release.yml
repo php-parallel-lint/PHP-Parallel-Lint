@@ -63,6 +63,8 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: error_reporting=-1, display_errors=On, display_startup_errors=On, zend.assertions=1
           coverage: none
+        env:
+          fail-fast: true
 
       - name: Run linter against codebase
         run: php ./parallel-lint.phar src/
