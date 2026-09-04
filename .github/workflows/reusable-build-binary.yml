@@ -2,6 +2,12 @@ name: Build Binary
 
 on:
   workflow_call:
+    inputs:
+      use-cache:
+        description: "Whether to use the Box PHAR cache"
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   bundle:
@@ -31,11 +37,36 @@ jobs:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
 
+      - name: Get latest Box version
+        id: box-version
+        run: |
+          latest_url=$(curl -Ls -o /dev/null -w '%{url_effective}' https://github.com/box-project/box/releases/latest)
+          echo "version=${latest_url##*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Box PHAR
+        id: cache-box
+        if: inputs.use-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: box.phar
+          key: box-phar-${{ steps.box-version.outputs.version }}
+
+      - name: Install Box
+        if: ${{ !inputs.use-cache || steps.cache-box.outputs.cache-hit != 'true' }}
+        run: wget https://github.com/box-project/box/releases/latest/download/box.phar -O box.phar
+
+      - name: Save Box PHAR cache
+        if: inputs.use-cache && steps.cache-box.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: box.phar
+          key: box-phar-${{ steps.box-version.outputs.version }}
+
+      - name: Set Box permissions
+        run: chmod 0755 box.phar
+
       # Note: do NOT turn on the requirement checker in the box config as it is no longer
       # compatible with PHP < 7.2.
-      - name: Install Box
-        run: wget https://github.com/box-project/box/releases/latest/download/box.phar -O box.phar && chmod 0755 box.phar && pwd
-
       - name: Validate configuration
         run: php box.phar validate -i box.json
 

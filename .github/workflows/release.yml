@@ -20,6 +20,8 @@ jobs:
 
     name: Build binary
     uses: ./.github/workflows/reusable-build-binary.yml
+    with:
+      use-cache: false
 
   verify:
     name: Validate binary on PHP ${{ matrix.php }}
