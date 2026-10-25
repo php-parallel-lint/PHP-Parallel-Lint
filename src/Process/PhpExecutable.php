@@ -70,7 +70,7 @@ class PhpExecutable
     /**
      * @param string $phpExecutable
      * @return PhpExecutable
-     * @throws \Exception
+     * @throws RuntimeException
      */
     public static function getPhpExecutable($phpExecutable)
     {
