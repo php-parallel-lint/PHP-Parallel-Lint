@@ -22,9 +22,6 @@ jobs:
     uses: ./.github/workflows/reusable-build-binary.yml
 
   verify:
-    name: Validate binary on PHP ${{ matrix.php }}
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.php == '8.6' }}
     needs:
       - bundle
 
@@ -47,6 +44,12 @@ jobs:
           - '8.4'
           - '8.5'
           - '8.6'
+          - '8.7'
+
+    continue-on-error: ${{ matrix.php == '8.7' }}
+
+    name: Validate binary on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -70,11 +73,12 @@ jobs:
         run: php ./parallel-lint.phar src/
 
   publish:
-    name: Add binary to release
-    runs-on: ubuntu-latest
     needs:
       - bundle
       - verify
+
+    name: Add binary to release
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download PHAR file
