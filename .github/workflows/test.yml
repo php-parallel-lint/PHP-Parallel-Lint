@@ -19,6 +19,7 @@ jobs:
   lint:
     name: Run style linter
     runs-on: ubuntu-latest
+
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
@@ -51,9 +52,6 @@ jobs:
     uses: ./.github/workflows/reusable-build-binary.yml
 
   test:
-    name: Run tests on PHP ${{ matrix.php }}
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.php == '8.6' }}
     needs:
       - bundle
 
@@ -76,6 +74,12 @@ jobs:
           - '8.4'
           - '8.5'
           - '8.6'
+          - '8.7'
+
+    continue-on-error: ${{ matrix.php == '8.7' }}
+
+    name: Run tests on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -96,17 +100,11 @@ jobs:
         run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies
-        if: ${{ matrix.php != '8.6' }}
         uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
         with:
+          # For PHP "nightly", we need to install with ignore platform reqs as not all dependencies allow it.
+          composer-options: ${{ matrix.php == '8.7' && '--ignore-platform-req=php+' || '' }}
           # Bust the cache at least once a month - output format: YYYY-MM.
-          custom-cache-suffix: $(date -u "+%Y-%m")
-
-      - name: "Install Composer dependencies (PHP nightly, ignore PHP reqs)"
-        if: ${{ matrix.php == '8.6' }}
-        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-        with:
-          composer-options: --ignore-platform-req=php
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: 'Integration test 1 - linting own code, no colors'
