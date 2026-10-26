@@ -102,6 +102,83 @@ class ManagerRunTest extends UnitTestCase
         $this->assertFalse($result->hasError());
     }
 
+    public function testCachePopulatesOnFirstRun()
+    {
+        $cacheFile = $this->getCacheFilePath();
+
+        $settings = $this->prepareSettings();
+        $settings->paths = array('tests/fixtures/fixture-02/');
+        $settings->cache = true;
+        $settings->cacheFile = $cacheFile;
+
+        $manager = $this->getManager($settings);
+        $result = $manager->run($settings);
+        $this->assertFalse($result->hasError());
+        $this->assertGreaterThan(0, $result->getCheckedFilesCount());
+        $this->assertFileExists($cacheFile);
+    }
+
+    public function testCacheReusesOnSecondRun()
+    {
+        $cacheFile = $this->getCacheFilePath();
+
+        $settings = $this->prepareSettings();
+        $settings->paths = array('tests/fixtures/fixture-02/');
+        $settings->cache = true;
+        $settings->cacheFile = $cacheFile;
+
+        // First run: populate cache
+        $manager = $this->getManager($settings);
+        $firstResult = $manager->run($settings);
+        $firstChecked = $firstResult->getCheckedFilesCount();
+        $this->assertGreaterThan(0, $firstChecked);
+
+        // Second run: all files served from cache, none actually linted
+        $manager = $this->getManager($settings);
+        $secondResult = $manager->run($settings);
+        $this->assertFalse($secondResult->hasError());
+        $this->assertSame(0, $secondResult->getCheckedFilesCount());
+        $this->assertSame($firstChecked, $secondResult->getSkippedFilesCount());
+    }
+
+    public function testCacheDoesNotCacheErrors()
+    {
+        $cacheFile = $this->getCacheFilePath();
+
+        $settings = $this->prepareSettings();
+        $settings->paths = array('tests/fixtures/fixture-03/');
+        $settings->cache = true;
+        $settings->cacheFile = $cacheFile;
+
+        // First run: file has syntax error
+        $manager = $this->getManager($settings);
+        $firstResult = $manager->run($settings);
+        $this->assertTrue($firstResult->hasError());
+
+        // Second run: error should still be reported (not cached)
+        $manager = $this->getManager($settings);
+        $secondResult = $manager->run($settings);
+        $this->assertTrue($secondResult->hasError());
+        $this->assertSame(
+            $firstResult->getFilesWithSyntaxErrorCount(),
+            $secondResult->getFilesWithSyntaxErrorCount()
+        );
+    }
+
+    public function testCacheWithoutFlagDoesNotCreateFile()
+    {
+        $cacheFile = $this->getCacheFilePath();
+
+        $settings = $this->prepareSettings();
+        $settings->paths = array('tests/fixtures/fixture-02/');
+        $settings->cache = false;
+        $settings->cacheFile = $cacheFile;
+
+        $manager = $this->getManager($settings);
+        $manager->run($settings);
+        $this->assertFileNotExistsPolyfill($cacheFile);
+    }
+
     /**
      * @param Settings $settings
      * @return Manager
@@ -129,5 +206,40 @@ class ManagerRunTest extends UnitTestCase
         $settings->colors = false;
 
         return $settings;
+    }
+
+    /**
+     * @return string
+     */
+    private function getCacheFilePath()
+    {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'parallel-lint-test-' . getmypid() . '.json';
+    }
+
+    /**
+     * Clean up cache files after each test.
+     *
+     * @after
+     */
+    public function removeCacheFile()
+    {
+        $cacheFile = $this->getCacheFilePath();
+        if (is_file($cacheFile)) {
+            unlink($cacheFile);
+        }
+    }
+
+    /**
+     * PHPUnit polyfill for assertFileDoesNotExist (PHPUnit < 9).
+     *
+     * @param string $file
+     */
+    private function assertFileNotExistsPolyfill($file)
+    {
+        if (method_exists($this, 'assertFileDoesNotExist')) {
+            $this->assertFileDoesNotExist($file);
+        } else {
+            $this->assertFalse(is_file($file), "File $file should not exist");
+        }
     }
 }
